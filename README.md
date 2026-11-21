@@ -1,0 +1,57 @@
+<p align="center">
+  <a href="https://whop.com/checkout/plan_fOxPHqsLK2LxS">
+    <img src="docs/assets/poster.jpg" alt="STA 6 — Signal Theft Auto VI | Viral GTA 6 Shorts Autopilot v4.0.1" width="100%" />
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://whop.com/checkout/plan_fOxPHqsLK2LxS">
+    <img src="https://img.shields.io/badge/UNLOCK%20FULL%20REPO%20ON%20WHOP-$49%20ONE--TIME-FA4616?style=for-the-badge&logo=whop&logoColor=white" alt="Unlock Full Repo on Whop — $49 One-Time" />
+  </a>
+  <a href="https://whop.com/agensi/sta-6/">
+    <img src="https://img.shields.io/badge/WHOP%20STOREFRONT-OPEN-111111?style=for-the-badge" alt="Open Whop Storefront" />
+  </a>
+  <a href="https://whop.com/agensi/sta-6/">
+    <img src="https://img.shields.io/badge/CLIPPER%20AFFILIATE-30%25%20PAYOUT-00C853?style=for-the-badge" alt="30% Clipper Affiliate Commission" />
+  </a>
+</p>
+
+# STA 6 — Signal Theft Auto VI (v4.0.1 Viral GTA 6 Shorts Autopilot)
+
+> **Paid Source Code & Pre-Trained ML Engine:** The full `STA 6 v4.0.1` Python pipeline, pre-trained 137-channel Tri-Stage ML weights (`models/viral_model_v4.json`), rendering engine, and automation skill are **private** and unlock **immediately upon purchase on Whop**.
+
+---
+
+## Get Instant Access — ~~`$99`~~ **`$49` One-Time (Lifetime License)**
+
+No monthly subscription. Pay once via **Whop** (Card, Apple Pay, Google Pay, local-currency adaptive pricing):
+
+### **[Buy STA 6 Now on Whop — `$49` One-Time →](https://whop.com/checkout/plan_fOxPHqsLK2LxS)**
+
+**How instant delivery works after payment:**
+1. **Immediate Download Inside Whop:** The second your payment completes, Whop automatically unlocks the private **STA 6 v4.0.1 — Download & Setup** hub containing **`STA-6-v4.0.1.zip`** and the 60-second macOS Apple Silicon setup guide.
+2. **Private GitHub Repo Access (`STA-6-pro`):** Enter your GitHub username at checkout to also receive collaborator access to the private `STA-6-pro` repository for all future `v4.x` updates.
+3. **Earn 30% as a Clipper Affiliate:** Share STA 6 through Whop's Global Affiliate program ([whop.com/agensi/sta-6](https://whop.com/agensi/sta-6/)) and earn **`$14.70` per sale**.
+
+---
+
+## Built for GTA 6 & Streamer Clipping Channels
+
+Trained on **2,193 real YouTube Shorts across 137 unique channels**, **139 paired within-channel Viral vs. Flop MP4s across 37 channels** (zero subscriber bias), **18 Gold-Standard viral Shorts (`100K–11.08M` views)**, **475 long-form RPM benchmarks**, and **270 mined viral comments**.
+
+| Module Included in Paid Package | What It Does for Clippers |
+| :--- | :--- |
+| **Tri-Stage Viral AI Gate (`v4.0.1`)** | **Model A** (`0.7768` held-out ROC-AUC across 137 channels) + **Model B** (`64.1%–64.9%` unseen-channel pairwise win rate across 37 channels) + **Model C** (`18`-Short Gold Centroid similarity score) |
+| **VOD Viral Moment Miner (`clip.py mine`)** | Scans any stream/VOD and automatically ranks the highest-energy `24–34s` reaction & climax windows |
+| **Aaron Rheins 60fps Split-Screen Engine** | Full-bleed `1080×610` + `1080×1310` @ `60fps` layout, bright OLED color-pop, `2.6s` climax cold-open + copyright-free procedural sub-bass SFX, auto dead-air trim, `1.18×` scream-zoom, and seam-locked captions |
+| **Auto-Upload & Monetization Stack** | `120m`-spaced US Prime `publishAt` scheduler, `12` GTA 6 launch debate auto-comments, hard `10/day` spam-safe cap, `gta6_outliers` channel radar, weekly `8:05+` high-RPM compilation builder, and byte-verified Google Drive backup + Mac cleanup |
+| **Full Research & Agent Skill** | Complete `v4.0.1` + `v3.0` reverse-engineering reports + autonomous `SKILL.md` for macOS Apple Silicon |
+
+---
+
+## Requirements
+- **macOS Apple Silicon** (M1 / M2 / M3 / M4)
+- **Python 3.11+**, `ffmpeg`, and `yt-dlp` (installed in 60 seconds via `brew` + `.venv`)
+
+## License
+Commercial proprietary software — **All Rights Reserved**. Redistribution, resale, or public sharing of the source code or pre-trained model weights without a license is prohibited. See [`LICENSE`](LICENSE).
