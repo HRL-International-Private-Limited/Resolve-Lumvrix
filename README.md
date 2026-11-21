@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="https://whop.com/checkout/plan_fOxPHqsLK2LxS">
-    <img src="https://img.shields.io/badge/UNLOCK%20FULL%20REPO%20ON%20WHOP-$49%20ONE--TIME-FA4616?style=for-the-badge&logo=whop&logoColor=white" alt="Unlock Full Repo on Whop — $49 One-Time" />
+    <img src="https://img.shields.io/badge/50%25%20OFF%20CODE%3A%20STA650-$24.50%20ONE--TIME-FA4616?style=for-the-badge&logo=whop&logoColor=white" alt="50% Off Promo Code STA650 — $24.50 One-Time" />
   </a>
   <a href="https://whop.com/agensi/sta-6/">
     <img src="https://img.shields.io/badge/WHOP%20STOREFRONT-OPEN-111111?style=for-the-badge" alt="Open Whop Storefront" />
@@ -18,15 +18,17 @@
 
 # STA 6 — Signal Theft Auto VI (v4.0.1 Viral GTA 6 Shorts Autopilot)
 
+> **50% OFF Launch Offer (First 50 Clippers Only):** Enter promo code **`STA650`** at Whop checkout to drop the Lifetime License from ~~`$49`~~ to **`$24.50` one-time** (no monthly fees).
+>
 > **Paid Source Code & Pre-Trained ML Engine:** The full `STA 6 v4.0.1` Python pipeline, pre-trained 137-channel Tri-Stage ML weights (`models/viral_model_v4.json`), rendering engine, and automation skill are **private** and unlock **immediately upon purchase on Whop**.
 
 ---
 
-## Get Instant Access — ~~`$99`~~ **`$49` One-Time (Lifetime License)**
+## Get Instant Access — ~~`$99`~~ ~~`$49`~~ **`$24.50` with code `STA650` (Lifetime License)**
 
 No monthly subscription. Pay once via **Whop** (Card, Apple Pay, Google Pay, local-currency adaptive pricing):
 
-### **[Buy STA 6 Now on Whop — `$49` One-Time →](https://whop.com/checkout/plan_fOxPHqsLK2LxS)**
+### **[Claim 50% OFF on Whop (Code: `STA650` → `$24.50` One-Time) →](https://whop.com/checkout/plan_fOxPHqsLK2LxS)**
 
 **How instant delivery works after payment:**
 1. **Immediate Download Inside Whop:** The second your payment completes, Whop automatically unlocks the private **STA 6 v4.0.1 — Download & Setup** hub containing **`STA-6-v4.0.1.zip`** and the 60-second macOS Apple Silicon setup guide.
