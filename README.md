@@ -16,11 +16,11 @@
   </a>
 </p>
 
-# STA 6 — Signal Theft Auto VI (v4.0.4 Animated Viral Shine + Zero-Loss 2K Viral GTA 6 Shorts Autopilot)
+# STA 6 — Signal Theft Auto VI (v4.0.5 5 Pro Motion Caption Styles + Viral Shine + Zero-Loss 2K Autopilot)
 
 > **50% OFF Launch Offer (First 50 Clippers Only):** Enter promo code **`STA650`** at Whop checkout to drop the Lifetime License from ~~`$49`~~ to **`$24.50` one-time** (no monthly fees).
 >
-> **Paid Source Code & Pre-Trained ML Engine:** The full `STA 6 v4.0.4` Python pipeline, pre-trained 137-channel Tri-Stage ML weights (`models/viral_model_v4.json`), Zero-Loss 2K anti-blur rendering engine, 60fps Animated Viral Shine Hook generator, and automation skill are **private** and unlock **immediately upon purchase on Whop**.
+> **Paid Source Code & Pre-Trained ML Engine:** The full `STA 6 v4.0.5` Python pipeline, 5 zero-editor pro motion caption styles (`clip.py captions`), 60fps Animated Viral Shine Hook generator, Zero-Loss 2K anti-blur rendering engine, pre-trained 137-channel Tri-Stage ML weights (`models/viral_model_v4.json`), and automation skill are **private** and unlock **immediately upon purchase on Whop**.
 
 ---
 
@@ -31,15 +31,69 @@ No monthly subscription. Pay once via **Whop** (Card, Apple Pay, Google Pay, loc
 ### **[Claim 50% OFF on Whop (Code: `STA650` → `$24.50` One-Time) →](https://whop.com/checkout/plan_fOxPHqsLK2LxS)**
 
 **How instant delivery works after payment:**
-1. **Immediate Download Inside Whop:** The second your payment completes, Whop automatically unlocks the private **STA 6 v4.0.4 — Download & Setup** hub containing **`STA-6-v4.0.4.zip`** and the 60-second macOS Apple Silicon setup guide.
+1. **Immediate Download Inside Whop:** The second your payment completes, Whop automatically unlocks the private **STA 6 v4.0.5 — Download & Setup** hub containing **`STA-6-v4.0.5.zip`** and the 60-second macOS Apple Silicon setup guide.
 2. **Private GitHub Repo Access (`STA-6-pro`):** Enter your GitHub username at checkout to also receive collaborator access to the private `STA-6-pro` repository for all future `v4.x` updates.
 3. **Earn 30% as a Clipper Affiliate:** Share STA 6 through Whop's Global Affiliate program ([whop.com/agensi/sta-6](https://whop.com/agensi/sta-6/)) and earn **`$14.70` per full-price sale**.
 
 ---
 
-## What's New in `v4.0.4` — Live Output Preview
+## What's New in `v4.0.5` — 4 New Pro Motion Caption Styles + Coding-Agent CLI
 
-See the exact **60fps Animated Viral Shine Text**, **pixel-centered black caption lane**, and **zero-blur 2K (`1440×2560`) anti-blur facecam output** rendered automatically by STA 6 `v4.0.4` (zero Premiere Pro or manual editing):
+Zero DaVinci Resolve, Premiere Pro, or CapCut needed. Every caption style renders natively at **2K 60fps (`1440×2560`)** with **pixel-exact (`0px` vertical / `±1px` horizontal) alignment** — selectable in one CLI flag by you or your AI coding agent (Claude Code, Antigravity, Cursor, Codex):
+
+<p align="center">
+  <img src="docs/assets/v405_caption_styles_animation.gif" alt="STA 6 v4.0.5 — Live Animated Pro Motion Captions (Shine, Stop Motion, Flicker, Inverted)" width="96%" />
+  <br />
+  <em>Live 60fps motion previews rendered natively by <code>scripts/clip.py</code> — The Shine, The Stop Motion (15fps erode-dilate), The Flicker (neon spline curve), and The Inverted (4:4:4 RGB zero-artifact color-corrected mask)</em>
+</p>
+
+<p align="center">
+  <img src="docs/assets/v405_caption_styles_preview.jpg" alt="STA 6 v4.0.5 — Full 2K 4-Style Comparison Collage" width="100%" />
+  <br />
+  <em>Full 2K (1440×2560 @ 60fps) output comparison across all 4 new styles — exact 23px/23px black-lane centering &amp; seamless full-bleed live-footage inversion</em>
+</p>
+
+<details>
+<summary><b>View 1:1 2K Typography Close-Ups (Inspect Anti-Aliased Edges &amp; Zero-Artifact Inversion)</b></summary>
+<p align="center">
+  <img src="docs/assets/v405_caption_closeups.jpg" alt="STA 6 v4.0.5 — 1:1 2K Close-Ups of All 4 New Caption Styles" width="96%" />
+</p>
+</details>
+
+### Coding-Agent CLI Quick Reference (No External Editing Software)
+
+```bash
+# 0. Let any coding agent inspect all 5 styles, colors & templates as JSON
+.venv/bin/python scripts/clip.py captions
+
+# 1. The Shine — Neon Green (#5EFF24) + 3 Diagonal Light Sweeps + 3-Layer Optical Bloom
+.venv/bin/python scripts/clip.py render "<VIDEO_OR_URL>" --clip 120:150 \
+  --cam "iw*0.37:ih*0.43:0:ih*0.56" --caption-style shine --caption-color green --out-dir output
+
+# 2. The Stop Motion — Editorial Serif Italic (#F4EDD2) + 15fps Circular Erode-Dilate Dissolve
+.venv/bin/python scripts/clip.py render "<VIDEO_OR_URL>" --clip 120:150 \
+  --cam "iw*0.37:ih*0.43:0:ih*0.56" --caption-style stopmotion --caption-color cream --out-dir output
+
+# 3. The Flicker — Cinema White + Exact Neon-Tube Spline Opacity Flicker (233ms)
+.venv/bin/python scripts/clip.py render "<VIDEO_OR_URL>" --clip 120:150 \
+  --cam "iw*0.37:ih*0.43:0:ih*0.56" --caption-style flicker --caption-color white --out-dir output
+
+# 4. The Inverted — 4:4:4 RGB Color-Corrected Live-Footage Inversion (Zero White Edge Artifacts)
+.venv/bin/python scripts/clip.py render "<VIDEO_OR_URL>" --clip 120:150 \
+  --cam "iw*0.37:ih*0.43:0:ih*0.56" --caption-style inverted --out-dir output
+
+# 5. Hormozi Karaoke (default) — Bold Italic Impact Electric Yellow Active Word Pop
+.venv/bin/python scripts/clip.py render "<VIDEO_OR_URL>" --clip 120:150 \
+  --cam "iw*0.37:ih*0.43:0:ih*0.56" --caption-style hormozi --out-dir output
+```
+
+> **Supported `--caption-color` presets:** `auto` | `green` (`#5EFF24`) | `blue` (`#2ECEFF`) | `cream` (`#F4EDD2`) | `gold` (`#FFD830`) | `pink` (`#FF4CAC`) | `white` (`#FFFFFF`)
+
+---
+
+## `v4.0.4` — Animated Viral Shine Hook Preview
+
+See the **60fps Animated Viral Shine Text** (`--hook "..." --hook-theme blue|vice|gold`), **pixel-centered black caption lane**, and **zero-blur 2K (`1440×2560`) anti-blur facecam output**:
 
 <p align="center">
   <img src="docs/assets/v404_shine_animation.gif" alt="STA 6 v4.0.4 — 60fps Animated Viral Shine Text Hook Overlay" width="88%" />
@@ -72,7 +126,8 @@ Trained on **2,193 real YouTube Shorts across 137 unique channels**, **139 paire
 
 | Module Included in Paid Package | What It Does for Clippers |
 | :--- | :--- |
-| **NEW `v4.0.4` 60fps Animated Viral Shine Hooks** | Premiere-grade two-tier tight neo-grotesque lockup, **4-color bilinear gradient** (`blue` / `vice` / `gold`), animated `-28°` feathered **diagonal glossy shine sweep**, pulsing bottom-stack **ambient bloom glow**, and staggered 60fps pop-in — **zero boxes, zero borders** |
+| **NEW `v4.0.5` 5 Pro Motion Caption Styles + Agent CLI** | Built-in `shine`, `stopmotion` (15fps circular erode-dilate), `flicker` (spline neon curve), `inverted` (4:4:4 RGB zero-artifact color-corrected live mask), and `hormozi` karaoke — **0px vertical / ±1px horizontal centering** + `clip.py captions` JSON selector for coding agents |
+| **`v4.0.4` 60fps Animated Viral Shine Hooks** | Premiere-grade two-tier tight neo-grotesque lockup, **4-color bilinear gradient** (`blue` / `vice` / `gold`), animated `-28°` feathered **diagonal glossy shine sweep**, pulsing bottom-stack **ambient bloom glow**, and staggered 60fps pop-in — **zero boxes, zero borders** |
 | **`v4.0.3` Precision Seam Caption Lane** | Dedicated true-black caption divider lane + automatic OBS/letterbox header trimming (`detect_top_black_bar`) so karaoke captions sit **pixel-centered** with zero facecam overlap |
 | **`v4.0.2` Zero-Loss 2K Anti-Blur Engine** | Defaults to **`1440×2560 @ 60fps` (`CRF 13`, `320k` AAC, `BT.709`)** to trigger YouTube's high-bitrate **VP9/AV1** tier, downloads up to **4K (`2160p`)** VODs, strips webcam macroblocks (`deblock` + `hqdn3d`) + **AMD FidelityFX CAS** sharpening (**5.9× sharper facecams**), zero double-encoding |
 | **Tri-Stage Viral AI Gate (`v4.0.1`)** | **Model A** (`0.7768` held-out ROC-AUC across 137 channels) + **Model B** (`64.1%–64.9%` unseen-channel pairwise win rate across 37 channels) + **Model C** (`18`-Short Gold Centroid similarity score) |
