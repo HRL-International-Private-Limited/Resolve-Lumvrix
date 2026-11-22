@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="https://hrlpavan.github.io/STA-6/">
-    <img src="https://img.shields.io/badge/LAUNCH%20LIVE%2060FPS%20EDITING%20HARNESS-TRY%20NOW%20(0%20LAG)-0EA5E9?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Launch Live 60fps STA-6 Editing Harness" />
+    <img src="https://img.shields.io/badge/LAUNCH%20LUMVRIX%20RESOLVE%20(LIVE)-60FPS%20%C2%B7%200%20LAG-3B82F6?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Launch Lumvrix Resolve Live 60fps Editor" />
   </a>
   <a href="https://whop.com/checkout/plan_fOxPHqsLK2LxS">
     <img src="https://img.shields.io/badge/50%25%20OFF%20CODE%3A%20STA650-$24.50%20ONE--TIME-FA4616?style=for-the-badge&logo=whop&logoColor=white" alt="50% Off Promo Code STA650 — $24.50 One-Time" />
@@ -19,26 +19,26 @@
   </a>
 </p>
 
-# STA 6 — Signal Theft Auto VI (v4.0.8 DaVinci Resolve-Style Editing Harness + AI Bridge MCP + 2K Autopilot)
+# Lumvrix Resolve (`v4.0.9`) — Easy 60fps Video & Caption Studio + AI Bridge MCP (Powered by STA-6)
 
 > **50% OFF Launch Offer (First 50 Clippers Only):** Enter promo code **`STA650`** at Whop checkout to drop the Lifetime License from ~~`$49`~~ to **`$24.50` one-time** (no monthly fees).
 >
-> **Try the Live DaVinci Resolve-Style Zero-Lag Editing Harness Right Now:** **[Open STA-6 Resolve Harness (`hrlpavan.github.io/STA-6`) →](https://hrlpavan.github.io/STA-6/)** — authentic DaVinci Resolve dark studio UI with multi-track NLE timeline (`T1 / V2 / V1 / A1`), SMPTE 60fps timecode, live color grade sliders, all 5 caption styles at **60fps (`<1.5ms/frame`)**, click-to-pin Resolve review markers, non-destructive `Snapshot / Compare A/B`, and a built-in **12-tool AI Bridge MCP** console!
+> **Try Lumvrix Resolve Live in Your Browser (Zero Lag):** **[Open Lumvrix Resolve (`hrlpavan.github.io/STA-6`) →](https://hrlpavan.github.io/STA-6/)** — ultra-clean, beginner-friendly **Clideo-inspired workspace** with a slim 6-icon tool rail, distraction-free 60fps 9:16 preview (`0.5ms/frame`), **drag-directly-on-video** caption alignment (with magnetic snap to the flush zero-gap seam), **click-to-pin inline change flagging**, clean 3-track timeline, 1-click **Export** modal, and a built-in **12-tool AI Bridge MCP** console!
 >
-> **Paid Source Code & Pre-Trained ML Engine:** The full `STA 6 v4.0.8` Python pipeline, stdlib **AI Bridge MCP Server (`scripts/mcp_bridge.py`)**, local harness bridge (`scripts/harness.py`), flush zero-gap 2K rendering engine, 5 pro motion caption styles (`clip.py captions`), 60fps Animated Viral Shine Hook generator, and pre-trained 137-channel Tri-Stage ML weights (`models/viral_model_v4.json`) are **private** and unlock **immediately upon purchase on Whop**.
+> **Paid Source Code & Pre-Trained ML Engine:** The full `Lumvrix Resolve v4.0.9` Python pipeline, stdlib **AI Bridge MCP Server (`scripts/mcp_bridge.py`, key: `lumvrix-resolve`)**, local studio server (`scripts/harness.py`), flush zero-gap 2K rendering engine, 5 pro motion caption styles (`clip.py captions`), 60fps Animated Viral Shine Hook generator, and pre-trained 137-channel Tri-Stage ML weights (`models/viral_model_v4.json`) are **private** and unlock **immediately upon purchase on Whop**.
 
 ---
 
-## What's New in `v4.0.8` — DaVinci Resolve-Style Frontend + 12-Tool AI Bridge MCP
+## What's New in `v4.0.9` — Meet **Lumvrix Resolve** (Clideo-Easy UI + Direct Canvas Editing + AI Bridge MCP)
 
-Inspired by **DaVinci Resolve Studio**, [`flamexnreal/davinci-resolve-ai-bridge-mcp`](https://github.com/flamexnreal/davinci-resolve-ai-bridge-mcp), and [`walkinglabs/awesome-harness-engineering`](https://github.com/walkinglabs/awesome-harness-engineering):
+Redesigned for effortless 10-second editing — combining **Clideo Video Editor's** clean simplicity with **DaVinci Resolve's** precision color/timeline engine, [`flamexnreal/davinci-resolve-ai-bridge-mcp`](https://github.com/flamexnreal/davinci-resolve-ai-bridge-mcp), and [`walkinglabs/awesome-harness-engineering`](https://github.com/walkinglabs/awesome-harness-engineering):
 
 <p align="center">
   <a href="https://hrlpavan.github.io/STA-6/">
-    <img src="docs/assets/v408_resolve_harness_preview.jpg" alt="STA 6 v4.0.8 — DaVinci Resolve-Style Zero-Lag 60fps Editing Harness + AI Bridge MCP" width="100%" />
+    <img src="docs/assets/v409_lumvrix_resolve_preview.jpg" alt="Lumvrix Resolve v4.0.9 — Easy 60fps Video & Caption Editor + AI Bridge MCP" width="100%" />
   </a>
   <br />
-  <em><a href="https://hrlpavan.github.io/STA-6/"><b>Launch Live Resolve-Style Editing Harness (60 FPS · 1.5ms/frame · Zero Lag) →</b></a> — Multi-track Resolve NLE timeline (<code>T1 / V2 / V1 / A1</code>), SMPTE 60fps playhead, live 12-tool AI Bridge MCP (Antigravity / Claude Code / Codex / Cursor / Resolve Lua), spatial review markers &amp; deterministic <code>β=1</code> gates</em>
+  <em><a href="https://hrlpavan.github.io/STA-6/"><b>Launch Lumvrix Resolve Live (60 FPS · 0.5ms/frame · Zero Lag) →</b></a> — Slim 6-icon rail (<code>Captions / Hook / Media / Color / Flags / AI Bridge</code>), direct drag-on-canvas captions with flush zero-gap seam snap, inline floating Flag popover, clean 3-track timeline, 12-tool AI Bridge MCP &amp; Clideo-style Export modal</em>
 </p>
 
 ---
@@ -50,9 +50,9 @@ No monthly subscription. Pay once via **Whop** (Card, Apple Pay, Google Pay, loc
 ### **[Claim 50% OFF on Whop (Code: `STA650` → `$24.50` One-Time) →](https://whop.com/checkout/plan_fOxPHqsLK2LxS)**
 
 **How instant delivery works after payment:**
-1. **Immediate Download Inside Whop:** The second your payment completes, Whop automatically unlocks the private **STA 6 v4.0.8 — Download & Setup** hub containing **`STA-6-v4.0.8.zip`** and the 60-second macOS Apple Silicon setup guide.
+1. **Immediate Download Inside Whop:** The second your payment completes, Whop automatically unlocks the private **Lumvrix Resolve v4.0.9 — Download & Setup** hub containing **`Lumvrix-Resolve-v4.0.9.zip`** and the 60-second macOS Apple Silicon setup guide.
 2. **Private GitHub Repo Access (`STA-6-pro`):** Enter your GitHub username at checkout to also receive collaborator access to the private `STA-6-pro` repository for all future `v4.x` updates.
-3. **Earn 30% as a Clipper Affiliate:** Share STA 6 through Whop's Global Affiliate program ([whop.com/agensi/sta-6](https://whop.com/agensi/sta-6/)) and earn **`$14.70` per full-price sale**.
+3. **Earn 30% as a Clipper Affiliate:** Share Lumvrix Resolve / STA 6 through Whop's Global Affiliate program ([whop.com/agensi/sta-6](https://whop.com/agensi/sta-6/)) and earn **`$14.70` per full-price sale**.
 
 ---
 
