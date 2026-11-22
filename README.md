@@ -1,53 +1,54 @@
-<p align="center">
-  <a href="https://whop.com/checkout/plan_fOxPHqsLK2LxS">
-    <img src="docs/assets/poster.jpg" alt="STA 6 — Signal Theft Auto VI | Viral GTA 6 Shorts Autopilot v4.0.1" width="100%" />
-  </a>
-</p>
+<div align="center">
+  <a href="https://hrl-international-private-limited.github.io/Resolve-Lumvrix/"><img src="docs/assets/rl.png" alt="Resolve Lumvrix™ Official Emblem — HRL International Pvt. Ltd." width="108" /></a>
 
-<p align="center">
-  <a href="https://hrl-international-private-limited.github.io/Resolve-Lumvrix/">
-    <img src="docs/assets/rl.png" alt="Resolve Lumvrix™ Official Emblem — HRL International Pvt. Ltd." width="136" />
-  </a>
-</p>
+  <h1>Resolve Lumvrix™ <code>v4.1.0</code></h1>
 
-<p align="center">
-  <a href="https://hrl-international-private-limited.github.io/Resolve-Lumvrix/">
-    <img src="https://img.shields.io/badge/LAUNCH%20RESOLVE%20LUMVRIX%20(LIVE)-60FPS%20%C2%B7%200%20LAG-FF7A18?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Launch Resolve Lumvrix Live 60fps Editor" />
-  </a>
-  <a href="https://whop.com/checkout/plan_fOxPHqsLK2LxS">
-    <img src="https://img.shields.io/badge/50%25%20OFF%20CODE%3A%20STA650-$24.50%20ONE--TIME-FA4616?style=for-the-badge&logo=whop&logoColor=white" alt="50% Off Promo Code STA650 — $24.50 One-Time" />
-  </a>
-  <a href="https://whop.com/agensi/sta-6/">
-    <img src="https://img.shields.io/badge/WHOP%20STOREFRONT-OPEN-111111?style=for-the-badge" alt="Open Whop Storefront" />
-  </a>
-  <a href="https://github.com/HRL-International-Private-Limited">
-    <img src="https://img.shields.io/badge/HRL%20INTERNATIONAL-PVT.%20LTD.-00C853?style=for-the-badge&logo=github&logoColor=white" alt="HRL International Pvt. Ltd. GitHub Organization" />
-  </a>
-</p>
+  <p><b>Easy 60fps Video &amp; Caption Studio + 12-Tool AI Bridge MCP + 2K Anti-Blur Shorts Engine</b><br />Built &amp; Owned by <a href="https://github.com/HRL-International-Private-Limited"><b>HRL International Private Limited</b></a></p>
 
-# Resolve Lumvrix™ (`v4.1.0`) — Easy 60fps Video & Caption Studio + AI Bridge MCP (by HRL International Pvt. Ltd.)
+  <p>
+    <a href="https://hrl-international-private-limited.github.io/Resolve-Lumvrix/"><img src="https://img.shields.io/badge/LIVE%20STUDIO-60FPS%20%C2%B7%200%20LAG-FF7A18?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Launch Resolve Lumvrix Live Studio" /></a>&nbsp;<a href="https://whop.com/checkout/plan_fOxPHqsLK2LxS"><img src="https://img.shields.io/badge/50%25%20OFF%20STA650-$24.50%20LIFETIME-FA4616?style=for-the-badge&logo=whop&logoColor=white" alt="50% Off Promo Code STA650" /></a>&nbsp;<a href="https://whop.com/agensi/sta-6/"><img src="https://img.shields.io/badge/WHOP-STOREFRONT-111111?style=for-the-badge" alt="Whop Storefront" /></a>&nbsp;<a href="https://github.com/HRL-International-Private-Limited"><img src="https://img.shields.io/badge/HRL%20INT'L-PVT.%20LTD.-00C853?style=for-the-badge&logo=github&logoColor=white" alt="HRL International Pvt. Ltd." /></a>
+  </p>
 
-> **Official Repository of [HRL International Private Limited](https://github.com/HRL-International-Private-Limited)** — Autonomous Deep-Tech Engineering & Visual Computing (Mangaluru, Karnataka, India).
->
-> **50% OFF Launch Offer (First 50 Clippers Only):** Enter promo code **`STA650`** at Whop checkout to drop the Lifetime License from ~~`$49`~~ to **`$24.50` one-time** (no monthly fees).
->
-> **Try Resolve Lumvrix™ Live in Your Browser (Zero Lag):** **[Open Resolve Lumvrix™ (`hrl-international-private-limited.github.io/Resolve-Lumvrix`) →](https://hrl-international-private-limited.github.io/Resolve-Lumvrix/)** — ultra-clean, beginner-friendly **Clideo-inspired workspace** featuring the official `rl.png` emblem, slim 6-icon tool rail, distraction-free 60fps 9:16 preview (`0.5ms/frame`), **drag-directly-on-video** caption alignment (with magnetic snap to the flush zero-gap seam), **click-to-pin inline change flagging**, clean 3-track timeline, 1-click **Export** modal, and a built-in **12-tool AI Bridge MCP** console!
->
-> **Intellectual Property & Ownership:** **Resolve Lumvrix™**, the `RL` emblem (`rl.png`), and the underlying STA-6 2K engine are proprietary software and trademarks exclusively owned by **HRL International Private Limited (`HRL International Pvt. Ltd.`)**. All copyright, trademark, trade-secret, and patent rights are reserved — see [`PATENTS_AND_IP_NOTICE.md`](PATENTS_AND_IP_NOTICE.md) and [`LICENSE`](LICENSE). Full source code (`Resolve-Lumvrix-v4.1.0.zip`) unlocks **immediately upon purchase on Whop**.
+  <a href="https://hrl-international-private-limited.github.io/Resolve-Lumvrix/"><img src="docs/assets/v410_resolve_lumvrix_preview.jpg" alt="Resolve Lumvrix™ v4.1.0 — Easy 60fps Video & Caption Studio + AI Bridge MCP by HRL International Pvt. Ltd." width="100%" /></a>
+  <p><em><a href="https://hrl-international-private-limited.github.io/Resolve-Lumvrix/"><b>Launch Resolve Lumvrix™ Live in Your Browser (60 FPS · 0.5ms/frame · Zero Lag) →</b></a></em></p>
+</div>
+
+> **50% OFF Launch Offer (First 50 Clippers Only):** Use promo code **`STA650`** at Whop checkout to drop the Lifetime License from ~~`$49`~~ to **`$24.50` one-time** (zero monthly fees).  
+> **Ownership & IP:** **Resolve Lumvrix™** and the `RL` emblem (`rl.png`) are proprietary software and trademarks of **[HRL International Private Limited](https://github.com/HRL-International-Private-Limited)** (`HRL International Pvt. Ltd.`). See [`PATENTS_AND_IP_NOTICE.md`](PATENTS_AND_IP_NOTICE.md) and [`LICENSE`](LICENSE).
 
 ---
 
-## What's New in `v4.1.0` — Official **Resolve Lumvrix™** Brand, `rl.png` Emblem & HRL International Pvt. Ltd. IP Charter
+## Why Resolve Lumvrix™ Is Better Than Other Video Editors & AI Clipping Software
 
-Combining **Clideo Video Editor's** effortless simplicity with **DaVinci Resolve's** precision color/timeline engine, **12-tool AI Bridge MCP (`resolve-lumvrix`)**, and **HRL International Pvt. Ltd.'s** proprietary zero-gap 2K rendering stack:
+Most creators are forced to choose between **slow, expensive cloud AI tools** (OpusClip, Submagic, Descript) that compress video to blurry 1080p and charge monthly fees, or **heavy manual editors** (Premiere Pro, DaVinci Resolve, CapCut) that take 30–60 minutes per Short and have zero AI-agent automation. **Resolve Lumvrix™ combines the best of all three in one zero-lag local + browser studio:**
 
+| Capability | **Resolve Lumvrix™ (`v4.1.0`)** | Cloud AI SaaS *(OpusClip / Submagic / Descript)* | Manual NLEs *(CapCut / Premiere / DaVinci)* | Online Editors *(Clideo / Kapwing)* |
+| :--- | :---: | :---: | :---: | :---: |
+| **Pricing** | **`$24.50` One-Time (Lifetime)** | `$19–$60/mo` (`$228–$720/yr`) | `$10–$55/mo` + paid plugins | `$9–$24/mo` + watermarks |
+| **Preview Latency** | **`60 FPS` (`0.5ms/frame`, 0ms local load)** | Cloud upload + render queue wait | Heavy 2–5 GB desktop app | Server upload & browser lag |
+| **Native AI Coding-Agent Control** | **12-Tool AI Bridge MCP (`resolve-lumvrix`)** | None | Manual / complex Lua scripting | None |
+| **Output Sharpness & YouTube Codec** | **True 2K (`1440×2560 @ 60fps`) + AMD CAS (forces VP9/AV1)** | 1080p re-encoded (`6–8 Mbps` AVC1 blur) | Manual settings required | Compressed 1080p/720p |
+| **Zero-Gap Flush Split-Screen** | **Automatic OBS trim + flush `816+1744` seam (0 black bar)** | Manual crop / crooked borders | Manual masks per clip | Manual resize |
+| **Built-In Pro Motion Captions** | **5 Native 60fps Styles (`±1px` alignment, zero plugins)** | Basic templates / limited export | Requires After Effects / plugins | Static text only |
+| **Instant Change Flagging & Gates** | **Click-to-pin `(x, y, t)` flags + fail-closed `β=1` gate** | None | None | None |
+| **Privacy & Media Ownership** | **100% On-Device Local Processing (0 cloud uploads)** | Videos uploaded to 3rd-party servers | Local (CapCut cloud sync) | Cloud upload required |
+| **Viral Moment Mining & Scheduling** | **137-Channel Tri-Stage ML + VOD Miner + US Prime Scheduler** | Generic AI score only | None | None |
+
+### 5 Key Advantages Built for Real Clippers & Creators
+1. **Zero Monthly Fees, Zero Credit Limits:** Pay once (`$24.50` with `STA650`) and render unlimited 2K 60fps Shorts and weekly `8:05+` compilations forever on your own Apple Silicon Mac.
+2. **Clideo-Simple UI, Studio-Grade 2K Output:** Beginners drag captions directly on the 9:16 preview (with magnetic snap to the flush zero-gap seam) and click **Export** — while under the hood, Resolve Lumvrix™ runs **4K VOD ingestion + deblock + Lanczos + AMD FidelityFX CAS + CRF 13 BT.709** to force YouTube's crisp **VP9/AV1** bitrate tier.
+3. **First-Class AI Bridge MCP (`resolve-lumvrix`):** Unlike closed web editors, Antigravity, Claude Code, Codex, and Cursor connect directly via 12 JSON-RPC 2.0 tools (`customize_captions`, `set_clip_grade`, `add_marker`, `compare_timelines`, `render_current_timeline`) with live two-way browser sync and fail-closed quality gating.
+4. **Zero-Editor Motion Captions (`clip.py captions`):** Ships with 5 native 60fps styles (*The Shine*, *15fps Stop Motion*, *Neon Flicker*, *4:4:4 RGB Inverted Mask*, and *Hormozi Pop*) plus 60fps Animated Viral Shine Hooks — no Premiere, After Effects, or CapCut Pro subscription required.
+5. **Trained on Real Shorts Performance Data:** Backed by a **137-channel Tri-Stage ML engine** (2,193 Shorts + 139 paired within-channel MP4s) that mines climax moments, builds 2.6s cold-opens with copyright-free sub-bass SFX, masters audio to `-18 LUFS`, and schedules uploads 120 minutes apart in US Prime.
+
+---
+
+<details>
+<summary><b>View Official STA-6 Engine Launch Poster</b></summary>
 <p align="center">
-  <a href="https://hrl-international-private-limited.github.io/Resolve-Lumvrix/">
-    <img src="docs/assets/v410_resolve_lumvrix_preview.jpg" alt="Resolve Lumvrix™ v4.1.0 — Easy 60fps Video & Caption Studio + AI Bridge MCP by HRL International Pvt. Ltd." width="100%" />
-  </a>
-  <br />
-  <em><a href="https://hrl-international-private-limited.github.io/Resolve-Lumvrix/"><b>Launch Resolve Lumvrix™ Live (60 FPS · 0.5ms/frame · Zero Lag) →</b></a> — Official <code>rl.png</code> Dragon Emblem, slim 6-icon rail (<code>Captions / Hook / Media / Color / Flags / AI Bridge</code>), direct drag-on-canvas captions with zero-gap seam snap, inline Flag popover, clean 3-track timeline, 12-tool AI Bridge MCP &amp; built-in HRL International Pvt. Ltd. IP &amp; Patent Notice</em>
+  <a href="https://whop.com/checkout/plan_fOxPHqsLK2LxS"><img src="docs/assets/poster.jpg" alt="STA 6 — Signal Theft Auto VI | Powered by Resolve Lumvrix™" width="100%" /></a>
 </p>
+</details>
 
 ---
 
