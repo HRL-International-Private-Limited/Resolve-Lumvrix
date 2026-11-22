@@ -5,13 +5,13 @@
 </p>
 
 <p align="center">
-  <a href="https://hrlpavan.github.io/STA-6/">
+  <a href="https://hrl-international-private-limited.github.io/Resolve-Lumvrix/">
     <img src="docs/assets/rl.png" alt="Resolve Lumvrix™ Official Emblem — HRL International Pvt. Ltd." width="136" />
   </a>
 </p>
 
 <p align="center">
-  <a href="https://hrlpavan.github.io/STA-6/">
+  <a href="https://hrl-international-private-limited.github.io/Resolve-Lumvrix/">
     <img src="https://img.shields.io/badge/LAUNCH%20RESOLVE%20LUMVRIX%20(LIVE)-60FPS%20%C2%B7%200%20LAG-FF7A18?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Launch Resolve Lumvrix Live 60fps Editor" />
   </a>
   <a href="https://whop.com/checkout/plan_fOxPHqsLK2LxS">
@@ -20,16 +20,18 @@
   <a href="https://whop.com/agensi/sta-6/">
     <img src="https://img.shields.io/badge/WHOP%20STOREFRONT-OPEN-111111?style=for-the-badge" alt="Open Whop Storefront" />
   </a>
-  <a href="https://whop.com/agensi/sta-6/">
-    <img src="https://img.shields.io/badge/HRL%20INTERNATIONAL-PVT.%20LTD.-00C853?style=for-the-badge" alt="HRL International Pvt. Ltd." />
+  <a href="https://github.com/HRL-International-Private-Limited">
+    <img src="https://img.shields.io/badge/HRL%20INTERNATIONAL-PVT.%20LTD.-00C853?style=for-the-badge&logo=github&logoColor=white" alt="HRL International Pvt. Ltd. GitHub Organization" />
   </a>
 </p>
 
 # Resolve Lumvrix™ (`v4.1.0`) — Easy 60fps Video & Caption Studio + AI Bridge MCP (by HRL International Pvt. Ltd.)
 
+> **Official Repository of [HRL International Private Limited](https://github.com/HRL-International-Private-Limited)** — Autonomous Deep-Tech Engineering & Visual Computing (Mangaluru, Karnataka, India).
+>
 > **50% OFF Launch Offer (First 50 Clippers Only):** Enter promo code **`STA650`** at Whop checkout to drop the Lifetime License from ~~`$49`~~ to **`$24.50` one-time** (no monthly fees).
 >
-> **Try Resolve Lumvrix™ Live in Your Browser (Zero Lag):** **[Open Resolve Lumvrix™ (`hrlpavan.github.io/STA-6`) →](https://hrlpavan.github.io/STA-6/)** — ultra-clean, beginner-friendly **Clideo-inspired workspace** featuring the official `rl.png` emblem, slim 6-icon tool rail, distraction-free 60fps 9:16 preview (`0.5ms/frame`), **drag-directly-on-video** caption alignment (with magnetic snap to the flush zero-gap seam), **click-to-pin inline change flagging**, clean 3-track timeline, 1-click **Export** modal, and a built-in **12-tool AI Bridge MCP** console!
+> **Try Resolve Lumvrix™ Live in Your Browser (Zero Lag):** **[Open Resolve Lumvrix™ (`hrl-international-private-limited.github.io/Resolve-Lumvrix`) →](https://hrl-international-private-limited.github.io/Resolve-Lumvrix/)** — ultra-clean, beginner-friendly **Clideo-inspired workspace** featuring the official `rl.png` emblem, slim 6-icon tool rail, distraction-free 60fps 9:16 preview (`0.5ms/frame`), **drag-directly-on-video** caption alignment (with magnetic snap to the flush zero-gap seam), **click-to-pin inline change flagging**, clean 3-track timeline, 1-click **Export** modal, and a built-in **12-tool AI Bridge MCP** console!
 >
 > **Intellectual Property & Ownership:** **Resolve Lumvrix™**, the `RL` emblem (`rl.png`), and the underlying STA-6 2K engine are proprietary software and trademarks exclusively owned by **HRL International Private Limited (`HRL International Pvt. Ltd.`)**. All copyright, trademark, trade-secret, and patent rights are reserved — see [`PATENTS_AND_IP_NOTICE.md`](PATENTS_AND_IP_NOTICE.md) and [`LICENSE`](LICENSE). Full source code (`Resolve-Lumvrix-v4.1.0.zip`) unlocks **immediately upon purchase on Whop**.
 
@@ -40,11 +42,11 @@
 Combining **Clideo Video Editor's** effortless simplicity with **DaVinci Resolve's** precision color/timeline engine, **12-tool AI Bridge MCP (`resolve-lumvrix`)**, and **HRL International Pvt. Ltd.'s** proprietary zero-gap 2K rendering stack:
 
 <p align="center">
-  <a href="https://hrlpavan.github.io/STA-6/">
+  <a href="https://hrl-international-private-limited.github.io/Resolve-Lumvrix/">
     <img src="docs/assets/v410_resolve_lumvrix_preview.jpg" alt="Resolve Lumvrix™ v4.1.0 — Easy 60fps Video & Caption Studio + AI Bridge MCP by HRL International Pvt. Ltd." width="100%" />
   </a>
   <br />
-  <em><a href="https://hrlpavan.github.io/STA-6/"><b>Launch Resolve Lumvrix™ Live (60 FPS · 0.5ms/frame · Zero Lag) →</b></a> — Official <code>rl.png</code> Dragon Emblem, slim 6-icon rail (<code>Captions / Hook / Media / Color / Flags / AI Bridge</code>), direct drag-on-canvas captions with zero-gap seam snap, inline Flag popover, clean 3-track timeline, 12-tool AI Bridge MCP &amp; built-in HRL International Pvt. Ltd. IP &amp; Patent Notice</em>
+  <em><a href="https://hrl-international-private-limited.github.io/Resolve-Lumvrix/"><b>Launch Resolve Lumvrix™ Live (60 FPS · 0.5ms/frame · Zero Lag) →</b></a> — Official <code>rl.png</code> Dragon Emblem, slim 6-icon rail (<code>Captions / Hook / Media / Color / Flags / AI Bridge</code>), direct drag-on-canvas captions with zero-gap seam snap, inline Flag popover, clean 3-track timeline, 12-tool AI Bridge MCP &amp; built-in HRL International Pvt. Ltd. IP &amp; Patent Notice</em>
 </p>
 
 ---
