@@ -16,11 +16,11 @@
   </a>
 </p>
 
-# STA 6 — Signal Theft Auto VI (v4.0.3 Zero-Loss 2K + Precision Typography Viral GTA 6 Shorts Autopilot)
+# STA 6 — Signal Theft Auto VI (v4.0.4 Animated Viral Shine + Zero-Loss 2K Viral GTA 6 Shorts Autopilot)
 
 > **50% OFF Launch Offer (First 50 Clippers Only):** Enter promo code **`STA650`** at Whop checkout to drop the Lifetime License from ~~`$49`~~ to **`$24.50` one-time** (no monthly fees).
 >
-> **Paid Source Code & Pre-Trained ML Engine:** The full `STA 6 v4.0.3` Python pipeline, pre-trained 137-channel Tri-Stage ML weights (`models/viral_model_v4.json`), Zero-Loss 2K anti-blur rendering engine, studio rounded-pill typography, and automation skill are **private** and unlock **immediately upon purchase on Whop**.
+> **Paid Source Code & Pre-Trained ML Engine:** The full `STA 6 v4.0.4` Python pipeline, pre-trained 137-channel Tri-Stage ML weights (`models/viral_model_v4.json`), Zero-Loss 2K anti-blur rendering engine, 60fps Animated Viral Shine Hook generator, and automation skill are **private** and unlock **immediately upon purchase on Whop**.
 
 ---
 
@@ -31,7 +31,7 @@ No monthly subscription. Pay once via **Whop** (Card, Apple Pay, Google Pay, loc
 ### **[Claim 50% OFF on Whop (Code: `STA650` → `$24.50` One-Time) →](https://whop.com/checkout/plan_fOxPHqsLK2LxS)**
 
 **How instant delivery works after payment:**
-1. **Immediate Download Inside Whop:** The second your payment completes, Whop automatically unlocks the private **STA 6 v4.0.3 — Download & Setup** hub containing **`STA-6-v4.0.3.zip`** and the 60-second macOS Apple Silicon setup guide.
+1. **Immediate Download Inside Whop:** The second your payment completes, Whop automatically unlocks the private **STA 6 v4.0.4 — Download & Setup** hub containing **`STA-6-v4.0.4.zip`** and the 60-second macOS Apple Silicon setup guide.
 2. **Private GitHub Repo Access (`STA-6-pro`):** Enter your GitHub username at checkout to also receive collaborator access to the private `STA-6-pro` repository for all future `v4.x` updates.
 3. **Earn 30% as a Clipper Affiliate:** Share STA 6 through Whop's Global Affiliate program ([whop.com/agensi/sta-6](https://whop.com/agensi/sta-6/)) and earn **`$14.70` per full-price sale**.
 
@@ -43,7 +43,8 @@ Trained on **2,193 real YouTube Shorts across 137 unique channels**, **139 paire
 
 | Module Included in Paid Package | What It Does for Clippers |
 | :--- | :--- |
-| **NEW `v4.0.3` Precision Typography & Clean CTA** | Dedicated true-black caption divider lane + automatic OBS/letterbox header trimming (`detect_top_black_bar`) so captions sit **pixel-centered** with zero overlap, plus a 2× supersampled **unified rounded dark-glass pill hook CTA** (zero chunky borders or stepped boxes) |
+| **NEW `v4.0.4` 60fps Animated Viral Shine Hooks** | Premiere-grade two-tier tight neo-grotesque lockup, **4-color bilinear gradient** (`blue` / `vice` / `gold`), animated `-28°` feathered **diagonal glossy shine sweep**, pulsing bottom-stack **ambient bloom glow**, and staggered 60fps pop-in — **zero boxes, zero borders** |
+| **`v4.0.3` Precision Seam Caption Lane** | Dedicated true-black caption divider lane + automatic OBS/letterbox header trimming (`detect_top_black_bar`) so karaoke captions sit **pixel-centered** with zero facecam overlap |
 | **`v4.0.2` Zero-Loss 2K Anti-Blur Engine** | Defaults to **`1440×2560 @ 60fps` (`CRF 13`, `320k` AAC, `BT.709`)** to trigger YouTube's high-bitrate **VP9/AV1** tier, downloads up to **4K (`2160p`)** VODs, strips webcam macroblocks (`deblock` + `hqdn3d`) + **AMD FidelityFX CAS** sharpening (**5.9× sharper facecams**), zero double-encoding |
 | **Tri-Stage Viral AI Gate (`v4.0.1`)** | **Model A** (`0.7768` held-out ROC-AUC across 137 channels) + **Model B** (`64.1%–64.9%` unseen-channel pairwise win rate across 37 channels) + **Model C** (`18`-Short Gold Centroid similarity score) |
 | **VOD Viral Moment Miner (`clip.py mine`)** | Scans any stream/VOD and automatically ranks the highest-energy `24–34s` reaction & climax windows |
