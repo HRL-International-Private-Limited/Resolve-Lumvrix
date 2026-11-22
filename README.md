@@ -37,6 +37,35 @@ No monthly subscription. Pay once via **Whop** (Card, Apple Pay, Google Pay, loc
 
 ---
 
+## What's New in `v4.0.4` — Live Output Preview
+
+See the exact **60fps Animated Viral Shine Text**, **pixel-centered black caption lane**, and **zero-blur 2K (`1440×2560`) anti-blur facecam output** rendered automatically by STA 6 `v4.0.4` (zero Premiere Pro or manual editing):
+
+<p align="center">
+  <img src="docs/assets/v404_shine_animation.gif" alt="STA 6 v4.0.4 — 60fps Animated Viral Shine Text Hook Overlay" width="88%" />
+  <br />
+  <em>60fps Animated Viral Shine Hook (4-color gradient + diagonal glossy light sweep + pulsing ambient bloom — themes: <code>blue</code>, <code>vice</code>, <code>gold</code>)</em>
+</p>
+
+<table>
+  <tr>
+    <td align="center" width="58%">
+      <img src="docs/assets/v404_preview_closeup.jpg" alt="STA 6 v4.0.4 — Centered Caption Bar & Viral Shine Hook Close-Up" width="100%" />
+      <br />
+      <b>v4.0.3 + v4.0.4 Typography Close-Up</b><br />
+      <sub>Pixel-centered caption bar + auto OBS letterbox trim + zero-border Viral Shine Hook</sub>
+    </td>
+    <td align="center" width="42%">
+      <img src="docs/assets/v404_preview_full.jpg" alt="STA 6 v4.0.4 — Full 2K 1440x2560 Zero-Blur Output Frame" width="100%" />
+      <br />
+      <b>Full 2K (1440×2560 @ 60fps) Master</b><br />
+      <sub>4K VOD ingestion + AMD CAS anti-blur facecam + CRF 13 BT.709 (triggers YouTube VP9/AV1)</sub>
+    </td>
+  </tr>
+</table>
+
+---
+
 ## Built for GTA 6 & Streamer Clipping Channels
 
 Trained on **2,193 real YouTube Shorts across 137 unique channels**, **139 paired within-channel Viral vs. Flop MP4s across 37 channels** (zero subscriber bias), **18 Gold-Standard viral Shorts (`100K–11.08M` views)**, **475 long-form RPM benchmarks**, and **270 mined viral comments**.
