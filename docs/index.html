@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Resolve Lumvrix™ — Easy 60fps Video & Caption Editor + AI Bridge (v4.2.0) | HRL International Pvt. Ltd.</title>
+<title>Resolve Lumvrix™ — Easy 60fps Video & Caption Editor + YouTube AI Clipper + AI Bridge (v4.3.0) | HRL International Pvt. Ltd.</title>
 <meta name="author" content="HRL International Pvt. Ltd." />
 <meta name="copyright" content="Copyright © 2026 HRL International Pvt. Ltd. All Rights Reserved." />
 <meta name="application-name" content="Resolve Lumvrix" />
@@ -579,11 +579,15 @@
     <div class="brand">
       <img class="logo-mark" src="assets/rl.png" alt="Resolve Lumvrix™ Logo" />
       <span class="brand-title">Resolve <span>Lumvrix</span><sup class="brand-tm">TM</sup></span>
-      <span class="ver-tag">v4.2.0</span>
+      <span class="ver-tag">v4.3.0</span>
       <span class="fps-chip" id="fpsText">60 FPS · 0.6ms</span>
     </div>
 
     <div class="top-center">
+      <button class="btn sm flag-cta" id="btnOpenAutopilotTop" title="Paste YouTube Link & Auto-Clip with Claude, Codex, or Antigravity">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        <span>YouTube AI Clipper</span>
+      </button>
       <button class="status-pill ok" id="btnWorkflowStatus" title="View all 6 Editing Workflow Stages & Quality Checks">
         <span class="dot"></span>
         <span id="workflowStatusText">Workflow Ready · 6/6 Checks</span>
@@ -699,17 +703,68 @@
         </div>
       </div>
 
-      <!-- PANEL 3: MEDIA & CLIP -->
+      <!-- PANEL 3: YOUTUBE AI AGENT CLIPPER & MEDIA -->
       <div class="drawer-scroll" id="panel-media">
+        <div class="card" style="border-color:rgba(209,0,45,.28);">
+          <div class="card-title"><span>1. YouTube AI Agent Clipper</span><span class="field-val" id="ytJobBadge">READY</span></div>
+          <div class="field">
+            <div class="field-row"><span>Paste YouTube Link (or Local VOD)</span></div>
+            <input type="text" id="ytUrlInput" value="https://youtu.be/TWIZ2_FlIB0" placeholder="https://www.youtube.com/watch?v=..." />
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+            <div class="field"><span class="field-row">Videos Needed (1–10)</span><input type="number" id="ytClipCount" value="3" min="1" max="10" /></div>
+            <div class="field"><span class="field-row">Clip Duration (sec)</span><input type="number" id="ytClipDur" value="30" min="12" max="60" /></div>
+          </div>
+          <div class="field">
+            <div class="field-row"><span>AI Agent (Uses Your Agent Tokens)</span></div>
+            <div class="pill-row" id="ytAgentRow">
+              <button class="pill-btn active" data-agent="auto">Auto Agent</button>
+              <button class="pill-btn" data-agent="claude">Claude Code</button>
+              <button class="pill-btn" data-agent="antigravity">Antigravity</button>
+              <button class="pill-btn" data-agent="codex">Codex</button>
+              <button class="pill-btn" data-agent="algorithm">Tri-Stage ML</button>
+            </div>
+            <div style="font-size:10.5px;color:var(--dim);margin-top:2px;" id="ytDetectedLbl">Detected tokens: Claude Code, Antigravity (agy), Tri-Stage ML</div>
+          </div>
+          <div class="field">
+            <div class="field-row"><span>Save Directly to Local Folder</span></div>
+            <input type="text" id="ytOutDir" value="output" placeholder="output" />
+          </div>
+          <button class="btn export-cta" id="btnStartAutopilot" style="width:100%;">Start Agent Clipping (Live)</button>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:5px;">
+            <button class="btn sm" id="btnPauseAutopilot">Pause</button>
+            <button class="btn sm" id="btnResumeAutopilot">Resume</button>
+            <button class="btn sm" id="btnSkipAutopilot">Skip Clip</button>
+            <button class="btn sm flag-cta" id="btnStopAutopilot">Stop</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><span>2. Stop &amp; Tell Agent to Change Live</span></div>
+          <div style="font-size:11.5px;color:var(--muted);line-height:1.4;">Not interested in the current clip? Pause or type a change below — your agent updates the 60fps preview live:</div>
+          <input type="text" id="ytSteerInput" placeholder="e.g. Skip clip, use Inverted captions &amp; hook: GTA 6 Physics | Are Unreal" />
+          <button class="btn flag-cta" id="btnSteerAutopilot" style="width:100%;">Apply Change via Agent &amp; Resume</button>
+        </div>
+
+        <div class="card">
+          <div class="card-title"><span>3. Live Progress &amp; Saved Local Files</span><span class="field-val" id="ytCountLbl">0 / 3</span></div>
+          <div style="height:7px;background:var(--surface3);border-radius:999px;overflow:hidden;">
+            <div id="ytProgFill" style="height:100%;width:0%;background:var(--hrl-crimson);transition:width .25s ease;"></div>
+          </div>
+          <div style="font-size:11.5px;font-weight:600;color:var(--text);" id="ytStageText">Paste a YouTube link above and click Start Agent Clipping.</div>
+          <div id="ytSavedList" style="display:flex;flex-direction:column;gap:6px;"></div>
+          <div class="codebox" id="ytLogBox" style="max-height:110px;font-size:10.5px;">[Ready] Waiting for YouTube link &amp; video count...</div>
+        </div>
+
         <input type="file" id="videoUpload" accept="video/*" hidden />
         <div class="upload-drop" id="btnUploadBox">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><path d="M12 16V4m0 0-4 4m4-4 4 4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
-          <div style="font-weight:700;font-size:13px;">Drop or Choose Video</div>
-          <div style="font-size:11.5px;color:var(--muted);">MP4, MOV, WebM — plays instantly at 60fps (0ms upload)</div>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--hrl-crimson)" stroke-width="2"><path d="M12 16V4m0 0-4 4m4-4 4 4M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+          <div style="font-weight:700;font-size:12.5px;">Or Drop Local Video File</div>
+          <div style="font-size:11px;color:var(--muted);">MP4, MOV, WebM — plays instantly at 60fps (0ms upload)</div>
         </div>
         <div class="card">
-          <div class="card-title"><span>Active Clip</span><button class="btn sm" id="btnUseDemo">Use Demo</button></div>
-          <div style="font-weight:700;font-size:12.5px;" id="activeMediaName">GTA 6 · IShowSpeed 1080p Demo</div>
+          <div class="card-title"><span>Manual Clip Window</span><button class="btn sm" id="btnUseDemo">Use Demo</button></div>
+          <div style="font-weight:700;font-size:12px;" id="activeMediaName">GTA 6 · IShowSpeed 1080p Demo</div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
             <div class="field"><span class="field-row">Start (sec)</span><input type="number" id="clipStart" value="120" min="0" /></div>
             <div class="field"><span class="field-row">End (sec)</span><input type="number" id="clipEnd" value="150" min="1" /></div>
@@ -805,9 +860,19 @@
 
     <!-- HUGE DISTRACTION-FREE 60FPS PREVIEW CANVAS (Direct Drag + Click-to-Pin!) -->
     <main class="stage" id="dropZone">
-      <div class="company-motto-badge" title="HRL International Private Limited — Official Company Motto">
-        <span class="motto-tag">Company Motto</span>
-        <span class="motto-text">We Can Do Everything Related To Software Sector Without Any Excuses!</span>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:6px;z-index:15;">
+        <div class="company-motto-badge" title="HRL International Private Limited — Official Company Motto">
+          <span class="motto-tag">Company Motto</span>
+          <span class="motto-text">We Can Do Everything Related To Software Sector Without Any Excuses!</span>
+        </div>
+        <!-- Live Agent Clipping Floating Stage Bar (Pause / Change / Skip In-Between!) -->
+        <div id="stageAgentBar" style="display:none;align-items:center;gap:8px;background:var(--surface);border:1.5px solid var(--hrl-crimson);padding:4px 10px 4px 12px;border-radius:9999px;box-shadow:0 6px 20px rgba(209,0,45,.15);">
+          <span class="dot" style="color:var(--hrl-crimson);"></span>
+          <span id="stageAgentText" style="font-size:11.5px;font-weight:700;color:var(--text);">Agent Clipping Live...</span>
+          <button class="btn sm" id="btnStagePauseChange">Pause &amp; Change</button>
+          <button class="btn sm" id="btnStageSkip">Skip Clip</button>
+          <button class="btn sm flag-cta" id="btnStageStop">Stop</button>
+        </div>
       </div>
       <div class="canvas-area">
         <div class="phone" id="phoneFrame">
@@ -1946,7 +2011,209 @@
     if (e.key === "Escape") { setFlagMode(false); closeExport(); closeLegal(); }
   });
 
-  // ===== 6. TWO-WAY LIVE LOCAL ENGINE + AI BRIDGE SYNC =====
+  // ===== 6. TWO-WAY LIVE LOCAL ENGINE + YOUTUBE AI AGENT CLIPPER + AI BRIDGE SYNC =====
+  let selectedAgent = "auto";
+  let webSimTimer = null, webSimPaused = false, webSimIdx = 0, webSimTotal = 3, webSimSaved = [];
+
+  document.getElementById("btnOpenAutopilotTop").onclick = () => openPanel("media");
+  document.querySelectorAll("#ytAgentRow .pill-btn").forEach(b => b.onclick = () => {
+    selectedAgent = b.dataset.agent;
+    document.querySelectorAll("#ytAgentRow .pill-btn").forEach(x => x.classList.toggle("active", x === b));
+  });
+
+  function applyEditSpecToState(es) {
+    if (!es) return;
+    if (es.source) state.sourceLabel = es.source;
+    if (es.clip && /^\d+:\d+$/.test(es.clip)) {
+      const [s0, s1] = es.clip.split(":").map(Number);
+      state.clipStart = s0; state.clipEnd = s1;
+    }
+    if (es.caption_style && STYLES[es.caption_style]) state.captionStyle = es.caption_style;
+    if (es.caption_color && COLORS[es.caption_color]) state.captionColor = es.caption_color;
+    if (es.pos_y_1920) state.posY = Number(es.pos_y_1920);
+    if (es.hook !== undefined) { state.hookEnabled = Boolean(es.hook); state.hookText = es.hook || ""; }
+    if (es.hook_theme) state.hookTheme = es.hook_theme;
+    if (es.grade) state.grade = { ...state.grade, ...es.grade };
+    if (Array.isArray(es.preview_chunks) && es.preview_chunks.length) state.chunks = es.preview_chunks;
+    syncInputs(); refreshAll(false);
+  }
+
+  function renderAutopilotUI(ap) {
+    if (!ap) return;
+    const status = (ap.status || "idle").toUpperCase();
+    const req = ap.requested_count || Number(document.getElementById("ytClipCount").value) || 3;
+    const done = ap.completed_count || 0;
+    const pct = req > 0 ? Math.min(100, Math.round((done / req) * 100)) : 0;
+    document.getElementById("ytJobBadge").textContent = status;
+    document.getElementById("ytCountLbl").textContent = `${done} / ${req} SAVED`;
+    document.getElementById("ytProgFill").style.width = (ap.status === "running" ? Math.max(15, pct) : pct) + "%";
+    document.getElementById("ytStageText").textContent = ap.stage_label || "Ready.";
+    if (Array.isArray(ap.logs) && ap.logs.length) {
+      const lb = document.getElementById("ytLogBox");
+      lb.textContent = ap.logs.join("\n");
+      lb.scrollTop = lb.scrollHeight;
+    }
+    const list = document.getElementById("ytSavedList");
+    list.innerHTML = "";
+    (ap.saved_videos || []).forEach(v => {
+      const row = document.createElement("div");
+      row.className = "gate-row";
+      row.innerHTML = `<div style="min-width:0;"><div style="font-weight:700;font-size:11.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">#${v.index} · ${escapeHtml(v.filename || "short.mp4")}</div><div style="font-size:10.5px;color:var(--muted);">Window ${v.window}s · Score ${v.viral_score} · Style: ${v.style} · ${v.size_kb || 140} KB</div></div><span class="gbadge">SAVED</span>`;
+      row.style.cursor = "pointer";
+      row.onclick = () => {
+        if (v.style && STYLES[v.style]) state.captionStyle = v.style;
+        if (v.hook) { state.hookEnabled = true; state.hookText = v.hook; }
+        syncInputs(); refreshAll(); seekTo(0.1);
+        toast(`Previewing saved Clip #${v.index} (${v.filename})`);
+      };
+      list.appendChild(row);
+    });
+
+    const bar = document.getElementById("stageAgentBar");
+    if (ap.status === "running" || ap.status === "paused") {
+      bar.style.display = "inline-flex";
+      document.getElementById("stageAgentText").textContent = `${ap.agent_label || "AI Agent"} · ${ap.stage_label || "Clipping live..."}`;
+      document.getElementById("btnStagePauseChange").textContent = ap.status === "paused" ? "Resume" : "Pause & Change";
+    } else {
+      bar.style.display = "none";
+    }
+  }
+
+  // Browser-side steering parser so GitHub Pages live web preview ALSO updates 60fps canvas instantly
+  function applyLocalBrowserSteer(instr) {
+    const low = (instr || "").toLowerCase();
+    for (const st of ["hormozi", "shine", "stopmotion", "flicker", "inverted"]) {
+      if (low.includes(st) || (st === "stopmotion" && low.includes("stop motion")) || (st === "inverted" && low.includes("invert"))) {
+        state.captionStyle = st;
+        state.posY = st === "inverted" ? 1180 : 612;
+      }
+    }
+    for (const c of ["green", "blue", "cream", "gold", "pink", "white"]) {
+      if (low.includes(c)) state.captionColor = c;
+    }
+    if (low.includes("yellow")) state.captionColor = "gold";
+    const mh = instr.match(/hook(?:\s+to|\s*[:=])?\s*["']?([A-Za-z0-9 |!?'_-]{4,48})["']?$/i);
+    if (mh) { state.hookEnabled = true; state.hookText = mh[1].trim(); }
+    syncInputs(); refreshAll();
+  }
+
+  async function startAutopilotJob() {
+    const url = document.getElementById("ytUrlInput").value.trim() || "https://youtu.be/TWIZ2_FlIB0";
+    const count = Math.max(1, Math.min(10, Number(document.getElementById("ytClipCount").value) || 3));
+    const dur = Math.max(12, Math.min(60, Number(document.getElementById("ytClipDur").value) || 30));
+    const outDir = document.getElementById("ytOutDir").value.trim() || "output";
+    const instr = document.getElementById("ytSteerInput").value.trim();
+
+    if (localConnected) {
+      const r = await fetch("/api/autopilot/start", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ url, count, dur, agent: selectedAgent, out_dir: outDir, instruction: instr }),
+      });
+      const d = await r.json();
+      if (d.autopilot) renderAutopilotUI(d.autopilot);
+      toast(`Started ${selectedAgent.toUpperCase()} agent clipping (${count} videos)!`);
+      return;
+    }
+
+    // Web preview interactive live simulation (updates 60fps canvas live for each clip!)
+    clearInterval(webSimTimer);
+    webSimPaused = false; webSimIdx = 0; webSimTotal = count; webSimSaved = [];
+    const presets = [
+      { style: "shine", col: "green", hook: "IShowSpeed | Breaks GTA 6", win: `120:${120+dur}`, score: 94.2, chunks: [{start:0.05,end:1.8,text:"No way bro!"},{start:1.8,end:3.6,text:"Look at Vice City"},{start:3.6,end:5.4,text:"GTA 6 is unreal!"}] },
+      { style: "hormozi", col: "gold", hook: "Vice City Drift | Gone Wrong", win: `210:${210+dur}`, score: 91.8, chunks: [{start:0.05,end:1.8,text:"WATCH THIS DRIFT!"},{start:1.8,end:3.6,text:"Cops are everywhere"},{start:3.6,end:5.4,text:"6 stars instantly!"}] },
+      { style: "stopmotion", col: "cream", hook: "Secret Vice City | Nightclub", win: `340:${340+dur}`, score: 89.6, chunks: [{start:0.05,end:1.8,text:"Look at the reflections"},{start:1.8,end:3.6,text:"Every NPC reacts live"},{start:3.6,end:5.4,text:"Rockstar cooked here"}] },
+      { style: "flicker", col: "white", hook: "Leaked Map Size | Is Massive", win: `465:${465+dur}`, score: 88.1, chunks: [{start:0.05,end:1.8,text:"Wait hold on..."},{start:1.8,end:3.6,text:"Zoom out the radar"},{start:3.6,end:5.4,text:"Twice as big as Los Santos"}] },
+      { style: "inverted", col: "auto", hook: "GTA 6 Physics | Are Next Gen", win: `580:${580+dur}`, score: 86.9, chunks: [{start:0.05,end:1.8,text:"Full 4:4:4 inverted mask"},{start:1.8,end:3.6,text:"Zero white edge artifacts"},{start:3.6,end:5.4,text:"Pure 2K 60fps cinema"}] },
+    ];
+    const agLabel = { auto: "Claude Code (Agent Tokens)", claude: "Claude Code (Agent Tokens)", antigravity: "Antigravity (agy Tokens)", codex: "OpenAI Codex (Agent Tokens)", algorithm: "Tri-Stage Viral ML" }[selectedAgent] || "AI Agent";
+    const logs = [`[Live] ${agLabel} mining top ${count} viral windows from ${url}...`];
+
+    const stepSim = () => {
+      if (webSimPaused) return;
+      if (webSimIdx >= webSimTotal) {
+        clearInterval(webSimTimer);
+        renderAutopilotUI({ status: "completed", requested_count: webSimTotal, completed_count: webSimSaved.length, agent_label: agLabel, stage_label: `Done! Produced ${webSimSaved.length} viral Shorts (${outDir}/)`, saved_videos: webSimSaved, logs });
+        toast(`Completed ${webSimSaved.length} viral Shorts!`);
+        return;
+      }
+      const p = presets[webSimIdx % presets.length];
+      webSimIdx++;
+      state.sourceLabel = url;
+      state.captionStyle = p.style; state.captionColor = p.col;
+      state.posY = p.style === "inverted" ? 1180 : 612;
+      state.hookEnabled = true; state.hookText = p.hook; state.chunks = p.chunks;
+      if (instr) applyLocalBrowserSteer(instr);
+      syncInputs(); refreshAll(false); seekTo(0.15);
+      const fn = `short_0${webSimIdx}_clip${webSimIdx}_${state.captionStyle}.mp4`;
+      webSimSaved.push({ index: webSimIdx, filename: fn, window: p.win, viral_score: p.score, style: state.captionStyle, hook: state.hookText, size_kb: 1420 });
+      logs.push(`[Clip ${webSimIdx}/${webSimTotal}] ${agLabel} styled '${state.captionStyle}' (${p.win}s · Score ${p.score}) → saved ${outDir}/${fn}`);
+      renderAutopilotUI({
+        status: webSimIdx < webSimTotal ? "running" : "completed",
+        requested_count: webSimTotal,
+        completed_count: webSimSaved.length,
+        agent_label: agLabel,
+        stage_label: webSimIdx < webSimTotal ? `Clip ${webSimIdx}/${webSimTotal} Live on 60fps Canvas · Style '${state.captionStyle}' (Score ${p.score})` : `Done! Saved ${webSimSaved.length} viral Shorts to ${outDir}/`,
+        saved_videos: webSimSaved,
+        logs,
+      });
+    };
+    stepSim();
+    if (webSimTotal > 1) webSimTimer = setInterval(stepSim, 1800);
+  }
+
+  async function sendAutopilotControl(action, resumeAfter = false) {
+    const instr = document.getElementById("ytSteerInput").value.trim();
+    if (localConnected) {
+      const r = await fetch("/api/autopilot/control", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ action, instruction: instr, agent: selectedAgent, resume: resumeAfter }),
+      });
+      const d = await r.json();
+      if (d.edit_spec) applyEditSpecToState(d.edit_spec);
+      if (d.autopilot) renderAutopilotUI(d.autopilot);
+      toast(`Agent → ${action.toUpperCase()}`);
+      return;
+    }
+    if (action === "pause") {
+      webSimPaused = true;
+      renderAutopilotUI({ status: "paused", requested_count: webSimTotal, completed_count: webSimSaved.length, stage_label: "Paused — Type a change below or click Resume", saved_videos: webSimSaved });
+      toast("Paused live agent clipping");
+    } else if (action === "resume") {
+      if (instr) applyLocalBrowserSteer(instr);
+      webSimPaused = false;
+      toast("Resumed agent clipping");
+    } else if (action === "skip") {
+      webSimPaused = false;
+      toast("Skipped to next viral moment");
+    } else if (action === "stop") {
+      clearInterval(webSimTimer); webSimPaused = false;
+      renderAutopilotUI({ status: "stopped", requested_count: webSimTotal, completed_count: webSimSaved.length, stage_label: "Stopped by user — Ready for changes", saved_videos: webSimSaved });
+      toast("Stopped agent clipping");
+    } else if (action === "steer") {
+      if (instr) applyLocalBrowserSteer(instr);
+      webSimPaused = false;
+      toast("Applied change live on 60fps canvas!");
+    }
+  }
+
+  document.getElementById("btnStartAutopilot").onclick = startAutopilotJob;
+  document.getElementById("btnPauseAutopilot").onclick = () => sendAutopilotControl("pause");
+  document.getElementById("btnResumeAutopilot").onclick = () => sendAutopilotControl("resume");
+  document.getElementById("btnSkipAutopilot").onclick = () => sendAutopilotControl("skip");
+  document.getElementById("btnStopAutopilot").onclick = () => sendAutopilotControl("stop");
+  document.getElementById("btnSteerAutopilot").onclick = () => sendAutopilotControl("steer", true);
+  document.getElementById("ytSteerInput").onkeydown = e => { if (e.key === "Enter") { e.preventDefault(); sendAutopilotControl("steer", true); } };
+  document.getElementById("btnStagePauseChange").onclick = () => {
+    openPanel("media");
+    const isPaused = document.getElementById("btnStagePauseChange").textContent === "Resume";
+    sendAutopilotControl(isPaused ? "resume" : "pause");
+    if (!isPaused) document.getElementById("ytSteerInput").focus();
+  };
+  document.getElementById("btnStageSkip").onclick = () => sendAutopilotControl("skip");
+  document.getElementById("btnStageStop").onclick = () => sendAutopilotControl("stop");
+
   async function pushLocalState(notify = false) {
     if (!localConnected) return;
     try {
@@ -1959,16 +2226,11 @@
     if (!localConnected) return;
     try {
       const r = await fetch("/api/state", { cache:"no-store" }); if (!r.ok) return;
-      const d = await r.json(); if (!d.revision || d.revision <= lastLocalRev) return;
+      const d = await r.json();
+      if (d.autopilot) renderAutopilotUI(d.autopilot);
+      if (!d.revision || d.revision <= lastLocalRev) return;
       lastLocalRev = d.revision; document.getElementById("mcpRevLbl").textContent = `rev #${d.revision}`;
-      const es = d.edit_spec || {};
-      if (es.caption_style && STYLES[es.caption_style]) state.captionStyle = es.caption_style;
-      if (es.caption_color && COLORS[es.caption_color]) state.captionColor = es.caption_color;
-      if (es.pos_y_1920) state.posY = Number(es.pos_y_1920);
-      if (es.hook !== undefined) { state.hookEnabled = Boolean(es.hook); state.hookText = es.hook || ""; }
-      if (es.hook_theme) state.hookTheme = es.hook_theme;
-      if (es.grade) state.grade = { ...state.grade, ...es.grade };
-      if (Array.isArray(es.preview_chunks) && es.preview_chunks.length) state.chunks = es.preview_chunks;
+      applyEditSpecToState(d.edit_spec);
       if (Array.isArray(d.flags)) state.flags = d.flags;
       if (d.snapshots) state.snapshots = d.snapshots;
       syncInputs(); refreshAll(false);
@@ -1987,6 +2249,11 @@
       document.getElementById("btnWhopModal").style.display = "none";
       document.getElementById("btnLocalRenderModal").style.display = "inline-flex";
       document.getElementById("btnRunCheck").style.display = "inline-flex";
+      if (d.agents) {
+        const inst = Object.values(d.agents).filter(a => a.installed).map(a => a.id);
+        document.getElementById("ytDetectedLbl").textContent = `Installed agent tokens on Mac: ${inst.join(", ")}`;
+      }
+      if (d.autopilot) renderAutopilotUI(d.autopilot);
       renderMcpSetup();
       document.getElementById("btnRunCheck").onclick = async () => {
         const o = document.getElementById("localCheckOut"); o.style.display = "block"; o.textContent = "Running clip.py check...";
@@ -2001,7 +2268,7 @@
         log.textContent = await res.text();
         toast(res.ok ? "Render complete!" : "Blocked or failed — see log");
       };
-      setInterval(pullLocalState, 1400);
+      setInterval(pullLocalState, 500);
     } catch {}
   }
 

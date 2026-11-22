@@ -1,16 +1,16 @@
 <div align="center">
   <a href="https://hrl-international-private-limited.github.io/Resolve-Lumvrix/"><img src="docs/assets/rl.png" alt="Resolve Lumvrix™ Official Emblem — HRL International Pvt. Ltd." width="108" /></a>
 
-  <h1>Resolve Lumvrix™ <code>v4.2.0</code></h1>
+  <h1>Resolve Lumvrix™ <code>v4.3.0</code></h1>
 
-  <p><b>Easy 60fps Video &amp; Caption Studio (HRL Design Language · Light Theme) + 12-Tool AI Bridge MCP + 2K Engine</b><br />Built &amp; Owned by <a href="https://github.com/HRL-International-Private-Limited"><b>HRL International Private Limited</b></a></p>
+  <p><b>Paste YouTube Link &rarr; Multi-Agent Live Clipper (Claude / Codex / Antigravity Tokens) + HRL Light Theme 60fps Studio + 2K Engine</b><br />Built &amp; Owned by <a href="https://github.com/HRL-International-Private-Limited"><b>HRL International Private Limited</b></a></p>
 
   <p>
     <a href="https://hrl-international-private-limited.github.io/Resolve-Lumvrix/"><img src="https://img.shields.io/badge/LIVE%20STUDIO-60FPS%20%C2%B7%200%20LAG-D1002D?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Launch Resolve Lumvrix Live Studio" /></a>&nbsp;<a href="https://whop.com/checkout/plan_fOxPHqsLK2LxS"><img src="https://img.shields.io/badge/50%25%20OFF%20STA650-$24.50%20LIFETIME-FA4616?style=for-the-badge&logo=whop&logoColor=white" alt="50% Off Promo Code STA650" /></a>&nbsp;<a href="https://whop.com/agensi/sta-6/"><img src="https://img.shields.io/badge/WHOP-STOREFRONT-111111?style=for-the-badge" alt="Whop Storefront" /></a>&nbsp;<a href="https://github.com/HRL-International-Private-Limited"><img src="https://img.shields.io/badge/HRL%20INT'L-PVT.%20LTD.-00C853?style=for-the-badge&logo=github&logoColor=white" alt="HRL International Pvt. Ltd." /></a>
   </p>
 
-  <a href="https://hrl-international-private-limited.github.io/Resolve-Lumvrix/"><img src="docs/assets/v420_resolve_lumvrix_preview.jpg" alt="Resolve Lumvrix™ v4.2.0 — HRL Executive Light Theme + DaVinci Resolve Timeline + AI Bridge MCP" width="100%" /></a>
-  <p><em><a href="https://hrl-international-private-limited.github.io/Resolve-Lumvrix/"><b>Launch Resolve Lumvrix™ v4.2.0 Live in Your Browser (HRL Executive Light Theme · 60 FPS · Zero Lag) →</b></a></em></p>
+  <a href="https://hrl-international-private-limited.github.io/Resolve-Lumvrix/"><img src="docs/assets/v430_resolve_lumvrix_preview.jpg" alt="Resolve Lumvrix™ v4.3.0 — Live YouTube AI Agent Clipper + HRL Executive Light Theme + DaVinci Resolve Timeline" width="100%" /></a>
+  <p><em><a href="https://hrl-international-private-limited.github.io/Resolve-Lumvrix/"><b>Launch Resolve Lumvrix™ v4.3.0 Live in Your Browser (YouTube AI Agent Clipper · HRL Light Theme · 60 FPS) →</b></a></em></p>
 </div>
 
 > **50% OFF Launch Offer (First 50 Clippers Only):** Use promo code **`STA650`** at Whop checkout to drop the Lifetime License from ~~`$49`~~ to **`$24.50` one-time** (zero monthly fees).  
