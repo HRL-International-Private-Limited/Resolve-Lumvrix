@@ -41,7 +41,7 @@
   button, input, select, textarea { font-family: inherit; color: inherit; }
 
   .app {
-    display: grid; grid-template-rows: 54px 1fr 144px;
+    display: grid; grid-template-rows: 54px 1fr auto;
     height: 100vh; width: 100%; max-width: 100vw; overflow: hidden;
   }
 
@@ -285,61 +285,155 @@
   .ctrl-chip:hover { color: #fff; background: var(--surface2); }
   .ctrl-chip.active { color: #fff; background: rgba(59,130,246,.2); border-color: rgba(59,130,246,.45); }
 
-  /* 3. CLEAN CLIDEO-EASY BOTTOM TIMELINE */
+  /* 3. DAVINCI RESOLVE STUDIO-STYLE BOTTOM TIMELINE */
   .timeline {
-    background: var(--surface); display: flex; flex-direction: column; overflow: hidden;
+    --vh: 62px; --ah: 66px;
+    background: #1c1e24; display: flex; flex-direction: column; position: relative;
+    border-top: 1px solid #0d0f14; user-select: none;
   }
   .tl-top {
-    height: 32px; display: flex; align-items: center; justify-content: space-between;
-    padding: 0 14px; border-bottom: 1px solid var(--border); background: #151820;
+    height: 36px; display: flex; align-items: center; justify-content: space-between;
+    padding: 0 12px; border-bottom: 1px solid #0e1015; background: #191b20; position: relative;
   }
+  .tl-tools { display: flex; align-items: center; gap: 4px; }
+  .tl-ico-btn {
+    width: 30px; height: 26px; border-radius: 5px; border: 1px solid transparent; background: transparent;
+    color: #9ba3b4; cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+    transition: all .12s;
+  }
+  .tl-ico-btn:hover { background: #262a34; color: #f3f5f9; }
+  .tl-ico-btn.active { color: #e85a3c; background: rgba(232,90,60,.12); border-color: rgba(232,90,60,.32); }
+  .tl-ico-btn.view-open { background: #2a2e39; color: #fff; border-color: #42495c; }
+  .tl-sep { width: 1px; height: 16px; background: #2c313d; margin: 0 4px; }
+
+  /* Floating Resolve Timeline View Options Popover */
+  .tl-view-pop {
+    position: absolute; bottom: calc(100% + 6px); left: 10px; width: 274px;
+    background: #22242b; border: 1px solid #353945; border-radius: 7px;
+    box-shadow: 0 18px 46px rgba(0,0,0,.78); padding: 12px 14px 14px;
+    display: none; flex-direction: column; gap: 11px; z-index: 65; color: #c7cdd9;
+  }
+  .tl-view-pop.show { display: flex; }
+  .tl-pop-toggle {
+    display: flex; align-items: center; gap: 11px; width: 100%; background: transparent; border: none;
+    color: #cfd5e2; font-size: 13px; font-weight: 500; cursor: pointer; padding: 3px 2px; border-radius: 5px;
+    text-align: left;
+  }
+  .tl-pop-toggle:hover { background: rgba(255,255,255,.05); color: #fff; }
+  .tl-pop-toggle.on { color: #fff; }
+  .tl-pop-toggle.on svg { color: #e85a3c; }
+  .tl-pop-hr { height: 1px; background: #14161b; border-bottom: 1px solid #2e323d; margin: 0 -2px; }
+  .tl-pop-title { font-size: 12.5px; font-weight: 700; color: #eef2f8; }
+  .tl-pop-row { display: grid; grid-template-columns: 52px 1fr; align-items: center; gap: 10px; font-size: 12.5px; color: #b8bfce; }
+  .tl-pop-row input[type="range"] { accent-color: #b4bccb; height: 3px; background: #121419; }
+  .tl-pop-default-btn {
+    align-self: center; padding: 6px 22px; border-radius: 999px; background: #262932;
+    border: 1px solid #484e5e; color: #dce1ec; font-size: 12px; font-weight: 500; cursor: pointer;
+    transition: all .14s;
+  }
+  .tl-pop-default-btn:hover { background: #313644; border-color: #6b7388; color: #fff; }
+
   .tl-body {
-    flex: 1; display: grid; grid-template-columns: 118px 1fr; overflow: hidden;
+    display: grid; grid-template-columns: 208px 1fr; overflow: hidden; background: #1c1e24;
   }
   .tl-labels {
-    display: flex; flex-direction: column; border-right: 1px solid var(--border); background: var(--surface);
+    display: flex; flex-direction: column; border-right: 1px solid #0d0f14; background: #1b1d23;
   }
-  .tl-lbl-spacer { height: 22px; border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 12px; font-family: var(--mono); font-size: 10px; color: var(--dim); }
-  .tl-lbl {
-    flex: 1; display: flex; align-items: center; gap: 7px; padding: 0 12px;
-    border-bottom: 1px solid rgba(255,255,255,.04); font-size: 11.5px; font-weight: 600; color: var(--muted);
+  .tl-lbl-spacer {
+    height: 24px; border-bottom: 1px solid #0e1015; display: flex; align-items: center;
+    justify-content: space-between; padding: 0 10px; background: #181a20;
+    font-family: var(--mono); font-size: 10.5px; font-weight: 600; color: #8c95a8;
   }
-  .tr-dot { width: 8px; height: 8px; border-radius: 3px; flex-shrink: 0; }
+  .tl-hdr {
+    display: flex; flex-direction: column; justify-content: center; gap: 4px; padding: 5px 8px 5px 10px;
+    border-bottom: 1px solid #0e1015; border-left: 3px solid transparent; background: #1e2027;
+    overflow: hidden;
+  }
+  .tl-hdr.t1 { height: 28px; flex-direction: row; align-items: center; justify-content: space-between; border-left-color: #d99b26; padding: 0 8px 0 10px; }
+  .tl-hdr.v1 { height: var(--vh); border-left-color: #3a7eb5; }
+  .tl-hdr.a1 { height: var(--ah); border-left-color: #32945e; }
+  .tl-hdr-row { display: flex; align-items: center; gap: 5px; }
+  .tl-badge {
+    min-width: 28px; height: 19px; padding: 0 5px; border-radius: 3px; font-family: var(--mono);
+    font-size: 10.5px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center;
+    border: 1px solid #3f6e7c; background: #22262f; color: #d5dde8;
+  }
+  .tl-badge.target { border-color: #8f3a3a; background: rgba(162,48,48,.28); color: #f6e2e2; }
+  .tl-mini-ico {
+    width: 19px; height: 19px; border-radius: 3px; border: none; background: transparent;
+    color: #7d8597; cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700;
+  }
+  .tl-mini-ico:hover { background: #2b2f3a; color: #fff; }
+  .tl-mini-ico.on { color: #e2e8f0; }
+  .tl-mini-pill {
+    width: 19px; height: 19px; border-radius: 3px; border: 1px solid #313540; background: #262932;
+    color: #9ba3b5; font-size: 10px; font-weight: 700; cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+  }
+  .tl-mini-pill:hover { border-color: #555c70; color: #fff; }
+  .tl-mini-pill.solo.active { background: #d99b26; border-color: #f5b942; color: #111; }
+  .tl-mini-pill.mute.active { background: #d94646; border-color: #f26464; color: #fff; }
+  .tl-ch { margin-left: auto; font-family: var(--mono); font-size: 10.5px; color: #8c94a6; font-weight: 600; }
+  .tl-track-name { font-size: 12px; font-weight: 700; color: #eef2f8; line-height: 1.15; }
+  .tl-track-sub { font-size: 10.5px; color: #8790a3; line-height: 1.1; }
 
-  .tl-tracks { position: relative; display: flex; flex-direction: column; cursor: pointer; background: var(--bg); overflow: hidden; }
-  .tl-ruler { height: 22px; position: relative; background: #161922; border-bottom: 1px solid var(--border); }
+  .tl-tracks { position: relative; display: flex; flex-direction: column; cursor: pointer; background: #1d2026; overflow: hidden; }
+  .tl-ruler { height: 24px; position: relative; background: #181a20; border-bottom: 1px solid #0e1015; }
   .tl-tick {
-    position: absolute; bottom: 0; border-left: 1px solid #30374a; height: 7px;
-    font-family: var(--mono); font-size: 9.5px; color: var(--dim); padding-left: 4px; pointer-events: none;
+    position: absolute; top: 0; border-left: 1px solid #383e4d; height: 6px; pointer-events: none;
   }
-  .tl-tick.major { height: 14px; border-left-color: #4b556d; color: var(--muted); }
+  .tl-tick.mid { height: 10px; border-left-color: #4b5264; }
+  .tl-tick.major {
+    height: 14px; border-left-color: #626b82; font-family: var(--mono); font-size: 10px;
+    color: #959eb2; padding-left: 4px; padding-top: 9px;
+  }
   .tl-flag {
     position: absolute; top: 2px; width: 11px; height: 12px; transform: translateX(-50%);
-    clip-path: polygon(0 0, 100% 0, 100% 65%, 50% 100%, 0 65%); background: var(--red); cursor: pointer; z-index: 6;
+    clip-path: polygon(0 0, 100% 0, 100% 65%, 50% 100%, 0 65%); background: var(--red); cursor: pointer; z-index: 7;
   }
   .tl-flag.tweak { background: var(--amber); }
   .tl-flag.note { background: var(--teal); }
   .tl-flag.resolved { background: var(--green); opacity: 0.65; }
 
-  .lane { flex: 1; position: relative; border-bottom: 1px solid rgba(255,255,255,.04); }
+  .lane { position: relative; border-bottom: 1px solid #0e1015; background: #1d2026; }
+  .lane.t1 { height: 28px; }
+  .lane.v1 { height: var(--vh); }
+  .lane.a1 { height: var(--ah); }
+
   .block {
-    position: absolute; top: 4px; bottom: 4px; border-radius: 6px; padding: 0 9px;
+    position: absolute; top: 3px; bottom: 3px; border-radius: 3px; padding: 0 8px;
     display: flex; align-items: center; font-size: 11px; font-weight: 600;
     overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
   }
-  .block.cap { background: rgba(245,158,11,.2); border: 1px solid rgba(245,158,11,.55); color: #fef3c7; }
-  .block.cap:hover { background: rgba(245,158,11,.32); }
-  .block.vid { background: linear-gradient(90deg, rgba(56,189,248,.22), rgba(167,139,250,.22)); border: 1px solid rgba(56,189,248,.45); color: #e0f2fe; }
-  .block.aud { background: rgba(34,197,94,.16); border: 1px solid rgba(34,197,94,.42); color: #dcfce7; }
-  .wave-canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.68; pointer-events: none; }
+  .block.cap { background: rgba(217,155,38,.26); border: 1px solid rgba(232,175,65,.6); color: #fef3c7; }
+  .block.cap:hover { background: rgba(217,155,38,.38); }
+
+  /* Authentic Resolve Selected Video & Audio Clips */
+  .res-clip {
+    position: absolute; top: 2px; bottom: 2px; left: 0; right: 0; border-radius: 2px;
+    border: 1.5px solid #e5483a; overflow: hidden; display: flex; flex-direction: column;
+    background: #14171d;
+  }
+  .res-clip-media { flex: 1; position: relative; min-height: 0; overflow: hidden; background: #12151a; }
+  .res-clip-media.aud-bg { background: #3b965f; }
+  .res-clip-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+  .res-clip-bar {
+    height: 19px; flex-shrink: 0; display: flex; align-items: center; gap: 6px; padding: 0 7px;
+    font-size: 11px; font-weight: 600; color: #f4f8fc; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .res-clip-bar.vid { background: #3b7db3; border-top: 1px solid rgba(255,255,255,.14); }
+  .res-clip-bar.aud { background: #318a57; border-top: 1px solid rgba(0,0,0,.22); }
+  .res-clip-bar svg { width: 12px; height: 12px; flex-shrink: 0; opacity: .92; }
 
   .playhead {
-    position: absolute; top: 0; bottom: 0; width: 2px; background: var(--playhead);
-    pointer-events: none; z-index: 8; box-shadow: 0 0 10px rgba(255,107,74,.6);
+    position: absolute; top: 0; bottom: 0; width: 2px; background: #e5483a;
+    pointer-events: none; z-index: 12; box-shadow: -1px 0 0 rgba(0,0,0,.65), 1px 0 0 rgba(0,0,0,.65);
   }
   .playhead-head {
-    position: absolute; top: 0; left: -6px; width: 14px; height: 11px; background: var(--playhead);
-    border-radius: 3px 3px 0 0; clip-path: polygon(0 0, 100% 0, 100% 60%, 50% 100%, 0 60%);
+    position: absolute; top: 0; left: -7px; width: 16px; height: 13px; background: #e5483a;
+    clip-path: polygon(0 0, 100% 0, 100% 56%, 50% 100%, 0 56%);
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,.7));
   }
 
   /* Flag & Gate Cards inside Drawer */
@@ -667,37 +761,129 @@
     </main>
   </div>
 
-  <!-- 3. CLEAN CLIDEO-EASY 3-TRACK BOTTOM TIMELINE -->
-  <section class="timeline">
+  <!-- 3. DAVINCI RESOLVE STUDIO-STYLE BOTTOM TIMELINE -->
+  <section class="timeline" id="timelineSection">
     <div class="tl-top">
-      <div style="display:flex;align-items:center;gap:8px;">
-        <span style="font-weight:700;font-size:12px;">Timeline</span>
-        <span style="font-family:var(--mono);font-size:10.5px;color:var(--muted);">1440×2560 · 60fps · Zero-Gap</span>
+      <!-- Floating Resolve Timeline View Options Popover -->
+      <div class="tl-view-pop" id="tlViewPop">
+        <button class="tl-pop-toggle on" id="btnScaledWave" title="Toggle Scaled Stereo Waveforms">
+          <svg width="22" height="16" viewBox="0 0 24 18" fill="none" stroke="currentColor" stroke-width="1.5">
+            <line x1="1" y1="1.5" x2="23" y2="1.5" opacity=".6"/><line x1="1" y1="16.5" x2="23" y2="16.5" opacity=".6"/>
+            <path d="M4 9V6m3 3V4m3 5V7m3 2V5m3 4V7m0 2v3m-3-3v4m-3-4v2m-3-2v5m-3-5v3"/>
+            <path d="M20 5v8m-2-6 2-2 2 2m-4 4 2 2 2-2" stroke-width="1.3"/>
+          </svg>
+          <span>Display Scaled Waveforms</span>
+        </button>
+        <div class="tl-pop-hr"></div>
+        <div class="tl-pop-title">Track Height</div>
+        <div class="tl-pop-row">
+          <span>Video</span>
+          <input type="range" id="tlVideoHeight" min="46" max="88" step="2" value="62" />
+        </div>
+        <div class="tl-pop-row">
+          <span>Audio</span>
+          <input type="range" id="tlAudioHeight" min="48" max="92" step="2" value="66" />
+        </div>
+        <div class="tl-pop-hr"></div>
+        <button class="tl-pop-default-btn" id="btnSetDefaultView">Set as Default View</button>
+      </div>
+
+      <div class="tl-tools">
+        <button class="tl-ico-btn" id="btnTlViewOpts" title="Timeline View Options (Track Height &amp; Waveforms)">
+          <svg width="18" height="16" viewBox="0 0 22 18" fill="none" stroke="currentColor" stroke-width="1.5">
+            <rect x="2" y="2" width="14" height="5" rx="1"/><line x1="6" y1="2" x2="6" y2="7"/><line x1="10" y1="2" x2="10" y2="7"/>
+            <line x1="2" y1="10.5" x2="11" y2="10.5"/><line x1="2" y1="14" x2="9" y2="14"/>
+            <path d="m12 13 2.5 2.5L20 10" stroke-width="1.8"/>
+          </svg>
+        </button>
+        <div class="tl-sep"></div>
+        <button class="tl-ico-btn active" data-tltool="select" title="Selection Mode (A)">
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor"><path d="M4 2.5 16 11l-5.2.8L13.5 17l-2 .9-2.7-5.2L5 15.8V2.5Z"/></svg>
+        </button>
+        <button class="tl-ico-btn" data-tltool="trim" title="Trim Edit Mode (T)">
+          <svg width="18" height="14" viewBox="0 0 24 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="9" y="2" width="6" height="12" rx="1"/><line x1="12" y1="2" x2="12" y2="14"/><path d="M6 5 3 8l3 3M18 5l3 3-3 3"/></svg>
+        </button>
+        <button class="tl-ico-btn" data-tltool="blade" title="Blade Edit Mode (B)">
+          <svg width="17" height="14" viewBox="0 0 22 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="18" height="10" rx="1.5"/><circle cx="7" cy="8" r="1.4"/><circle cx="15" cy="8" r="1.4"/><line x1="2" y1="8" x2="20" y2="8" stroke-dasharray="2 2"/></svg>
+        </button>
+        <div class="tl-sep"></div>
+        <span style="font-family:var(--mono);font-size:10.5px;color:#8c95a8;">1440×2560 · 60fps · Zero-Gap</span>
         <button class="brand-owner-btn" id="btnOpenLegalTl" title="View HRL International Pvt. Ltd. Trademark, Copyright &amp; Patent Notice">© 2026 HRL International Pvt. Ltd. · Resolve Lumvrix™</button>
       </div>
+
       <div style="display:flex;align-items:center;gap:6px;">
         <button class="btn sm" id="btnStepBack">-1f</button>
         <button class="btn sm" id="btnStepFwd">+1f</button>
         <button class="btn sm flag-cta" id="btnFlagAtPlayhead">+ Flag Here</button>
       </div>
     </div>
+
     <div class="tl-body">
       <div class="tl-labels">
-        <div class="tl-lbl-spacer">TIMECODE</div>
-        <div class="tl-lbl"><span class="tr-dot" style="background:var(--amber);"></span>Captions</div>
-        <div class="tl-lbl"><span class="tr-dot" style="background:var(--teal);"></span>Video 2K</div>
-        <div class="tl-lbl"><span class="tr-dot" style="background:var(--green);"></span>Audio</div>
+        <div class="tl-lbl-spacer"><span>TIMECODE</span><span id="tlSmpteLbl">00:00:00:00</span></div>
+        <div class="tl-hdr t1">
+          <div class="tl-hdr-row">
+            <span class="tl-badge" style="border-color:#a87a24;color:#fde68a;">T1</span>
+            <span class="tl-track-name" style="font-size:11px;">Captions</span>
+          </div>
+          <span class="tl-track-sub" id="tlCapCount">3 Clips</span>
+        </div>
+        <div class="tl-hdr v1">
+          <div class="tl-hdr-row">
+            <span class="tl-badge">V1</span>
+            <span class="tl-badge target">V1</span>
+            <button class="tl-mini-ico" id="btnLockV1" title="Lock Track">
+              <svg width="11" height="12" viewBox="0 0 16 18" fill="currentColor"><path d="M5 7V5a3 3 0 1 1 6 0v2h1.5A1.5 1.5 0 0 1 14 8.5v7A1.5 1.5 0 0 1 12.5 17h-9A1.5 1.5 0 0 1 2 15.5v-7A1.5 1.5 0 0 1 3.5 7H5Zm2 0h2V5a1 1 0 1 0-2 0v2Z"/></svg>
+            </button>
+            <button class="tl-mini-ico on" title="Auto Track Selector">&lt;|&gt;</button>
+            <button class="tl-mini-ico on" id="btnToggleFilmstrip" title="Toggle Filmstrip Thumbnails">
+              <svg width="14" height="12" viewBox="0 0 20 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1.5" y="2" width="17" height="12" rx="1.5"/><line x1="5" y1="2" x2="5" y2="14"/><line x1="15" y1="2" x2="15" y2="14"/></svg>
+            </button>
+          </div>
+          <div class="tl-track-name">Video 1</div>
+        </div>
+        <div class="tl-hdr a1">
+          <div class="tl-hdr-row">
+            <span class="tl-badge">A1</span>
+            <span class="tl-badge target">A1</span>
+            <button class="tl-mini-ico" id="btnLockA1" title="Lock Audio Track">
+              <svg width="11" height="12" viewBox="0 0 16 18" fill="currentColor"><path d="M5 7V5a3 3 0 1 1 6 0v2h1.5A1.5 1.5 0 0 1 14 8.5v7A1.5 1.5 0 0 1 12.5 17h-9A1.5 1.5 0 0 1 2 15.5v-7A1.5 1.5 0 0 1 3.5 7H5Zm2 0h2V5a1 1 0 1 0-2 0v2Z"/></svg>
+            </button>
+            <button class="tl-mini-ico on" title="Auto Track Selector">&lt;|&gt;</button>
+            <button class="tl-mini-pill solo" id="btnSoloA1" title="Solo Audio 1">S</button>
+            <button class="tl-mini-pill mute" id="btnMuteA1" title="Mute Audio 1">M</button>
+            <span class="tl-ch">2.0</span>
+          </div>
+          <div>
+            <div class="tl-track-name">Audio 1</div>
+            <div class="tl-track-sub">1 Clip</div>
+          </div>
+        </div>
       </div>
+
       <div class="tl-tracks" id="tlTracks">
         <div class="tl-ruler" id="tlRuler"></div>
-        <div class="lane" id="laneCaps"></div>
-        <div class="lane">
-          <div class="block vid" style="left:0%;width:100%;" id="vidTrackBlock">Facecam (816px) + Gameplay (1744px) · Flush Zero-Gap Split-Screen</div>
+        <div class="lane t1" id="laneCaps"></div>
+        <div class="lane v1">
+          <div class="res-clip" id="vidTrackBlock">
+            <div class="res-clip-media">
+              <canvas class="res-clip-canvas" id="filmstripCanvas" width="1200" height="56"></canvas>
+            </div>
+            <div class="res-clip-bar vid">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 11.5a4 4 0 0 0 5.7 0l2.1-2.1a4 4 0 1 0-5.7-5.7L9.4 4.9M11.5 8.5a4 4 0 0 0-5.7 0L3.7 10.6a4 4 0 1 0 5.7 5.7l1.2-1.2"/></svg>
+              <span id="vidClipName">IShowSpeed_GTA6_2K_ZeroGap.mp4</span>
+            </div>
+          </div>
         </div>
-        <div class="lane">
-          <div class="block aud" style="left:0%;width:100%;">
-            <canvas class="wave-canvas" id="waveCanvas" width="900" height="24"></canvas>
-            <span style="position:relative;z-index:2;">Audio · -18 LUFS Master</span>
+        <div class="lane a1">
+          <div class="res-clip">
+            <div class="res-clip-media aud-bg">
+              <canvas class="res-clip-canvas" id="waveCanvas" width="1200" height="60"></canvas>
+            </div>
+            <div class="res-clip-bar aud">
+              <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 11.5a4 4 0 0 0 5.7 0l2.1-2.1a4 4 0 1 0-5.7-5.7L9.4 4.9M11.5 8.5a4 4 0 0 0-5.7 0L3.7 10.6a4 4 0 1 0 5.7 5.7l1.2-1.2"/></svg>
+              <span id="audClipName">IShowSpeed_GTA6_2K_ZeroGap.mp4 · -18 LUFS Master</span>
+            </div>
           </div>
         </div>
         <div class="playhead" id="playhead"><div class="playhead-head"></div></div>
@@ -846,7 +1032,7 @@
   const hookCtx = hookCanvas.getContext("2d");
 
   const demoImg = new Image(); demoImg.src = "./assets/demo_frame.jpg";
-  let demoReady = false; demoImg.onload = () => { demoReady = true; };
+  let demoReady = false; demoImg.onload = () => { demoReady = true; drawFilmstrip(); };
   const userVideo = document.createElement("video");
   userVideo.muted = true; userVideo.loop = true; userVideo.playsInline = true;
   let hasUserVideo = false;
@@ -1092,6 +1278,11 @@
 
     document.getElementById("playhead").style.left = clamp((playhead/dur)*100, 0, 100).toFixed(2) + "%";
     document.getElementById("tcReadout").textContent = `${fmtSec(playhead)} / ${fmtSec(dur)}`;
+    const smpteEl = document.getElementById("tlSmpteLbl");
+    if (smpteEl) {
+      const fr = Math.floor((playhead % 1) * 60);
+      smpteEl.textContent = `00:${String(Math.floor(playhead/60)).padStart(2,"0")}:${String(Math.floor(playhead%60)).padStart(2,"0")}:${String(fr).padStart(2,"0")}`;
+    }
     document.getElementById("flagTimeLbl").textContent = fmtSec(playhead);
     const rows = document.getElementById("phraseList").children;
     for (let i=0;i<state.chunks.length && i<rows.length;i++) rows[i].classList.toggle("playing", playhead>=state.chunks[i].start && playhead<state.chunks[i].end);
@@ -1220,11 +1411,14 @@
   function renderTimeline() {
     const dur = totalDur(), ruler = document.getElementById("tlRuler"), caps = document.getElementById("laneCaps");
     ruler.innerHTML = ""; caps.innerHTML = "";
-    const step = dur <= 8 ? 0.5 : (dur <= 20 ? 1 : 2);
-    for (let s = 0; s <= dur + 0.001; s += step) {
-      const pct = clamp((s/dur)*100, 0, 100), maj = Math.abs(s % (step*2)) < 0.01;
-      const tk = document.createElement("div"); tk.className = "tl-tick" + (maj ? " major" : "");
-      tk.style.left = pct.toFixed(2) + "%"; if (maj && pct < 94) tk.textContent = `${s.toFixed(0)}s`;
+    const minorCount = 72;
+    for (let i = 0; i <= minorCount; i++) {
+      const pct = (i / minorCount) * 100;
+      const isMaj = i % 12 === 0, isMid = i % 4 === 0 && !isMaj;
+      const tk = document.createElement("div");
+      tk.className = "tl-tick" + (isMaj ? " major" : (isMid ? " mid" : ""));
+      tk.style.left = pct.toFixed(2) + "%";
+      if (isMaj && pct < 94) tk.textContent = `${((i / minorCount) * dur).toFixed(0)}s`;
       ruler.appendChild(tk);
     }
     state.flags.forEach((f, idx) => {
@@ -1240,6 +1434,12 @@
       b.onclick = e => { e.stopPropagation(); seekTo(c.start + 0.06); openPanel("captions"); };
       caps.appendChild(b);
     });
+    const capCnt = document.getElementById("tlCapCount");
+    if (capCnt) capCnt.textContent = `${state.chunks.length} Clip${state.chunks.length === 1 ? "" : "s"}`;
+    const clipLabel = (state.sourceLabel && state.sourceLabel !== "<VIDEO_OR_URL>") ? state.sourceLabel : "IShowSpeed_GTA6_2K_ZeroGap.mp4";
+    const vn = document.getElementById("vidClipName"), an = document.getElementById("audClipName");
+    if (vn) vn.textContent = clipLabel;
+    if (an) an.textContent = `${clipLabel} · -18 LUFS Master`;
   }
 
   function renderFlagsAndGates() {
@@ -1345,15 +1545,120 @@
     document.getElementById("btnSafeToggle").classList.toggle("active", state.safeZones);
   }
 
-  function drawWave() {
-    const c = document.getElementById("waveCanvas"), wctx = c.getContext("2d");
-    wctx.clearRect(0,0,c.width,c.height); wctx.fillStyle = "rgba(74,222,128,0.62)";
-    for (let i=0;i<160;i++) {
-      const env = i<16 ? 0.9 : (0.38 + 0.45*Math.abs(Math.sin(i*0.35)*Math.cos(i*0.14)));
-      const h = Math.max(3, env*(c.height-4));
-      wctx.fillRect(i*(c.width/160), (c.height-h)/2, 3, h);
+  let tlScaledWave = true, tlShowFilmstrip = true;
+  function drawFilmstrip() {
+    const c = document.getElementById("filmstripCanvas"); if (!c) return;
+    const fctx = c.getContext("2d");
+    fctx.fillStyle = "#12151b"; fctx.fillRect(0, 0, c.width, c.height);
+    if (!tlShowFilmstrip) return;
+    const src = (hasUserVideo && userVideo.readyState >= 2) ? userVideo : (demoReady ? demoImg : null);
+    const tileW = 76;
+    const count = Math.ceil(c.width / tileW);
+    for (let i = 0; i < count; i++) {
+      const x = i * tileW;
+      if (src) {
+        const sw = src.videoWidth || src.naturalWidth || 1280;
+        const sh = src.videoHeight || src.naturalHeight || 720;
+        // Alternate subtle pan across facecam + gameplay so filmstrip feels alive
+        const sx = (i % 3) * (sw * 0.06);
+        fctx.drawImage(src, sx, sh * 0.06, sw * 0.88, sh * 0.88, x, 0, tileW - 1, c.height);
+      } else {
+        const g = fctx.createLinearGradient(x, 0, x + tileW, c.height);
+        g.addColorStop(0, "#242a36"); g.addColorStop(1, "#181c24");
+        fctx.fillStyle = g; fctx.fillRect(x, 0, tileW - 1, c.height);
+      }
+      fctx.fillStyle = "rgba(0,0,0,.55)"; fctx.fillRect(x + tileW - 1, 0, 1, c.height);
     }
   }
+
+  function drawWave() {
+    const c = document.getElementById("waveCanvas"); if (!c) return;
+    const wctx = c.getContext("2d"), Wc = c.width, Hc = c.height, mid = Hc / 2;
+    wctx.fillStyle = "#3c9961"; wctx.fillRect(0, 0, Wc, Hc);
+    const bars = 260, bw = Wc / bars;
+    wctx.fillStyle = "#d9f2e4";
+    for (let i = 0; i < bars; i++) {
+      const raw = 0.22 + 0.68 * Math.abs(Math.sin(i * 0.23) * Math.cos(i * 0.09) + 0.35 * Math.sin(i * 0.71));
+      const amp = clamp(tlScaledWave ? raw * 1.05 : raw * 0.62, 0.10, 0.96);
+      const chH = (mid - 2) * amp;
+      const x = i * bw;
+      // Stereo L (upper half, hanging down from center like Resolve stereo waveform)
+      wctx.fillRect(x, mid - chH, Math.max(1.5, bw - 0.8), chH);
+      // Stereo R (lower half, rising up from center)
+      const ampR = clamp(amp * (0.86 + 0.24 * Math.abs(Math.cos(i * 0.41))), 0.10, 0.96);
+      wctx.fillRect(x, mid + 1, Math.max(1.5, bw - 0.8), (mid - 2) * ampR);
+    }
+    // Crisp Resolve stereo center divider line
+    wctx.fillStyle = "rgba(18, 42, 28, 0.55)";
+    wctx.fillRect(0, Math.floor(mid), Wc, 1);
+  }
+
+  // Timeline View Options Popover + Resolve Track Height Sliders
+  function applyTimelinePrefs(p) {
+    const sec = document.getElementById("timelineSection"); if (!sec) return;
+    if (p.vh) { sec.style.setProperty("--vh", p.vh + "px"); document.getElementById("tlVideoHeight").value = p.vh; }
+    if (p.ah) { sec.style.setProperty("--ah", p.ah + "px"); document.getElementById("tlAudioHeight").value = p.ah; }
+    if (typeof p.scaled === "boolean") {
+      tlScaledWave = p.scaled;
+      document.getElementById("btnScaledWave").classList.toggle("on", tlScaledWave);
+    }
+    drawFilmstrip(); drawWave();
+  }
+  try {
+    const savedTl = JSON.parse(localStorage.getItem("resolve_lumvrix_tl_view") || "null");
+    if (savedTl) applyTimelinePrefs(savedTl);
+  } catch {}
+  document.getElementById("btnTlViewOpts").onclick = e => {
+    e.stopPropagation();
+    const pop = document.getElementById("tlViewPop");
+    const open = pop.classList.toggle("show");
+    document.getElementById("btnTlViewOpts").classList.toggle("view-open", open);
+  };
+  document.getElementById("btnScaledWave").onclick = () => {
+    tlScaledWave = !tlScaledWave;
+    document.getElementById("btnScaledWave").classList.toggle("on", tlScaledWave);
+    drawWave();
+  };
+  document.getElementById("tlVideoHeight").oninput = e => {
+    document.getElementById("timelineSection").style.setProperty("--vh", e.target.value + "px");
+    drawFilmstrip();
+  };
+  document.getElementById("tlAudioHeight").oninput = e => {
+    document.getElementById("timelineSection").style.setProperty("--ah", e.target.value + "px");
+    drawWave();
+  };
+  document.getElementById("btnSetDefaultView").onclick = () => {
+    const prefs = {
+      vh: Number(document.getElementById("tlVideoHeight").value),
+      ah: Number(document.getElementById("tlAudioHeight").value),
+      scaled: tlScaledWave,
+    };
+    try { localStorage.setItem("resolve_lumvrix_tl_view", JSON.stringify(prefs)); } catch {}
+    document.getElementById("tlViewPop").classList.remove("show");
+    document.getElementById("btnTlViewOpts").classList.remove("view-open");
+    toast("Saved timeline view as default!");
+  };
+  document.getElementById("btnToggleFilmstrip").onclick = e => {
+    tlShowFilmstrip = !tlShowFilmstrip;
+    e.currentTarget.classList.toggle("on", tlShowFilmstrip);
+    drawFilmstrip();
+  };
+  document.getElementById("btnSoloA1").onclick = e => e.currentTarget.classList.toggle("active");
+  document.getElementById("btnMuteA1").onclick = e => {
+    const muted = e.currentTarget.classList.toggle("active");
+    userVideo.muted = muted || true;
+    toast(muted ? "Audio 1 muted" : "Audio 1 unmuted");
+  };
+  document.querySelectorAll("[data-tltool]").forEach(b => b.onclick = () => {
+    document.querySelectorAll("[data-tltool]").forEach(x => x.classList.toggle("active", x === b));
+  });
+  document.addEventListener("click", e => {
+    const pop = document.getElementById("tlViewPop");
+    if (pop && pop.classList.contains("show") && !pop.contains(e.target) && e.target.id !== "btnTlViewOpts") {
+      pop.classList.remove("show");
+      document.getElementById("btnTlViewOpts").classList.remove("view-open");
+    }
+  });
 
   function seekTo(sec) { playhead = clamp(sec, 0, totalDur() - 0.01); if (hasUserVideo && isFinite(userVideo.duration)) userVideo.currentTime = playhead; }
   function syncPlayBtn() { document.getElementById("btnPlay").textContent = playing ? "❚❚" : "▶"; if (hasUserVideo) { playing ? userVideo.play().catch(()=>{}) : userVideo.pause(); } }
@@ -1609,7 +1914,7 @@
   }
 
   // Boot!
-  drawWave(); syncInputs(); renderMcpSetup(); refreshAll(false); connectLocal(); requestAnimationFrame(tick);
+  drawFilmstrip(); drawWave(); syncInputs(); renderMcpSetup(); refreshAll(false); connectLocal(); requestAnimationFrame(tick);
 })();
 </script>
 </body>
