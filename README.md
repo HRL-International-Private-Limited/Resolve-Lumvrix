@@ -6,7 +6,13 @@
 
 <p align="center">
   <a href="https://hrlpavan.github.io/STA-6/">
-    <img src="https://img.shields.io/badge/LAUNCH%20LUMVRIX%20RESOLVE%20(LIVE)-60FPS%20%C2%B7%200%20LAG-3B82F6?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Launch Lumvrix Resolve Live 60fps Editor" />
+    <img src="docs/assets/rl.png" alt="Resolve Lumvrix™ Official Emblem — HRL International Pvt. Ltd." width="136" />
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://hrlpavan.github.io/STA-6/">
+    <img src="https://img.shields.io/badge/LAUNCH%20RESOLVE%20LUMVRIX%20(LIVE)-60FPS%20%C2%B7%200%20LAG-FF7A18?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Launch Resolve Lumvrix Live 60fps Editor" />
   </a>
   <a href="https://whop.com/checkout/plan_fOxPHqsLK2LxS">
     <img src="https://img.shields.io/badge/50%25%20OFF%20CODE%3A%20STA650-$24.50%20ONE--TIME-FA4616?style=for-the-badge&logo=whop&logoColor=white" alt="50% Off Promo Code STA650 — $24.50 One-Time" />
@@ -15,30 +21,30 @@
     <img src="https://img.shields.io/badge/WHOP%20STOREFRONT-OPEN-111111?style=for-the-badge" alt="Open Whop Storefront" />
   </a>
   <a href="https://whop.com/agensi/sta-6/">
-    <img src="https://img.shields.io/badge/CLIPPER%20AFFILIATE-30%25%20PAYOUT-00C853?style=for-the-badge" alt="30% Clipper Affiliate Commission" />
+    <img src="https://img.shields.io/badge/HRL%20INTERNATIONAL-PVT.%20LTD.-00C853?style=for-the-badge" alt="HRL International Pvt. Ltd." />
   </a>
 </p>
 
-# Lumvrix Resolve (`v4.0.9`) — Easy 60fps Video & Caption Studio + AI Bridge MCP (Powered by STA-6)
+# Resolve Lumvrix™ (`v4.1.0`) — Easy 60fps Video & Caption Studio + AI Bridge MCP (by HRL International Pvt. Ltd.)
 
 > **50% OFF Launch Offer (First 50 Clippers Only):** Enter promo code **`STA650`** at Whop checkout to drop the Lifetime License from ~~`$49`~~ to **`$24.50` one-time** (no monthly fees).
 >
-> **Try Lumvrix Resolve Live in Your Browser (Zero Lag):** **[Open Lumvrix Resolve (`hrlpavan.github.io/STA-6`) →](https://hrlpavan.github.io/STA-6/)** — ultra-clean, beginner-friendly **Clideo-inspired workspace** with a slim 6-icon tool rail, distraction-free 60fps 9:16 preview (`0.5ms/frame`), **drag-directly-on-video** caption alignment (with magnetic snap to the flush zero-gap seam), **click-to-pin inline change flagging**, clean 3-track timeline, 1-click **Export** modal, and a built-in **12-tool AI Bridge MCP** console!
+> **Try Resolve Lumvrix™ Live in Your Browser (Zero Lag):** **[Open Resolve Lumvrix™ (`hrlpavan.github.io/STA-6`) →](https://hrlpavan.github.io/STA-6/)** — ultra-clean, beginner-friendly **Clideo-inspired workspace** featuring the official `rl.png` emblem, slim 6-icon tool rail, distraction-free 60fps 9:16 preview (`0.5ms/frame`), **drag-directly-on-video** caption alignment (with magnetic snap to the flush zero-gap seam), **click-to-pin inline change flagging**, clean 3-track timeline, 1-click **Export** modal, and a built-in **12-tool AI Bridge MCP** console!
 >
-> **Paid Source Code & Pre-Trained ML Engine:** The full `Lumvrix Resolve v4.0.9` Python pipeline, stdlib **AI Bridge MCP Server (`scripts/mcp_bridge.py`, key: `lumvrix-resolve`)**, local studio server (`scripts/harness.py`), flush zero-gap 2K rendering engine, 5 pro motion caption styles (`clip.py captions`), 60fps Animated Viral Shine Hook generator, and pre-trained 137-channel Tri-Stage ML weights (`models/viral_model_v4.json`) are **private** and unlock **immediately upon purchase on Whop**.
+> **Intellectual Property & Ownership:** **Resolve Lumvrix™**, the `RL` emblem (`rl.png`), and the underlying STA-6 2K engine are proprietary software and trademarks exclusively owned by **HRL International Private Limited (`HRL International Pvt. Ltd.`)**. All copyright, trademark, trade-secret, and patent rights are reserved — see [`PATENTS_AND_IP_NOTICE.md`](PATENTS_AND_IP_NOTICE.md) and [`LICENSE`](LICENSE). Full source code (`Resolve-Lumvrix-v4.1.0.zip`) unlocks **immediately upon purchase on Whop**.
 
 ---
 
-## What's New in `v4.0.9` — Meet **Lumvrix Resolve** (Clideo-Easy UI + Direct Canvas Editing + AI Bridge MCP)
+## What's New in `v4.1.0` — Official **Resolve Lumvrix™** Brand, `rl.png` Emblem & HRL International Pvt. Ltd. IP Charter
 
-Redesigned for effortless 10-second editing — combining **Clideo Video Editor's** clean simplicity with **DaVinci Resolve's** precision color/timeline engine, [`flamexnreal/davinci-resolve-ai-bridge-mcp`](https://github.com/flamexnreal/davinci-resolve-ai-bridge-mcp), and [`walkinglabs/awesome-harness-engineering`](https://github.com/walkinglabs/awesome-harness-engineering):
+Combining **Clideo Video Editor's** effortless simplicity with **DaVinci Resolve's** precision color/timeline engine, **12-tool AI Bridge MCP (`resolve-lumvrix`)**, and **HRL International Pvt. Ltd.'s** proprietary zero-gap 2K rendering stack:
 
 <p align="center">
   <a href="https://hrlpavan.github.io/STA-6/">
-    <img src="docs/assets/v409_lumvrix_resolve_preview.jpg" alt="Lumvrix Resolve v4.0.9 — Easy 60fps Video & Caption Editor + AI Bridge MCP" width="100%" />
+    <img src="docs/assets/v410_resolve_lumvrix_preview.jpg" alt="Resolve Lumvrix™ v4.1.0 — Easy 60fps Video & Caption Studio + AI Bridge MCP by HRL International Pvt. Ltd." width="100%" />
   </a>
   <br />
-  <em><a href="https://hrlpavan.github.io/STA-6/"><b>Launch Lumvrix Resolve Live (60 FPS · 0.5ms/frame · Zero Lag) →</b></a> — Slim 6-icon rail (<code>Captions / Hook / Media / Color / Flags / AI Bridge</code>), direct drag-on-canvas captions with flush zero-gap seam snap, inline floating Flag popover, clean 3-track timeline, 12-tool AI Bridge MCP &amp; Clideo-style Export modal</em>
+  <em><a href="https://hrlpavan.github.io/STA-6/"><b>Launch Resolve Lumvrix™ Live (60 FPS · 0.5ms/frame · Zero Lag) →</b></a> — Official <code>rl.png</code> Dragon Emblem, slim 6-icon rail (<code>Captions / Hook / Media / Color / Flags / AI Bridge</code>), direct drag-on-canvas captions with zero-gap seam snap, inline Flag popover, clean 3-track timeline, 12-tool AI Bridge MCP &amp; built-in HRL International Pvt. Ltd. IP &amp; Patent Notice</em>
 </p>
 
 ---
@@ -50,9 +56,9 @@ No monthly subscription. Pay once via **Whop** (Card, Apple Pay, Google Pay, loc
 ### **[Claim 50% OFF on Whop (Code: `STA650` → `$24.50` One-Time) →](https://whop.com/checkout/plan_fOxPHqsLK2LxS)**
 
 **How instant delivery works after payment:**
-1. **Immediate Download Inside Whop:** The second your payment completes, Whop automatically unlocks the private **Lumvrix Resolve v4.0.9 — Download & Setup** hub containing **`Lumvrix-Resolve-v4.0.9.zip`** and the 60-second macOS Apple Silicon setup guide.
+1. **Immediate Download Inside Whop:** The second your payment completes, Whop automatically unlocks the private **Resolve Lumvrix™ v4.1.0 — Studio & AI Bridge Hub** containing **`Resolve-Lumvrix-v4.1.0.zip`** and the 60-second macOS Apple Silicon setup guide.
 2. **Private GitHub Repo Access (`STA-6-pro`):** Enter your GitHub username at checkout to also receive collaborator access to the private `STA-6-pro` repository for all future `v4.x` updates.
-3. **Earn 30% as a Clipper Affiliate:** Share Lumvrix Resolve / STA 6 through Whop's Global Affiliate program ([whop.com/agensi/sta-6](https://whop.com/agensi/sta-6/)) and earn **`$14.70` per full-price sale**.
+3. **Earn 30% as a Clipper Affiliate:** Share Resolve Lumvrix™ through Whop's Global Affiliate program ([whop.com/agensi/sta-6](https://whop.com/agensi/sta-6/)) and earn **`$14.70` per full-price sale**.
 
 ---
 
@@ -160,5 +166,5 @@ Trained on **2,193 real YouTube Shorts across 137 unique channels**, **139 paire
 - **macOS Apple Silicon** (M1 / M2 / M3 / M4)
 - **Python 3.11+**, `ffmpeg`, and `yt-dlp` (installed in 60 seconds via `brew` + `.venv`)
 
-## License
-Commercial proprietary software — **All Rights Reserved**. Redistribution, resale, or public sharing of the source code or pre-trained model weights without a license is prohibited. See [`LICENSE`](LICENSE).
+## License, Trademark & Patent Rights Notice
+**Resolve Lumvrix™** and its official `RL` emblem (`rl.png`) are proprietary software, trademarks, and intellectual property exclusively owned by **HRL International Private Limited (`HRL International Pvt. Ltd.`)**, Mangaluru, Karnataka, India — **Copyright © 2026 HRL International Pvt. Ltd. All Rights Reserved.** All copyright, trademark, trade-secret, and patent rights are reserved; redistribution, resale, decompilation, or public sharing of source code or pre-trained model weights without authorization is strictly prohibited. See [`LICENSE`](LICENSE) and [`PATENTS_AND_IP_NOTICE.md`](PATENTS_AND_IP_NOTICE.md).

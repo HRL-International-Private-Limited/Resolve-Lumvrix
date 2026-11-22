@@ -3,10 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Lumvrix Resolve — Easy 60fps Video & Caption Editor + AI Bridge (v4.0.9)</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2316181f'/%3E%3Ccircle cx='16' cy='11' r='4.8' fill='%23ff6b4a'/%3E%3Ccircle cx='11.4' cy='19.2' r='4.8' fill='%2338bdf8'/%3E%3Ccircle cx='20.6' cy='19.2' r='4.8' fill='%234ade80'/%3E%3C/svg%3E" />
+<title>Resolve Lumvrix™ — Easy 60fps Video & Caption Editor + AI Bridge (v4.1.0) | HRL International Pvt. Ltd.</title>
+<meta name="author" content="HRL International Pvt. Ltd." />
+<meta name="copyright" content="Copyright © 2026 HRL International Pvt. Ltd. All Rights Reserved." />
+<meta name="application-name" content="Resolve Lumvrix" />
+<link rel="icon" type="image/png" href="assets/rl.png" />
 <style>
-  /* ===== LUMVRIX RESOLVE — CLIDEO-EASY SIMPLICITY × DAVINCI RESOLVE STUDIO POLISH ===== */
+  /* ===== RESOLVE LUMVRIX™ (v4.1.0) — HRL INTERNATIONAL PVT. LTD. ===== */
   :root {
     --bg: #111318;
     --surface: #181b22;
@@ -48,9 +51,18 @@
     padding: 0 16px; background: var(--surface); border-bottom: 1px solid var(--border);
   }
   .brand { display: flex; align-items: center; gap: 10px; white-space: nowrap; }
-  .logo-mark { width: 26px; height: 26px; flex-shrink: 0; }
+  .logo-mark {
+    width: 32px; height: 32px; flex-shrink: 0; border-radius: 8px; object-fit: cover;
+    box-shadow: 0 2px 10px rgba(255,115,0,.35); border: 1px solid rgba(255,190,60,.35);
+  }
   .brand-title { font-size: 15px; font-weight: 800; letter-spacing: -0.3px; color: #fff; }
-  .brand-title span { color: var(--teal); font-weight: 700; }
+  .brand-title span { color: #ff9d2e; font-weight: 800; }
+  .brand-tm { font-size: 9px; vertical-align: super; color: var(--muted); font-weight: 700; margin-left: 1px; }
+  .brand-owner-btn {
+    background: transparent; border: none; color: var(--dim); font-size: 10.5px; font-weight: 600;
+    cursor: pointer; padding: 2px 6px; border-radius: 6px; transition: color .14s, background .14s;
+  }
+  .brand-owner-btn:hover { color: var(--text); background: var(--surface2); }
   .ver-tag {
     font-family: var(--mono); font-size: 10.5px; color: var(--muted);
     background: var(--surface2); border: 1px solid var(--border); padding: 2px 7px; border-radius: 999px;
@@ -401,14 +413,9 @@
   <!-- 1. CLEAN CLIDEO-STYLE TOP HEADER -->
   <header class="topbar">
     <div class="brand">
-      <svg class="logo-mark" viewBox="0 0 28 28" aria-hidden="true">
-        <rect width="28" height="28" rx="7" fill="#20242e"/>
-        <circle cx="14" cy="9.5" r="4.2" fill="#ff6b4a"/>
-        <circle cx="9.8" cy="17.2" r="4.2" fill="#38bdf8"/>
-        <circle cx="18.2" cy="17.2" r="4.2" fill="#4ade80"/>
-      </svg>
-      <span class="brand-title">Lumvrix <span>Resolve</span></span>
-      <span class="ver-tag">v4.0.9</span>
+      <img class="logo-mark" src="assets/rl.png" alt="Resolve Lumvrix™ Logo" />
+      <span class="brand-title">Resolve <span>Lumvrix</span><sup class="brand-tm">TM</sup></span>
+      <span class="ver-tag">v4.1.0</span>
       <span class="fps-chip" id="fpsText">60 FPS · 0.6ms</span>
     </div>
 
@@ -460,6 +467,10 @@
       <button class="rail-btn" data-panel="bridge">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="5" cy="12" r="2.5"/><circle cx="19" cy="6" r="2.5"/><circle cx="19" cy="18" r="2.5"/><path d="m7.3 11 9.4-4M7.3 13l9.4 4"/></svg>
         <span>AI Bridge</span>
+      </button>
+      <button class="rail-btn" id="btnOpenLegalRail" style="margin-top:auto;" title="Resolve Lumvrix™ — HRL International Pvt. Ltd. IP, Trademark &amp; Patent Notice">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3 5 6v6c0 4.5 3 7.8 7 9 4-1.2 7-4.5 7-9V6l-7-3Z"/><path d="m9.5 12 1.8 1.8 3.7-3.8"/></svg>
+        <span>IP Legal</span>
       </button>
     </nav>
 
@@ -662,6 +673,7 @@
       <div style="display:flex;align-items:center;gap:8px;">
         <span style="font-weight:700;font-size:12px;">Timeline</span>
         <span style="font-family:var(--mono);font-size:10.5px;color:var(--muted);">1440×2560 · 60fps · Zero-Gap</span>
+        <button class="brand-owner-btn" id="btnOpenLegalTl" title="View HRL International Pvt. Ltd. Trademark, Copyright &amp; Patent Notice">© 2026 HRL International Pvt. Ltd. · Resolve Lumvrix™</button>
       </div>
       <div style="display:flex;align-items:center;gap:6px;">
         <button class="btn sm" id="btnStepBack">-1f</button>
@@ -698,7 +710,10 @@
 <div class="modal-bg" id="exportModal">
   <div class="modal">
     <div class="modal-hd">
-      <h2>Export from Lumvrix Resolve</h2>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <img src="assets/rl.png" alt="Resolve Lumvrix™" style="width:28px;height:28px;border-radius:7px;object-fit:cover;" />
+        <h2>Export from Resolve Lumvrix™</h2>
+      </div>
       <button class="btn sm" id="btnCloseExport">Close</button>
     </div>
 
@@ -720,11 +735,40 @@
 
     <div style="display:flex;gap:8px;flex-wrap:wrap;">
       <button class="btn export-cta" id="btnLocalRenderModal" style="display:none;flex:1;">Render 2K MP4 Now</button>
-      <a class="btn export-cta" id="btnWhopModal" href="https://whop.com/checkout/plan_fOxPHqsLK2LxS" target="_blank" rel="noopener" style="flex:1;background:linear-gradient(135deg,#fa4616,#e11d48);">Get Lumvrix Resolve Local 2K Engine ($24.50)</a>
+      <a class="btn export-cta" id="btnWhopModal" href="https://whop.com/checkout/plan_fOxPHqsLK2LxS" target="_blank" rel="noopener" style="flex:1;background:linear-gradient(135deg,#fa4616,#e11d48);">Get Resolve Lumvrix Local 2K Engine ($24.50)</a>
       <button class="btn" id="btnCopyPromptModal">Copy AI Fix Prompt</button>
       <button class="btn" id="btnDownloadSpec">Save Spec JSON</button>
     </div>
     <div class="codebox" id="renderLogModal" style="display:none;"></div>
+    <div style="font-size:11px;color:var(--dim);text-align:center;border-top:1px solid var(--border);padding-top:10px;">
+      Resolve Lumvrix™ v4.1.0 · Copyright © 2026 <b>HRL International Pvt. Ltd.</b> · All Trademark, Copyright &amp; Patent Rights Reserved.
+    </div>
+  </div>
+</div>
+
+<!-- OFFICIAL IP, TRADEMARK & PATENT RIGHTS NOTICE MODAL -->
+<div class="modal-bg" id="legalModal">
+  <div class="modal" style="max-width:560px;">
+    <div class="modal-hd">
+      <div style="display:flex;align-items:center;gap:11px;">
+        <img src="assets/rl.png" alt="Resolve Lumvrix™ Logo" style="width:42px;height:42px;border-radius:10px;object-fit:cover;border:1px solid rgba(255,190,60,.45);" />
+        <div>
+          <h2 style="font-size:16px;">Resolve Lumvrix™ <span style="font-size:11px;color:#ff9d2e;font-weight:700;">v4.1.0</span></h2>
+          <div style="font-size:11.5px;color:var(--muted);">Proprietary Software of <b>HRL International Private Limited</b></div>
+        </div>
+      </div>
+      <button class="btn sm" id="btnCloseLegal">Close</button>
+    </div>
+
+    <div class="card" style="gap:8px;font-size:12px;line-height:1.55;color:#d6dce8;">
+      <div><b>Exclusive Owner:</b> HRL International Private Limited (<i>HRL International Pvt. Ltd.</i>), Mangaluru, Dakshina Kannada, Karnataka - 575007, India. Founder &amp; Managing Director: <b>Pavan Kumar Sadashiv</b>.</div>
+      <div><b>Trademark &amp; Brand Assets:</b> <b>Resolve Lumvrix™</b> and the official <code>RL</code> Dragon Emblem (<code>rl.png</code>) are proprietary marks of HRL International Pvt. Ltd. (Trade Marks Act, 1999 — NICE Classes 9, 38, 41, 42; WIPO Madrid System). Unauthorized use or passing off is strictly prohibited.</div>
+      <div><b>Patent &amp; Proprietary Technology Notice:</b> All domestic and international patent rights, trade secrets, and inventions embodied in the Zero-Gap Flush Split-Screen Compositor, 60fps Zero-Lag Canvas Editing Harness with Direct Seam-Snapping &amp; Spatial Flagging, Two-Way AI Bridge MCP Protocol (<code>resolve-lumvrix</code>), and 137-Channel Tri-Stage ML Engine are reserved exclusively by HRL International Pvt. Ltd. under the Patents Act, 1970 and applicable international treaties.</div>
+      <div><b>Copyright &amp; Anti-Circumvention:</b> Copyright © 2026 HRL International Pvt. Ltd. All Rights Reserved. Protected under the Indian Copyright Act, 1957 (Sec. 63/64/65A), Berne Convention, Information Technology Act, 2000 (Sec. 43/66/66C), and 17 U.S.C. § 512 (DMCA).</div>
+      <div style="font-family:var(--mono);font-size:11px;color:var(--muted);padding-top:4px;border-top:1px solid var(--border);">
+        Legal &amp; Licensing: hrlinternationalprivatelimited@gmail.com · Jurisdiction: Mangaluru Courts / High Court of Karnataka / WIPO
+      </div>
+    </div>
   </div>
 </div>
 
@@ -732,7 +776,7 @@
 
 <script>
 (() => {
-  // ===== 1. CONFIG & STATE (Mirrors scripts/clip.py + scripts/mcp_bridge.py v4.0.9) =====
+  // ===== 1. CONFIG & STATE (Resolve Lumvrix™ v4.1.0 — HRL International Pvt. Ltd.) =====
   const STYLES = {
     shine:      { name: "The Shine",      sample: "Shine!",    fontCss: '700 15px "Helvetica Neue",sans-serif', col: "#5eff24", defaultColor: "green", supportsColor: true },
     stopmotion: { name: "Stop Motion",    sample: "Editorial", fontCss: 'italic 700 16px Baskerville,Georgia,serif', col: "#f4edd2", defaultColor: "cream", supportsColor: true },
@@ -810,14 +854,14 @@
 
   function loadSaved() {
     try {
-      const s = JSON.parse(localStorage.getItem("lumvrix_resolve_v409") || "null");
+      const s = JSON.parse(localStorage.getItem("resolve_lumvrix_v410") || "null");
       if (s && s.captionStyle && Array.isArray(s.chunks)) {
         return { ...structuredClone(DEFAULT_STATE), ...s, cam: { ...DEFAULT_STATE.cam, ...(s.cam||{}) }, grade: { ...DEFAULT_STATE.grade, ...(s.grade||{}) } };
       }
     } catch {}
     return structuredClone(DEFAULT_STATE);
   }
-  const persist = () => { try { localStorage.setItem("lumvrix_resolve_v409", JSON.stringify(state)); } catch {} };
+  const persist = () => { try { localStorage.setItem("resolve_lumvrix_v410", JSON.stringify(state)); } catch {} };
   const totalDur = () => (hasUserVideo && userVideo.duration && isFinite(userVideo.duration))
     ? Math.min(60, Math.max(2, userVideo.duration))
     : Math.max(3.0, state.chunks.reduce((m, c) => Math.max(m, c.end), 5.4));
@@ -1101,7 +1145,7 @@
   function buildAgentPrompt() {
     const open = state.flags.filter(f => !f.resolved);
     const lines = [
-      "Apply these Lumvrix Resolve editing harness updates via `lumvrix-resolve-ai-bridge` MCP or `scripts/clip.py`:",
+      "Apply these Resolve Lumvrix™ editing harness updates via `resolve-lumvrix-ai-bridge` MCP or `scripts/clip.py`:",
       `Style: ${state.captionStyle} (${state.captionColor}) | Y=${state.posY} | Quality=${state.quality} | Hook="${state.hookEnabled ? state.hookText : 'none'}"`,
     ];
     if (open.length) {
@@ -1257,13 +1301,13 @@
 
   function renderMcpSetup() {
     const srvEntry = localMcpConfig && localMcpConfig.mcpServers ? Object.values(localMcpConfig.mcpServers)[0] : null;
-    const py = srvEntry ? srvEntry.command : "/path/to/Lumvrix-Resolve/.venv/bin/python";
-    const srv = srvEntry ? srvEntry.args[0] : "/path/to/Lumvrix-Resolve/scripts/mcp_bridge.py";
-    const cfg = JSON.stringify({ mcpServers: { "lumvrix-resolve": { command: py, args: [srv] } } }, null, 2);
+    const py = srvEntry ? srvEntry.command : "/path/to/Resolve-Lumvrix/.venv/bin/python";
+    const srv = srvEntry ? srvEntry.args[0] : "/path/to/Resolve-Lumvrix/scripts/mcp_bridge.py";
+    const cfg = JSON.stringify({ mcpServers: { "resolve-lumvrix": { command: py, args: [srv] } } }, null, 2);
     const map = {
       antigravity: `// ~/.gemini/antigravity/mcp_config.json\n${cfg}`,
-      claude: `claude mcp add lumvrix-resolve -- "${py}" "${srv}"`,
-      codex: `codex mcp add lumvrix-resolve -- "${py}" "${srv}"`,
+      claude: `claude mcp add resolve-lumvrix -- "${py}" "${srv}"`,
+      codex: `codex mcp add resolve-lumvrix -- "${py}" "${srv}"`,
       cursor: `// Cursor Settings -> MCP -> Add global MCP server\n${cfg}`,
       resolve: `# Optional DaVinci Resolve Lua Bridge:\nnpx davinci-resolve-ai-bridge-mcp\n# Workspace -> Scripts -> Resolve AI Bridge -> Start AI Bridge (Lua)`,
     };
@@ -1337,7 +1381,13 @@
   }
 
   // ===== 5. INTERACTIONS (INCLUDING DIRECT ON-CANVAS CAPTION DRAG!) =====
-  document.querySelectorAll(".rail-btn").forEach(b => b.onclick = () => openPanel(b.dataset.panel, true));
+  document.querySelectorAll(".rail-btn[data-panel]").forEach(b => b.onclick = () => openPanel(b.dataset.panel, true));
+  const openLegal = () => document.getElementById("legalModal").classList.add("show");
+  const closeLegal = () => document.getElementById("legalModal").classList.remove("show");
+  document.getElementById("btnOpenLegalRail").onclick = openLegal;
+  document.getElementById("btnOpenLegalTl").onclick = openLegal;
+  document.getElementById("btnCloseLegal").onclick = closeLegal;
+  document.getElementById("legalModal").onclick = e => { if (e.target.id === "legalModal") closeLegal(); };
   document.getElementById("btnCollapseDrawer").onclick = () => {
     document.getElementById("toolDrawer").classList.add("collapsed");
     document.querySelectorAll(".rail-btn").forEach(b => b.classList.remove("active"));
@@ -1463,8 +1513,8 @@
   document.getElementById("btnCopyCliModal").onclick = () => copyTxt(buildCli(), "Copied 1-line CLI command!");
   document.getElementById("btnCopyPromptModal").onclick = () => copyTxt(buildAgentPrompt(), "Copied AI Fix Prompt!");
   document.getElementById("btnDownloadSpec").onclick = () => {
-    const b = new Blob([JSON.stringify({ app: "Lumvrix Resolve v4.0.9", edit_spec: buildSpec(), flags: state.flags }, null, 2)], { type: "application/json" });
-    const a = document.createElement("a"); a.href = URL.createObjectURL(b); a.download = `lumvrix_resolve_${state.captionStyle}.json`; a.click(); toast("Downloaded project spec!");
+    const b = new Blob([JSON.stringify({ app: "Resolve Lumvrix™ v4.1.0", owner: "HRL International Pvt. Ltd.", copyright: "Copyright © 2026 HRL International Pvt. Ltd. All Rights Reserved.", edit_spec: buildSpec(), flags: state.flags }, null, 2)], { type: "application/json" });
+    const a = document.createElement("a"); a.href = URL.createObjectURL(b); a.download = `resolve_lumvrix_${state.captionStyle}.json`; a.click(); toast("Downloaded project spec!");
   };
 
   // AI Bridge MCP
@@ -1480,7 +1530,7 @@
       const r = await fetch("/api/mcp/call", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ name: tn, arguments: tn==="preview_timeline"?{name:"original"}:{} }) });
       const d = await r.json(); out.textContent = JSON.stringify(d.result || d, null, 2); await pullLocalState(); toast(`MCP → ${tn}`); return;
     }
-    let sim = { app: "Lumvrix Resolve v4.0.9", tool: tn, mode: "web-preview" };
+    let sim = { app: "Resolve Lumvrix™ v4.1.0", owner: "HRL International Pvt. Ltd.", tool: tn, mode: "web-preview" };
     if (tn === "project_health") sim = { ready: evalGates().every(g=>g.status!=="fail"), gates: evalGates() };
     else if (tn === "timeline_overview") sim = { edit_spec: buildSpec(), flags: state.flags };
     else if (tn === "preview_timeline") { state.snapshots = { ...(state.snapshots||{}), original: buildSpec() }; persist(); sim = { ok: true, saved: "original" }; }
@@ -1496,7 +1546,7 @@
     if (["INPUT","TEXTAREA","SELECT"].includes(document.activeElement.tagName)) return;
     if (e.code === "Space") { e.preventDefault(); playing = !playing; syncPlayBtn(); }
     if (e.key.toLowerCase() === "f") { e.preventDefault(); setFlagMode(!flagMode); }
-    if (e.key === "Escape") { setFlagMode(false); closeExport(); }
+    if (e.key === "Escape") { setFlagMode(false); closeExport(); closeLegal(); }
   });
 
   // ===== 6. TWO-WAY LIVE LOCAL ENGINE + AI BRIDGE SYNC =====
@@ -1549,7 +1599,7 @@
         const src = prompt("Local video path or YouTube/Twitch URL:", state.sourceLabel === "<VIDEO_OR_URL>" ? "" : state.sourceLabel);
         if (!src) return;
         state.sourceLabel = src.trim(); refreshAll();
-        const log = document.getElementById("renderLogModal"); log.style.display = "block"; log.textContent = "Rendering 2K 60fps MP4 via Lumvrix Resolve...";
+        const log = document.getElementById("renderLogModal"); log.style.display = "block"; log.textContent = "Rendering 2K 60fps MP4 via Resolve Lumvrix™...";
         const res = await fetch("/api/mcp/call", { method:"POST", headers:{"Content-Type":"application/json"}, body: JSON.stringify({ name: "render_current_timeline", arguments: { source: state.sourceLabel } }) });
         log.textContent = await res.text();
         toast(res.ok ? "Render complete!" : "Blocked or failed — see log");
