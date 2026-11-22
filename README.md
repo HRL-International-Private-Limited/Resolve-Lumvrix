@@ -19,26 +19,26 @@
   </a>
 </p>
 
-# STA 6 — Signal Theft Auto VI (v4.0.7 Zero-Lag 60fps Editing Harness + 5 Pro Captions + 2K Autopilot)
+# STA 6 — Signal Theft Auto VI (v4.0.8 DaVinci Resolve-Style Editing Harness + AI Bridge MCP + 2K Autopilot)
 
 > **50% OFF Launch Offer (First 50 Clippers Only):** Enter promo code **`STA650`** at Whop checkout to drop the Lifetime License from ~~`$49`~~ to **`$24.50` one-time** (no monthly fees).
 >
-> **Try the Live Zero-Lag Editing Harness Right Now:** **[Open STA-6 Editing Harness (`hrlpavan.github.io/STA-6`) →](https://hrlpavan.github.io/STA-6/)** — customize all 5 caption styles at **60fps (`<1ms/frame`)**, inspect the 6-stage Harness Engineering workflow & deterministic quality gates (`β=1`), drop any local video for instant preview, and **pin instant change flags directly on the 9:16 frame** to export a structured Coding-Agent Fix Prompt + CLI command.
+> **Try the Live DaVinci Resolve-Style Zero-Lag Editing Harness Right Now:** **[Open STA-6 Resolve Harness (`hrlpavan.github.io/STA-6`) →](https://hrlpavan.github.io/STA-6/)** — authentic DaVinci Resolve dark studio UI with multi-track NLE timeline (`T1 / V2 / V1 / A1`), SMPTE 60fps timecode, live color grade sliders, all 5 caption styles at **60fps (`<1.5ms/frame`)**, click-to-pin Resolve review markers, non-destructive `Snapshot / Compare A/B`, and a built-in **12-tool AI Bridge MCP** console!
 >
-> **Paid Source Code & Pre-Trained ML Engine:** The full `STA 6 v4.0.7` Python pipeline, local harness server (`scripts/harness.py`), flush zero-gap 2K rendering engine, 5 pro motion caption styles (`clip.py captions`), 60fps Animated Viral Shine Hook generator, and pre-trained 137-channel Tri-Stage ML weights (`models/viral_model_v4.json`) are **private** and unlock **immediately upon purchase on Whop**.
+> **Paid Source Code & Pre-Trained ML Engine:** The full `STA 6 v4.0.8` Python pipeline, stdlib **AI Bridge MCP Server (`scripts/mcp_bridge.py`)**, local harness bridge (`scripts/harness.py`), flush zero-gap 2K rendering engine, 5 pro motion caption styles (`clip.py captions`), 60fps Animated Viral Shine Hook generator, and pre-trained 137-channel Tri-Stage ML weights (`models/viral_model_v4.json`) are **private** and unlock **immediately upon purchase on Whop**.
 
 ---
 
-## What's New in `v4.0.7` — Zero-Lag 60fps Web Editing Harness
+## What's New in `v4.0.8` — DaVinci Resolve-Style Frontend + 12-Tool AI Bridge MCP
 
-Built on **Harness Engineering** principles ([`walkinglabs/awesome-harness-engineering`](https://github.com/walkinglabs/awesome-harness-engineering)) — **Control–Agency–Runtime (`CAR`)**, deterministic quality gates (`β=1`), and trace-backed human review flags:
+Inspired by **DaVinci Resolve Studio**, [`flamexnreal/davinci-resolve-ai-bridge-mcp`](https://github.com/flamexnreal/davinci-resolve-ai-bridge-mcp), and [`walkinglabs/awesome-harness-engineering`](https://github.com/walkinglabs/awesome-harness-engineering):
 
 <p align="center">
   <a href="https://hrlpavan.github.io/STA-6/">
-    <img src="docs/assets/v407_editing_harness_preview.jpg" alt="STA 6 v4.0.7 — Zero-Lag 60fps Browser Editing Harness with Live Inverted Captions & Spatial Flag Pins" width="100%" />
+    <img src="docs/assets/v408_resolve_harness_preview.jpg" alt="STA 6 v4.0.8 — DaVinci Resolve-Style Zero-Lag 60fps Editing Harness + AI Bridge MCP" width="100%" />
   </a>
   <br />
-  <em><a href="https://hrlpavan.github.io/STA-6/"><b>Launch Live Editing Harness (60 FPS · 0.3ms/frame · Zero Lag) →</b></a> — Visual 6-stage pipeline, live caption customization, click-to-pin instant change flags, deterministic Shorts gates &amp; 1-click Coding-Agent CLI export</em>
+  <em><a href="https://hrlpavan.github.io/STA-6/"><b>Launch Live Resolve-Style Editing Harness (60 FPS · 1.5ms/frame · Zero Lag) →</b></a> — Multi-track Resolve NLE timeline (<code>T1 / V2 / V1 / A1</code>), SMPTE 60fps playhead, live 12-tool AI Bridge MCP (Antigravity / Claude Code / Codex / Cursor / Resolve Lua), spatial review markers &amp; deterministic <code>β=1</code> gates</em>
 </p>
 
 ---
@@ -50,7 +50,7 @@ No monthly subscription. Pay once via **Whop** (Card, Apple Pay, Google Pay, loc
 ### **[Claim 50% OFF on Whop (Code: `STA650` → `$24.50` One-Time) →](https://whop.com/checkout/plan_fOxPHqsLK2LxS)**
 
 **How instant delivery works after payment:**
-1. **Immediate Download Inside Whop:** The second your payment completes, Whop automatically unlocks the private **STA 6 v4.0.7 — Download & Setup** hub containing **`STA-6-v4.0.7.zip`** and the 60-second macOS Apple Silicon setup guide.
+1. **Immediate Download Inside Whop:** The second your payment completes, Whop automatically unlocks the private **STA 6 v4.0.8 — Download & Setup** hub containing **`STA-6-v4.0.8.zip`** and the 60-second macOS Apple Silicon setup guide.
 2. **Private GitHub Repo Access (`STA-6-pro`):** Enter your GitHub username at checkout to also receive collaborator access to the private `STA-6-pro` repository for all future `v4.x` updates.
 3. **Earn 30% as a Clipper Affiliate:** Share STA 6 through Whop's Global Affiliate program ([whop.com/agensi/sta-6](https://whop.com/agensi/sta-6/)) and earn **`$14.70` per full-price sale**.
 

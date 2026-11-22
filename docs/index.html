@@ -3,576 +3,771 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>STA-6 Editing Harness v4.0.7 — Zero-Lag 60fps Caption Studio & Review Gate</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop stop-color='%2328daff'/%3E%3Cstop offset='1' stop-color='%231a3cf5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='32' rx='7' fill='url(%23g)'/%3E%3Ctext x='16' y='21' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='900' font-size='14'%3ES6%3C/text%3E%3C/svg%3E" />
+<title>STA-6 Resolve-Style Editing Harness + AI Bridge MCP (v4.0.8)</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231d1d1d'/%3E%3Ccircle cx='16' cy='11' r='5' fill='%23e85a3c'/%3E%3Ccircle cx='11.2' cy='19.5' r='5' fill='%2338bdf8'/%3E%3Ccircle cx='20.8' cy='19.5' r='5' fill='%234ade80'/%3E%3C/svg%3E" />
 <style>
+  /* ===== DAVINCI RESOLVE STUDIO MATTE CHARCOAL THEME ===== */
   :root {
-    --bg: #080a0f;
-    --panel: #0f131c;
-    --panel2: #151b28;
-    --border: #222b3e;
-    --border-hi: #34425f;
-    --text: #eef2fa;
-    --muted: #8b9bb8;
-    --accent: #38bdf8;
-    --green: #5eff24;
-    --amber: #fbbf24;
-    --red: #f43f5e;
-    --purple: #a78bfa;
+    --bg: #141414;
+    --panel: #1d1d1d;
+    --panel2: #242424;
+    --panel3: #2b2b2b;
+    --border: #303030;
+    --border-hi: #484848;
+    --text: #e6e6e6;
+    --muted: #929292;
+    --dim: #666666;
+    --playhead: #e85a3c;
+    --resolve-red: #e53935;
+    --resolve-amber: #f59e0b;
+    --resolve-teal: #38bdf8;
+    --resolve-green: #4ade80;
+    --resolve-violet: #a78bfa;
+    --neon-green: #5eff24;
     --mono: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Inter, system-ui, sans-serif;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { height: 100%; background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 13px; overflow: hidden; }
+  html, body {
+    height: 100%; background: var(--bg); color: var(--text);
+    font-family: var(--sans); font-size: 12px; overflow: hidden; user-select: none;
+  }
+  input, textarea, select, pre, code, .selectable { user-select: text; }
   button, input, select, textarea { font-family: inherit; color: inherit; }
 
-  /* Top Harness Control Bar */
+  .app-shell {
+    display: grid; grid-template-rows: 42px 1fr 162px 34px;
+    height: 100vh; width: 100%; max-width: 100vw; overflow: hidden;
+  }
+
+  /* 1. TOP RESOLVE HEADER BAR */
   .topbar {
-    height: 52px; display: flex; align-items: center; justify-content: space-between;
-    padding: 0 10px; background: var(--panel); border-bottom: 1px solid var(--border); gap: 8px;
+    display: flex; align-items: center; justify-content: space-between; gap: 6px; min-width: 0; overflow: hidden;
+    padding: 0 8px; background: #191919; border-bottom: 1px solid var(--border);
   }
-  .brand { display: flex; align-items: center; gap: 7px; white-space: nowrap; flex-shrink: 0; }
-  .brand-logo {
-    background: linear-gradient(135deg, #28daff, #1a3cf5); color: #fff; font-weight: 800;
-    font-size: 11px; padding: 4px 7px; border-radius: 6px; letter-spacing: 0.4px;
+  .brand { display: flex; align-items: center; gap: 6px; white-space: nowrap; flex-shrink: 0; }
+  .resolve-wheel {
+    width: 18px; height: 18px; position: relative; flex-shrink: 0;
   }
-  .brand-title { font-weight: 700; font-size: 12.5px; letter-spacing: -0.2px; }
+  .brand-name { font-weight: 700; font-size: 11.5px; letter-spacing: 0.1px; color: #f2f2f2; }
+  .brand-sub { color: var(--muted); font-family: var(--mono); font-size: 10px; }
   .pill {
-    display: inline-flex; align-items: center; gap: 4px; font-family: var(--mono); font-size: 10.5px;
-    padding: 3px 7px; border-radius: 999px; background: var(--panel2); border: 1px solid var(--border); color: var(--muted);
+    display: inline-flex; align-items: center; gap: 4px; font-family: var(--mono); font-size: 9.5px;
+    padding: 2px 6px; border-radius: 3px; background: var(--panel2); border: 1px solid var(--border); color: var(--muted);
   }
-  .pill.live { border-color: rgba(94,255,36,.35); color: var(--green); }
-  .pill.local { border-color: rgba(56,189,248,.45); color: var(--accent); }
+  .pill.fps { border-color: rgba(74,222,128,.35); color: var(--resolve-green); }
+  .pill.bridge { border-color: rgba(56,189,248,.4); color: var(--resolve-teal); cursor: pointer; }
+  .pill.bridge.live { border-color: rgba(74,222,128,.45); color: var(--resolve-green); }
   .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
 
-  /* 6-Stage Harness Workflow Strip */
-  .workflow-strip {
-    display: flex; align-items: center; gap: 3px; overflow-x: auto; scrollbar-width: none; padding: 2px 0;
-  }
+  /* 6-Stage Harness Workflow Pipeline */
+  .workflow-strip { display: flex; align-items: center; justify-content: center; gap: 2px; min-width: 0; flex: 1; overflow-x: auto; scrollbar-width: none; }
   .workflow-strip::-webkit-scrollbar { display: none; }
   .stage-node {
-    display: flex; align-items: center; gap: 4px; padding: 4px 7px; border-radius: 6px;
+    display: flex; align-items: center; gap: 4px; padding: 3px 5px; border-radius: 3px;
     background: var(--panel2); border: 1px solid var(--border); cursor: pointer; white-space: nowrap;
-    font-size: 10.5px; transition: border-color .12s, background .12s;
+    font-size: 10px; color: #cfcfcf; transition: border-color .1s, background .1s;
   }
-  .stage-node:hover { border-color: var(--border-hi); }
-  .stage-node.active { border-color: var(--accent); background: rgba(56,189,248,.1); }
-  .stage-node.has-flag { border-color: var(--red); background: rgba(244,63,94,.12); }
-  .stage-node.warn { border-color: var(--amber); }
-  .stage-num { font-family: var(--mono); color: var(--muted); font-size: 9.5px; }
+  .stage-node:hover { border-color: var(--border-hi); background: var(--panel3); }
+  .stage-node.active { border-color: var(--playhead); background: rgba(232,90,60,.14); color: #fff; }
+  .stage-node.has-flag { border-color: var(--resolve-red); background: rgba(229,57,53,.15); }
+  .stage-node.warn { border-color: var(--resolve-amber); }
+  .stage-num { font-family: var(--mono); font-size: 9.5px; color: var(--dim); }
   .stage-badge {
-    font-family: var(--mono); font-size: 9.5px; padding: 1px 4px; border-radius: 4px;
-    background: rgba(94,255,36,.12); color: var(--green); font-weight: 600;
+    font-family: var(--mono); font-size: 9px; padding: 1px 4px; border-radius: 2px;
+    background: rgba(74,222,128,.13); color: var(--resolve-green); font-weight: 700;
   }
-  .stage-badge.warn { background: rgba(251,191,36,.15); color: var(--amber); }
-  .stage-badge.fail { background: rgba(244,63,94,.18); color: var(--red); }
-  .stage-arrow { color: #364159; font-size: 10px; user-select: none; }
+  .stage-badge.warn { background: rgba(245,158,11,.18); color: var(--resolve-amber); }
+  .stage-badge.fail { background: rgba(229,57,53,.22); color: #ff6b6b; }
+  .stage-sep { color: #444; font-size: 10px; }
 
-  .top-actions { display: flex; align-items: center; gap: 7px; white-space: nowrap; }
+  .top-actions { display: flex; align-items: center; gap: 5px; white-space: nowrap; flex-shrink: 0; }
   .btn {
-    display: inline-flex; align-items: center; gap: 5px; padding: 6px 10px; border-radius: 7px;
-    border: 1px solid var(--border); background: var(--panel2); color: var(--text);
-    font-size: 12px; font-weight: 600; cursor: pointer; transition: all .12s; text-decoration: none;
+    display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+    padding: 4px 8px; border-radius: 3px; border: 1px solid var(--border); background: var(--panel2);
+    color: var(--text); font-size: 11px; font-weight: 600; cursor: pointer; text-decoration: none;
+    transition: background .1s, border-color .1s;
   }
-  .btn:hover { border-color: var(--border-hi); background: #1c2435; }
-  .btn.primary { background: linear-gradient(135deg, #0ea5e9, #2563eb); border-color: transparent; color: #fff; }
-  .btn.primary:hover { filter: brightness(1.08); }
-  .btn.flag-btn { background: rgba(244,63,94,.14); border-color: rgba(244,63,94,.45); color: #fb7185; }
-  .btn.flag-btn:hover, .btn.flag-btn.pin-on { background: var(--red); color: #fff; border-color: var(--red); }
-  .btn.whop-btn { background: rgba(250,70,22,.16); border-color: rgba(250,70,22,.45); color: #ff7a52; }
-  .btn.whop-btn:hover { background: #fa4616; color: #fff; }
-  .btn.sm { padding: 4px 8px; font-size: 11px; }
+  .btn:hover { background: var(--panel3); border-color: var(--border-hi); }
+  .btn.accent { background: var(--playhead); border-color: var(--playhead); color: #fff; }
+  .btn.accent:hover { filter: brightness(1.08); }
+  .btn.red { background: rgba(229,57,53,.18); border-color: rgba(229,57,53,.55); color: #ff7b7b; }
+  .btn.red:hover, .btn.red.on { background: var(--resolve-red); color: #fff; border-color: var(--resolve-red); }
+  .btn.teal { background: rgba(56,189,248,.14); border-color: rgba(56,189,248,.45); color: #7dd3fc; }
+  .btn.teal:hover { background: #0284c7; color: #fff; }
+  .btn.xs { padding: 2px 6px; font-size: 10px; }
 
-  /* 3-Column Studio Grid */
-  .main {
-    display: grid; grid-template-columns: 344px 1fr 364px;
-    height: calc(100vh - 52px); overflow: hidden;
+  /* 2. MIDDLE 3-PANE RESOLVE WORKSPACE */
+  .workspace {
+    display: grid; grid-template-columns: 300px minmax(360px, 1fr) 332px;
+    min-width: 0; min-height: 0; overflow: hidden; border-bottom: 1px solid var(--border);
   }
-  .col {
-    display: flex; flex-direction: column; overflow-y: auto; overflow-x: hidden;
-    border-right: 1px solid var(--border); background: var(--panel);
+  .pane {
+    display: flex; flex-direction: column; min-width: 0; min-height: 0; overflow: hidden;
+    background: var(--panel); border-right: 1px solid var(--border);
   }
-  .col:last-child { border-right: none; }
-  .col::-webkit-scrollbar { width: 6px; }
-  .col::-webkit-scrollbar-thumb { background: #263147; border-radius: 3px; }
+  .pane:last-child { border-right: none; }
+  .pane-tabs {
+    display: flex; background: #181818; border-bottom: 1px solid var(--border); flex-shrink: 0;
+  }
+  .ptab {
+    flex: 1; padding: 7px 6px; font-size: 10.5px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.45px; color: var(--muted); background: transparent; border: none;
+    border-bottom: 2px solid transparent; cursor: pointer; display: flex; align-items: center;
+    justify-content: center; gap: 4px; white-space: nowrap;
+  }
+  .ptab:hover { color: var(--text); background: rgba(255,255,255,.02); }
+  .ptab.active { color: #fff; border-bottom-color: var(--playhead); background: var(--panel); }
+  .cnt {
+    font-family: var(--mono); font-size: 9.5px; padding: 0 5px; border-radius: 2px;
+    background: var(--panel3); color: var(--muted);
+  }
+  .cnt.alert { background: rgba(229,57,53,.28); color: #ff8a80; }
+  .cnt.ok { background: rgba(74,222,128,.16); color: var(--resolve-green); }
 
-  .section { padding: 12px 14px; border-bottom: 1px solid var(--border); }
-  .sec-head {
-    display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 9px;
-    font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted);
+  .pane-body {
+    flex: 1; overflow-y: auto; overflow-x: hidden; display: none; flex-direction: column;
   }
-  .sec-head .val { white-space: nowrap; flex-shrink: 0; text-transform: none; }
+  .pane-body.active { display: flex; }
+  .pane-body::-webkit-scrollbar { width: 5px; }
+  .pane-body::-webkit-scrollbar-thumb { background: #383838; border-radius: 2px; }
 
-  /* Caption Style Cards */
-  .style-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-  .style-card {
-    padding: 8px 9px; border-radius: 8px; background: var(--panel2); border: 1px solid var(--border);
-    cursor: pointer; text-align: left; transition: all .12s; display: flex; flex-direction: column; gap: 2px;
+  .sec { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  .sec-hd {
+    display: flex; align-items: center; justify-content: space-between; gap: 6px; margin-bottom: 8px;
+    font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.6px; color: var(--muted);
   }
-  .style-card:hover { border-color: var(--border-hi); }
-  .style-card.active { border-color: var(--accent); background: rgba(56,189,248,.11); box-shadow: inset 0 0 0 1px rgba(56,189,248,.35); }
-  .style-card.span2 { grid-column: span 2; }
-  .sc-name { font-weight: 700; font-size: 12px; display: flex; align-items: center; justify-content: space-between; }
-  .sc-tag { font-family: var(--mono); font-size: 10px; color: var(--muted); }
-  .sc-desc { font-size: 11px; color: var(--muted); line-height: 1.3; }
+  .sec-hd .val { font-family: var(--mono); color: var(--resolve-amber); text-transform: none; white-space: nowrap; }
 
-  /* Color Swatches */
-  .swatches { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+  /* Resolve Effects / Caption Cards */
+  .fx-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+  .fx-card {
+    padding: 7px 8px; border-radius: 4px; background: var(--panel2); border: 1px solid var(--border);
+    cursor: pointer; text-align: left; display: flex; flex-direction: column; gap: 3px;
+    transition: border-color .1s, background .1s;
+  }
+  .fx-card:hover { border-color: var(--border-hi); background: var(--panel3); }
+  .fx-card.active { border-color: var(--playhead); background: rgba(232,90,60,.12); }
+  .fx-card.span2 { grid-column: span 2; }
+  .fx-top { display: flex; align-items: center; justify-content: space-between; font-weight: 700; font-size: 11.5px; }
+  .fx-badge { font-family: var(--mono); font-size: 9.5px; color: var(--muted); }
+  .fx-desc { font-size: 10.5px; color: var(--muted); line-height: 1.3; }
+
+  .swatches { display: flex; flex-wrap: wrap; gap: 4px; }
   .swatch {
-    display: inline-flex; align-items: center; gap: 5px; padding: 4px 8px; border-radius: 999px;
-    background: var(--panel2); border: 1px solid var(--border); cursor: pointer; font-size: 11px; font-family: var(--mono);
+    display: inline-flex; align-items: center; gap: 4px; padding: 3px 7px; border-radius: 3px;
+    background: var(--panel2); border: 1px solid var(--border); cursor: pointer; font-family: var(--mono); font-size: 10.5px;
   }
-  .swatch.active { border-color: var(--accent); background: rgba(56,189,248,.14); color: #fff; }
-  .swatch-dot { width: 10px; height: 10px; border-radius: 50%; border: 1px solid rgba(255,255,255,.25); }
+  .swatch.active { border-color: var(--playhead); background: rgba(232,90,60,.16); color: #fff; }
+  .sdot { width: 9px; height: 9px; border-radius: 50%; border: 1px solid rgba(255,255,255,.25); }
 
-  /* Form controls */
-  .field { margin-bottom: 9px; }
-  .field:last-child { margin-bottom: 0; }
-  .field-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
-  .label { font-size: 11px; color: var(--muted); font-weight: 600; }
-  .val { font-family: var(--mono); font-size: 11px; color: var(--accent); }
+  /* Resolve Inspector Inputs & Sliders */
+  .row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
+  .lbl { font-size: 10.5px; color: var(--muted); font-weight: 600; }
+  .mono-val { font-family: var(--mono); font-size: 10.5px; color: var(--resolve-teal); }
   input[type="text"], input[type="number"], textarea, select {
-    width: 100%; background: var(--bg); border: 1px solid var(--border); border-radius: 6px;
-    padding: 6px 8px; font-size: 12px; outline: none; transition: border-color .12s;
+    width: 100%; background: #131313; border: 1px solid var(--border); border-radius: 3px;
+    padding: 5px 7px; font-size: 11.5px; color: var(--text); outline: none;
   }
-  input[type="text"]:focus, textarea:focus, select:focus { border-color: var(--accent); }
-  input[type="range"] { width: 100%; accent-color: var(--accent); cursor: pointer; }
-  .toggle-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-  .toggle {
-    display: flex; align-items: center; gap: 6px; padding: 6px 8px; border-radius: 6px;
-    background: var(--panel2); border: 1px solid var(--border); cursor: pointer; font-size: 11px; user-select: none;
+  input[type="text"]:focus, textarea:focus, select:focus { border-color: var(--playhead); }
+  input[type="range"] { width: 100%; accent-color: var(--playhead); cursor: pointer; height: 14px; }
+  .chk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+  .chk {
+    display: flex; align-items: center; gap: 5px; padding: 5px 7px; border-radius: 3px;
+    background: var(--panel2); border: 1px solid var(--border); cursor: pointer; font-size: 10.5px;
   }
-  .toggle input { accent-color: var(--accent); cursor: pointer; }
+  .chk input { accent-color: var(--playhead); }
 
-  /* Transcript Chunks */
-  .chunk-list { display: flex; flex-direction: column; gap: 5px; max-height: 158px; overflow-y: auto; }
-  .chunk-row { display: grid; grid-template-columns: 54px 1fr 24px; gap: 5px; align-items: center; }
-  .chunk-time {
-    font-family: var(--mono); font-size: 10px; color: var(--muted); text-align: center;
-    background: var(--panel2); padding: 5px 4px; border-radius: 5px; cursor: pointer; border: 1px solid var(--border);
+  /* Media Pool Card */
+  .media-card {
+    display: grid; grid-template-columns: 78px 1fr; gap: 8px; align-items: center;
+    padding: 6px; border-radius: 4px; background: var(--panel2); border: 1px solid var(--border); cursor: pointer;
   }
-  .chunk-row.playing .chunk-time { border-color: var(--green); color: var(--green); }
-  .chunk-del {
-    background: transparent; border: 1px solid transparent; color: var(--muted); cursor: pointer;
-    border-radius: 5px; height: 26px; font-size: 13px;
-  }
-  .chunk-del:hover { color: var(--red); border-color: rgba(244,63,94,.3); }
+  .media-card.active { border-color: var(--resolve-teal); background: rgba(56,189,248,.08); }
+  .media-thumb { width: 78px; height: 46px; border-radius: 3px; object-fit: cover; background: #000; border: 1px solid #333; }
+  .media-meta { font-family: var(--mono); font-size: 9.5px; color: var(--muted); margin-top: 2px; }
 
-  /* Center Preview Stage */
-  .stage-col {
-    background: radial-gradient(circle at 50% 35%, #121826 0%, #07090e 72%);
-    display: flex; flex-direction: column; align-items: center; justify-content: space-between;
-    padding: 12px 16px; position: relative; overflow: hidden; border-right: 1px solid var(--border);
+  /* Center Viewer (DaVinci Resolve Monitor) */
+  .viewer-col {
+    background: #121212; display: flex; flex-direction: column; min-height: 0; overflow: hidden;
+    border-right: 1px solid var(--border);
   }
-  .stage-toolbar {
-    width: 100%; max-width: 540px; display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  .viewer-bar {
+    height: 32px; display: flex; align-items: center; justify-content: space-between; padding: 0 10px;
+    background: #181818; border-bottom: 1px solid var(--border); flex-shrink: 0; gap: 8px;
   }
-  .canvas-shell {
-    position: relative; display: flex; align-items: center; justify-content: center;
-    flex: 1; min-height: 0; width: 100%; padding: 8px 0;
+  .smpte {
+    font-family: var(--mono); font-size: 13px; font-weight: 700; letter-spacing: 0.6px;
+    color: #f4f4f4; background: #101010; padding: 2px 8px; border-radius: 3px; border: 1px solid #2e2e2e;
   }
-  .phone-frame {
-    position: relative; height: 100%; max-height: 640px; aspect-ratio: 9 / 16;
-    border-radius: 16px; overflow: hidden; border: 2px solid #263147;
-    box-shadow: 0 24px 70px rgba(0,0,0,.72), 0 0 0 1px rgba(255,255,255,.04);
-    background: #000;
+  .viewer-stage {
+    flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center;
+    padding: 8px 12px; position: relative; background: #111111;
   }
-  #previewCanvas {
-    width: 100%; height: 100%; display: block; cursor: default;
+  .monitor-wrap {
+    position: relative; height: 100%; max-height: 100%; aspect-ratio: 9 / 16;
+    background: #000; border: 1px solid #333; box-shadow: 0 12px 44px rgba(0,0,0,.78); overflow: hidden;
   }
+  #previewCanvas { width: 100%; height: 100%; display: block; }
   #previewCanvas.pin-cursor { cursor: crosshair; }
   .pin-layer { position: absolute; inset: 0; pointer-events: none; }
   .pin-dot {
-    position: absolute; transform: translate(-50%, -50%); width: 22px; height: 22px; border-radius: 50%;
-    background: var(--red); color: #fff; font-family: var(--mono); font-size: 11px; font-weight: 800;
+    position: absolute; transform: translate(-50%, -50%); width: 20px; height: 20px; border-radius: 50%;
+    background: var(--resolve-red); color: #fff; font-family: var(--mono); font-size: 10px; font-weight: 800;
     display: flex; align-items: center; justify-content: center; border: 2px solid #fff;
-    box-shadow: 0 3px 12px rgba(0,0,0,.7); pointer-events: auto; cursor: pointer;
-    transition: transform .12s;
+    box-shadow: 0 2px 10px rgba(0,0,0,.8); pointer-events: auto; cursor: pointer;
   }
-  .pin-dot:hover { transform: translate(-50%, -50%) scale(1.18); }
+  .pin-dot.tweak { background: var(--resolve-amber); color: #111; }
+  .pin-dot.note { background: var(--resolve-teal); color: #111; }
   .pin-dot.resolved { background: #10b981; opacity: 0.65; }
-  .pin-dot.tweak { background: var(--amber); color: #090b10; }
-  .pin-dot.note { background: var(--accent); color: #090b10; }
   .pin-banner {
-    position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
-    background: rgba(244,63,94,.92); color: #fff; font-size: 11px; font-weight: 700;
-    padding: 4px 10px; border-radius: 999px; pointer-events: none; display: none; white-space: nowrap;
+    position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+    background: rgba(229,57,53,.94); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 0.4px;
+    padding: 3px 9px; border-radius: 3px; display: none; white-space: nowrap; pointer-events: none;
   }
   .pin-banner.show { display: block; }
 
-  /* Timeline Scrubber */
-  .timeline-box {
-    width: 100%; max-width: 540px; background: var(--panel); border: 1px solid var(--border);
-    border-radius: 10px; padding: 9px 11px; display: flex; flex-direction: column; gap: 7px;
+  .transport-bar {
+    height: 36px; display: flex; align-items: center; justify-content: center; gap: 6px;
+    padding: 0 10px; background: #181818; border-top: 1px solid var(--border); flex-shrink: 0;
   }
-  .transport { display: flex; align-items: center; gap: 8px; }
-  .timecode { font-family: var(--mono); font-size: 11px; color: var(--text); min-width: 92px; }
-  .track {
-    position: relative; height: 26px; background: var(--bg); border: 1px solid var(--border);
-    border-radius: 6px; cursor: pointer; overflow: hidden;
+  .tbtn {
+    height: 24px; min-width: 28px; padding: 0 7px; border-radius: 3px; border: 1px solid var(--border);
+    background: var(--panel2); color: var(--text); font-family: var(--mono); font-size: 11px; font-weight: 700;
+    cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
   }
-  .track-chunks { position: absolute; inset: 3px 0; display: flex; pointer-events: none; }
-  .track-chunk {
-    position: absolute; top: 0; bottom: 0; border-radius: 4px; background: rgba(56,189,248,.16);
-    border: 1px solid rgba(56,189,248,.35); font-size: 9px; color: #bae6fd; padding: 3px 4px;
-    overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
-  }
-  .track-playhead {
-    position: absolute; top: 0; bottom: 0; width: 2px; background: var(--green);
-    box-shadow: 0 0 8px var(--green); pointer-events: none;
-  }
-  .track-flag {
-    position: absolute; top: 1px; width: 8px; height: 8px; transform: translateX(-50%);
-    border-radius: 50%; background: var(--red); border: 1px solid #fff; cursor: pointer; z-index: 3;
-  }
-  .track-flag.resolved { background: #10b981; }
+  .tbtn:hover { background: var(--panel3); border-color: var(--border-hi); }
+  .tbtn.play { background: var(--playhead); border-color: var(--playhead); color: #fff; min-width: 56px; }
 
-  /* Right Harness Panel (Tabs: Flags / Gates / Handoff) */
-  .tabs {
-    display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--border);
-    background: var(--bg); position: sticky; top: 0; z-index: 5;
+  /* Phrases, Flags, Gates & MCP Console */
+  .chunk-list { display: flex; flex-direction: column; gap: 4px; max-height: 132px; overflow-y: auto; }
+  .chunk-row { display: grid; grid-template-columns: 48px 1fr 22px; gap: 4px; align-items: center; }
+  .chunk-tc {
+    font-family: var(--mono); font-size: 10px; color: var(--muted); background: var(--panel2);
+    border: 1px solid var(--border); border-radius: 3px; padding: 4px 2px; cursor: pointer; text-align: center;
   }
-  .tab {
-    padding: 10px 6px; text-align: center; font-size: 11px; font-weight: 700; color: var(--muted);
-    background: transparent; border: none; border-bottom: 2px solid transparent; cursor: pointer;
-    display: flex; align-items: center; justify-content: center; gap: 5px;
-  }
-  .tab.active { color: var(--text); border-bottom-color: var(--accent); background: var(--panel); }
-  .cnt {
-    font-family: var(--mono); font-size: 10px; padding: 1px 5px; border-radius: 999px;
-    background: var(--panel2); color: var(--muted);
-  }
-  .cnt.alert { background: rgba(244,63,94,.22); color: #fb7185; }
-  .cnt.ok { background: rgba(94,255,36,.14); color: var(--green); }
-  .tab-pane { display: none; padding: 12px 14px; flex: 1; }
-  .tab-pane.active { display: flex; flex-direction: column; gap: 10px; }
-
-  /* Flag Composer & List */
-  .flag-composer {
-    background: var(--panel2); border: 1px solid var(--border); border-radius: 9px; padding: 10px;
-    display: flex; flex-direction: column; gap: 8px;
-  }
+  .chunk-row.playing .chunk-tc { border-color: var(--playhead); color: var(--playhead); font-weight: 700; }
   .chip-row { display: flex; flex-wrap: wrap; gap: 4px; }
   .chip {
-    padding: 3px 7px; border-radius: 999px; font-size: 10px; font-weight: 600;
-    background: var(--bg); border: 1px solid var(--border); color: var(--muted); cursor: pointer;
+    padding: 3px 7px; border-radius: 3px; font-size: 10px; font-weight: 600;
+    background: #141414; border: 1px solid var(--border); color: var(--muted); cursor: pointer;
   }
-  .chip.active { border-color: var(--accent); color: #fff; background: rgba(56,189,248,.16); }
-  .chip.sev-blocker.active { border-color: var(--red); background: rgba(244,63,94,.2); color: #fda4af; }
-  .chip.sev-tweak.active { border-color: var(--amber); background: rgba(251,191,36,.18); color: #fde68a; }
+  .chip.active { border-color: var(--playhead); color: #fff; background: rgba(232,90,60,.18); }
+  .chip.sev-blocker.active { border-color: var(--resolve-red); background: rgba(229,57,53,.24); color: #ff8a80; }
+  .chip.sev-tweak.active { border-color: var(--resolve-amber); background: rgba(245,158,11,.2); color: #fde68a; }
+  .chip.sev-note.active { border-color: var(--resolve-teal); background: rgba(56,189,248,.18); color: #bae6fd; }
 
   .flag-card {
-    background: var(--panel2); border: 1px solid var(--border); border-left: 3px solid var(--red);
-    border-radius: 8px; padding: 9px 10px; display: flex; flex-direction: column; gap: 5px;
+    background: var(--panel2); border: 1px solid var(--border); border-left: 3px solid var(--resolve-red);
+    border-radius: 3px; padding: 7px 8px; display: flex; flex-direction: column; gap: 4px;
   }
-  .flag-card.tweak { border-left-color: var(--amber); }
-  .flag-card.note { border-left-color: var(--accent); }
-  .flag-card.resolved { opacity: 0.52; border-left-color: #10b981; }
-  .flag-top { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
-  .flag-meta { font-family: var(--mono); font-size: 10px; color: var(--muted); display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
-  .flag-note { font-size: 12px; line-height: 1.38; color: var(--text); }
-  .flag-actions { display: flex; gap: 6px; align-items: center; }
+  .flag-card.tweak { border-left-color: var(--resolve-amber); }
+  .flag-card.note { border-left-color: var(--resolve-teal); }
+  .flag-card.resolved { opacity: 0.5; border-left-color: #10b981; }
 
-  /* Quality Gates */
   .gate-card {
-    background: var(--panel2); border: 1px solid var(--border); border-radius: 8px; padding: 9px 10px;
-    display: flex; align-items: flex-start; justify-content: space-between; gap: 8px;
+    background: var(--panel2); border: 1px solid var(--border); border-radius: 3px; padding: 7px 8px;
+    display: flex; align-items: flex-start; justify-content: space-between; gap: 6px;
   }
-  .gate-title { font-family: var(--mono); font-size: 11px; font-weight: 700; margin-bottom: 2px; }
-  .gate-detail { font-size: 11px; color: var(--muted); line-height: 1.35; }
-  .gate-status {
-    font-family: var(--mono); font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 5px;
-    background: rgba(94,255,36,.13); color: var(--green); white-space: nowrap;
+  .gate-st {
+    font-family: var(--mono); font-size: 9.5px; font-weight: 700; padding: 2px 6px; border-radius: 2px;
+    background: rgba(74,222,128,.14); color: var(--resolve-green); white-space: nowrap;
   }
-  .gate-status.warn { background: rgba(251,191,36,.16); color: var(--amber); }
-  .gate-status.fail { background: rgba(244,63,94,.2); color: #fb7185; }
+  .gate-st.warn { background: rgba(245,158,11,.18); color: var(--resolve-amber); }
+  .gate-st.fail { background: rgba(229,57,53,.24); color: #ff8a80; }
 
-  /* Code blocks */
   .codebox {
-    background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 9px;
-    font-family: var(--mono); font-size: 11px; line-height: 1.45; color: #cbd5e1;
-    white-space: pre-wrap; word-break: break-all; max-height: 210px; overflow-y: auto;
+    background: #111111; border: 1px solid var(--border); border-radius: 3px; padding: 7px 8px;
+    font-family: var(--mono); font-size: 10.5px; line-height: 1.45; color: #d4d4d4;
+    white-space: pre-wrap; word-break: break-all; max-height: 170px; overflow-y: auto;
   }
+  .mcp-tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .mcp-btn {
+    padding: 5px 6px; border-radius: 3px; background: #161616; border: 1px solid var(--border);
+    font-family: var(--mono); font-size: 10px; color: #c9d4e4; cursor: pointer; text-align: left;
+  }
+  .mcp-btn:hover { border-color: var(--resolve-teal); color: #fff; background: #20262e; }
+
+  /* 3. BOTTOM DAVINCI RESOLVE MULTI-TRACK TIMELINE */
+  .timeline-panel {
+    display: grid; grid-template-columns: 158px 1fr; background: #181818;
+    border-bottom: 1px solid var(--border); overflow: hidden;
+  }
+  .tl-headers {
+    display: flex; flex-direction: column; border-right: 1px solid var(--border); background: #1b1b1b;
+  }
+  .tl-ruler-hdr {
+    height: 24px; display: flex; align-items: center; justify-content: space-between; padding: 0 8px;
+    font-family: var(--mono); font-size: 9.5px; color: var(--muted); border-bottom: 1px solid var(--border);
+  }
+  .tr-hdr {
+    flex: 1; display: flex; align-items: center; justify-content: space-between; padding: 0 8px;
+    border-bottom: 1px solid #262626; font-size: 10.5px;
+  }
+  .tr-tag {
+    font-family: var(--mono); font-weight: 800; font-size: 10px; padding: 1px 5px; border-radius: 2px;
+    min-width: 24px; text-align: center;
+  }
+  .tr-tag.t1 { background: rgba(245,158,11,.22); color: var(--resolve-amber); }
+  .tr-tag.v2 { background: rgba(167,139,250,.22); color: var(--resolve-violet); }
+  .tr-tag.v1 { background: rgba(56,189,248,.22); color: var(--resolve-teal); }
+  .tr-tag.a1 { background: rgba(74,222,128,.22); color: var(--resolve-green); }
+  .tr-lbl { color: #bdbdbd; font-size: 10px; margin-left: 6px; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tr-ms { font-family: var(--mono); font-size: 9px; color: var(--dim); letter-spacing: 2px; }
+
+  .tl-lanes {
+    position: relative; display: flex; flex-direction: column; cursor: pointer; overflow: hidden; background: #151515;
+  }
+  .tl-ruler {
+    height: 24px; position: relative; background: #1c1c1c; border-bottom: 1px solid var(--border);
+  }
+  .tl-tick {
+    position: absolute; bottom: 0; border-left: 1px solid #3c3c3c; height: 8px;
+    font-family: var(--mono); font-size: 9px; color: #7e7e7e; padding-left: 3px; line-height: 1; pointer-events: none;
+  }
+  .tl-tick.major { height: 15px; border-left-color: #555; color: #a6a6a6; }
+  .tl-marker {
+    position: absolute; top: 1px; width: 10px; height: 11px; transform: translateX(-50%);
+    clip-path: polygon(0 0, 100% 0, 100% 65%, 50% 100%, 0 65%);
+    background: var(--resolve-red); cursor: pointer; z-index: 6;
+  }
+  .tl-marker.tweak { background: var(--resolve-amber); }
+  .tl-marker.note { background: var(--resolve-teal); }
+  .tl-marker.resolved { background: #10b981; opacity: 0.65; }
+
+  .tl-lane {
+    flex: 1; position: relative; border-bottom: 1px solid #242424; overflow: hidden;
+  }
+  .clip-bar {
+    position: absolute; top: 3px; bottom: 3px; border-radius: 3px; padding: 2px 6px;
+    font-size: 10px; font-weight: 600; display: flex; align-items: center; gap: 6px;
+    overflow: hidden; white-space: nowrap; text-overflow: ellipsis; border: 1px solid rgba(255,255,255,.15);
+  }
+  .clip-bar.t1 { background: linear-gradient(180deg, #9a5b13, #6e3f0b); color: #fef3c7; border-color: #d97706; }
+  .clip-bar.hook { background: linear-gradient(180deg, #1d4ed8, #1e3a8a); color: #dbeafe; border-color: #3b82f6; top: 1px; height: 10px; font-size: 8.5px; padding: 0 4px; }
+  .clip-bar.v2 { background: linear-gradient(180deg, #563783, #3c255e); color: #ede9fe; border-color: #7c3aed; }
+  .clip-bar.v1 { background: linear-gradient(180deg, #1d596e, #143f4f); color: #e0f2fe; border-color: #0284c7; }
+  .clip-bar.a1 { background: linear-gradient(180deg, #1a5c3d, #12402b); color: #d1fae5; border-color: #16a34a; }
+  .kf-diamond {
+    position: absolute; top: 50%; width: 7px; height: 7px; background: #fbbf24;
+    transform: translate(-50%, -50%) rotate(45deg); border: 1px solid #111;
+  }
+  .wave-canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.72; pointer-events: none; }
+
+  .playhead-line {
+    position: absolute; top: 0; bottom: 0; width: 1.5px; background: var(--playhead);
+    pointer-events: none; z-index: 8; box-shadow: 0 0 8px rgba(232,90,60,.65);
+  }
+  .playhead-cap {
+    position: absolute; top: 0; left: -5.5px; width: 12px; height: 10px; background: var(--playhead);
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+  }
+
+  /* 4. BOTTOM DAVINCI RESOLVE 6-PAGE DOCK */
+  .resolve-dock {
+    display: flex; align-items: center; justify-content: center; gap: 4px;
+    background: #141414; border-top: 1px solid #2b2b2b; padding: 0 12px; position: relative;
+  }
+  .dock-btn {
+    height: 26px; padding: 0 14px; border-radius: 3px; border: 1px solid transparent;
+    background: transparent; color: var(--muted); font-size: 11px; font-weight: 600;
+    cursor: pointer; display: inline-flex; align-items: center; gap: 5px; transition: all .1s;
+  }
+  .dock-btn:hover { color: #e5e5e5; background: #222; }
+  .dock-btn.active { color: #fff; background: #292929; border-color: #3f3f3f; border-bottom: 2px solid var(--playhead); }
+  .dock-right {
+    position: absolute; right: 12px; font-family: var(--mono); font-size: 10px; color: var(--dim);
+    display: flex; align-items: center; gap: 8px;
+  }
+
   .toast {
-    position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%) translateY(20px);
-    background: #10b981; color: #04130c; font-weight: 700; font-size: 12px; padding: 8px 14px;
-    border-radius: 999px; opacity: 0; pointer-events: none; transition: all .18s; z-index: 99;
-    box-shadow: 0 10px 30px rgba(0,0,0,.5);
+    position: fixed; bottom: 44px; left: 50%; transform: translateX(-50%) translateY(16px);
+    background: #242424; color: #fff; border: 1px solid var(--playhead); font-weight: 700; font-size: 11.5px;
+    padding: 7px 14px; border-radius: 4px; opacity: 0; pointer-events: none; transition: all .16s; z-index: 99;
+    box-shadow: 0 10px 28px rgba(0,0,0,.7);
   }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
   @media (max-width: 1120px) {
     html, body { overflow: auto; }
-    .main { grid-template-columns: 1fr; height: auto; overflow: visible; }
-    .stage-col { min-height: 680px; }
+    .app-shell { display: flex; flex-direction: column; height: auto; }
+    .workspace { grid-template-columns: 1fr; height: auto; }
+    .viewer-stage { height: 520px; }
+    .timeline-panel { height: 158px; }
   }
 </style>
 </head>
 <body>
+<div class="app-shell">
 
-<header class="topbar">
-  <div class="brand">
-    <span class="brand-logo">STA-6</span>
-    <span class="brand-title">Harness <span style="color:var(--muted);font-weight:500;">v4.0.7</span></span>
-    <span class="pill live" id="fpsPill"><span class="dot"></span><span id="fpsText">60 FPS · 1.2ms</span></span>
-    <span class="pill" id="modePill"><span class="dot"></span><span id="modeText">WEB</span></span>
+  <!-- 1. DAVINCI RESOLVE PROJECT & HARNESS HEADER -->
+  <header class="topbar">
+    <div class="brand">
+      <svg class="resolve-wheel" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="7.5" r="4.2" fill="#e85a3c" opacity="0.95"/>
+        <circle cx="7.8" cy="15.2" r="4.2" fill="#38bdf8" opacity="0.95"/>
+        <circle cx="16.2" cy="15.2" r="4.2" fill="#4ade80" opacity="0.95"/>
+      </svg>
+      <span class="brand-name">STA-6 Resolve</span>
+      <span class="brand-sub">v4.0.8</span>
+      <span class="pill fps"><span class="dot"></span><span id="fpsText">60 FPS · 0.6ms</span></span>
+      <span class="pill bridge" id="bridgePill" title="Click to open AI Bridge MCP Console"><span class="dot"></span><span id="bridgeText">MCP: WEB</span></span>
+    </div>
+
+    <nav class="workflow-strip" id="workflowStrip" title="6-Stage Harness Engineering Pipeline (CAR)"></nav>
+
+    <div class="top-actions">
+      <input type="file" id="videoUpload" accept="video/*" hidden />
+      <button class="btn" id="btnUpload" title="Import local MP4/MOV/WebM with 0ms upload lag">Import</button>
+      <button class="btn red" id="btnPinMode" title="Pin instant Resolve Marker / Flag on frame (Shortcut: F or M)">Flag (F)</button>
+      <button class="btn teal" id="btnSnapTimeline" title="Save non-destructive preview snapshot (Resolve AI Bridge preview_timeline)">Snap</button>
+      <button class="btn accent" id="btnCopyCliTop">Copy CLI</button>
+      <a class="btn" id="btnWhop" href="https://whop.com/checkout/plan_fOxPHqsLK2LxS" target="_blank" rel="noopener" style="border-color:rgba(250,70,22,.6);color:#ff8a65;">Get 2K</a>
+      <button class="btn accent" id="btnLocalRender" style="display:none;">Render 2K</button>
+    </div>
+  </header>
+
+  <!-- 2. MIDDLE 3-PANE RESOLVE STUDIO WORKSPACE -->
+  <div class="workspace">
+
+    <!-- LEFT PANE: Effects Library | Media Pool | AI Bridge MCP -->
+    <aside class="pane">
+      <div class="pane-tabs">
+        <button class="ptab active" data-ltab="effects">Effects</button>
+        <button class="ptab" data-ltab="media">Media Pool</button>
+        <button class="ptab" data-ltab="bridge">AI Bridge <span class="cnt ok">12</span></button>
+      </div>
+
+      <!-- LEFT TAB 1: Effects & Caption Generators -->
+      <div class="pane-body active" id="lpane-effects">
+        <div class="sec">
+          <div class="sec-hd"><span>Title Generators (5 Built-In)</span><span class="val" id="activeStyleFlag">--caption-style shine</span></div>
+          <div class="fx-grid" id="styleGrid"></div>
+        </div>
+        <div class="sec" id="colorSection">
+          <div class="sec-hd"><span>Accent Color (--caption-color)</span><span class="val" id="activeColorVal">green</span></div>
+          <div class="swatches" id="colorSwatches"></div>
+        </div>
+        <div class="sec">
+          <div class="sec-hd">
+            <span>Viral Shine Hook Overlay (0–2.6s)</span>
+            <label style="display:flex;align-items:center;gap:4px;cursor:pointer;text-transform:none;"><input type="checkbox" id="chkHook" checked /> On</label>
+          </div>
+          <input type="text" id="hookInput" value="IShowSpeed | Breaks GTA 6" placeholder="Line 1 | Line 2 (18–42 chars)" style="margin-bottom:7px;" />
+          <div class="chip-row" id="hookThemeRow">
+            <button class="chip active" data-theme="blue">Electric Blue</button>
+            <button class="chip" data-theme="vice">Vice City</button>
+            <button class="chip" data-theme="gold">Luxury Gold</button>
+          </div>
+        </div>
+        <div class="sec">
+          <div class="sec-hd"><span>Viewer Overlays</span><span class="val">Zero-Gap 816+1744</span></div>
+          <div class="chk-grid">
+            <label class="chk"><input type="checkbox" id="chkSafeZones" /> Shorts Safe Zones</label>
+            <label class="chk"><input type="checkbox" id="chkSeamRuler" /> Flush Seam Guide</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- LEFT TAB 2: Resolve Media Pool -->
+      <div class="pane-body" id="lpane-media">
+        <div class="sec">
+          <div class="sec-hd"><span>Master Media Bin</span><button class="btn xs accent" id="btnUpload2">+ Import</button></div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <div class="media-card active" id="demoMediaCard">
+              <img class="media-thumb" src="./assets/demo_frame.jpg" alt="GTA 6 Demo" />
+              <div>
+                <div style="font-weight:700;font-size:11.5px;">GTA6_IShowSpeed_Demo</div>
+                <div class="media-meta">1920×1080 · 60fps · Flush 2K</div>
+              </div>
+            </div>
+            <div class="media-card" id="userMediaCard" style="display:none;">
+              <div class="media-thumb" style="display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;color:var(--resolve-teal);">LOCAL MP4</div>
+              <div>
+                <div style="font-weight:700;font-size:11.5px;" id="userMediaName">Clip.mp4</div>
+                <div class="media-meta" id="userMediaMeta">Local 0ms Blob · 60fps</div>
+              </div>
+            </div>
+          </div>
+          <div style="margin-top:8px;font-size:10.5px;color:var(--muted);line-height:1.4;">
+            Drag &amp; drop any <b>.mp4 / .mov / .webm</b> onto the Viewer for instant 0ms zero-upload local playback.
+          </div>
+        </div>
+        <div class="sec">
+          <div class="sec-hd"><span>Clip In / Out &amp; Render Codec</span><span class="val" id="clipDurVal">30s</span></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-bottom:8px;">
+            <div><span class="lbl">In (s)</span><input type="number" id="clipStart" value="120" min="0" /></div>
+            <div><span class="lbl">Out (s)</span><input type="number" id="clipEnd" value="150" min="1" /></div>
+            <div><span class="lbl">Master</span>
+              <select id="qualitySelect">
+                <option value="2k" selected>2K VP9</option>
+                <option value="ultra">1080p CRF13</option>
+                <option value="fast">Fast VT</option>
+              </select>
+            </div>
+          </div>
+          <div class="chk-grid">
+            <label class="chk"><input type="checkbox" id="chkColdOpen" checked /> 2.6s Cold-Open</label>
+            <label class="chk"><input type="checkbox" id="chkSfx" checked /> Sub-Bass SFX</label>
+            <label class="chk"><input type="checkbox" id="chkDeadAir" checked /> Trim Dead Air</label>
+            <label class="chk"><input type="checkbox" id="chkZoom" checked /> 1.10× Zoom Peaks</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- LEFT TAB 3: AI Bridge MCP (Inspired by davinci-resolve-ai-bridge-mcp) -->
+      <div class="pane-body" id="lpane-bridge">
+        <div class="sec">
+          <div class="sec-hd"><span>AI Bridge MCP Clients</span><span class="val">stdio · JSON-RPC 2.0</span></div>
+          <div class="chip-row" id="mcpClientTabs" style="margin-bottom:7px;">
+            <button class="chip active" data-client="antigravity">Antigravity</button>
+            <button class="chip" data-client="claude">Claude Code</button>
+            <button class="chip" data-client="codex">Codex</button>
+            <button class="chip" data-client="cursor">Cursor</button>
+            <button class="chip" data-client="resolve">Resolve Lua</button>
+          </div>
+          <div class="codebox" id="mcpSetupCode" style="max-height:112px;margin-bottom:6px;"></div>
+          <button class="btn xs teal" id="btnCopyMcpSetup" style="width:100%;">Copy AI Bridge Setup</button>
+        </div>
+        <div class="sec">
+          <div class="sec-hd"><span>Live MCP Tool Runner (12 Tools)</span><span class="val" id="mcpRevLabel">rev #1</span></div>
+          <div class="mcp-tool-grid" id="mcpToolGrid">
+            <button class="mcp-btn" data-tool="bridge_status">bridge_status</button>
+            <button class="mcp-btn" data-tool="timeline_overview">timeline_overview</button>
+            <button class="mcp-btn" data-tool="project_health">project_health</button>
+            <button class="mcp-btn" data-tool="preview_timeline">preview_timeline</button>
+            <button class="mcp-btn" data-tool="compare_timelines">compare_timelines</button>
+            <button class="mcp-btn" data-tool="bridge_capabilities">bridge_capabilities</button>
+          </div>
+          <div class="codebox" id="mcpToolOut" style="margin-top:7px;max-height:140px;">Click any MCP tool above to inspect live AI Bridge JSON response...</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CENTER PANE: DaVinci Resolve Monitor + Transport -->
+    <section class="viewer-col">
+      <div class="viewer-bar">
+        <div style="display:flex;align-items:center;gap:6px;">
+          <span class="smpte" id="smpteDisplay">01:00:00:00</span>
+          <span class="pill" style="color:var(--resolve-green);border-color:rgba(74,222,128,.3);">ZERO-GAP 816+1744</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:5px;">
+          <button class="btn xs" id="btnCompareSnap" title="Toggle Compare Original Snapshot vs Current">Compare A/B</button>
+          <button class="btn xs" id="btnReplayHook">Replay Hook</button>
+        </div>
+      </div>
+
+      <div class="viewer-stage" id="dropZone">
+        <div class="monitor-wrap">
+          <canvas id="previewCanvas" width="720" height="1280"></canvas>
+          <div class="pin-layer" id="pinLayer"></div>
+          <div class="pin-banner" id="pinBanner">CLICK ON FRAME TO PIN RESOLVE REVIEW MARKER</div>
+        </div>
+      </div>
+
+      <div class="transport-bar">
+        <button class="tbtn" id="btnRestart" title="Jump to Start">|&lt;</button>
+        <button class="tbtn" id="btnStepBack" title="Step -1 Frame (60fps)">&lt;1f</button>
+        <button class="tbtn play" id="btnPlayPause" title="Play / Pause (Space)">Pause</button>
+        <button class="tbtn" id="btnStepFwd" title="Step +1 Frame (60fps)">1f&gt;</button>
+        <button class="tbtn" id="btnJumpEnd" title="Jump to End">&gt;|</button>
+        <span style="width:1px;height:16px;background:var(--border);margin:0 4px;"></span>
+        <button class="btn xs red" id="btnQuickFlag" title="Flag change at current timecode (F)">+ Marker</button>
+        <span class="lbl" style="font-family:var(--mono);font-size:10px;margin-left:4px;">Space=Play · F=Flag · Alt+Click=Pin</span>
+      </div>
+    </section>
+
+    <!-- RIGHT PANE: DaVinci Resolve Inspector -->
+    <aside class="pane">
+      <div class="pane-tabs">
+        <button class="ptab active" data-rtab="caption">Caption</button>
+        <button class="ptab" data-rtab="color">Color/Cam</button>
+        <button class="ptab" data-rtab="flags">Markers <span class="cnt ok" id="cntFlags">0</span></button>
+        <button class="ptab" data-rtab="deliver">Deliver <span class="cnt ok" id="cntGates">6/6</span></button>
+      </div>
+
+      <!-- RIGHT TAB 1: Caption Inspector -->
+      <div class="pane-body active" id="rpane-caption">
+        <div class="sec">
+          <div class="sec-hd"><span>T1 · Timed Caption Script (60fps Live)</span><button class="btn xs" id="btnAddChunk">+ Phrase</button></div>
+          <div class="chunk-list" id="chunkList"></div>
+        </div>
+        <div class="sec">
+          <div class="sec-hd"><span>Transform &amp; Seam Alignment</span><button class="btn xs" id="btnSnapSeam">Snap Seam</button></div>
+          <div class="row"><span class="lbl">Position Y (--pos-y in 1920-space)</span><span class="mono-val" id="posYVal">612 (y=816 @ 2K)</span></div>
+          <input type="range" id="posYSlider" min="260" max="1520" step="2" value="612" style="margin-bottom:8px;" />
+          <div class="row"><span class="lbl">Font Scale</span><span class="mono-val" id="fontScaleVal">1.00×</span></div>
+          <input type="range" id="fontScaleSlider" min="0.75" max="1.30" step="0.05" value="1.00" />
+        </div>
+        <div class="sec">
+          <div class="sec-hd"><span>Quick Flag on Current Caption</span><span class="val" id="quickTimeVal">01:00:00:00</span></div>
+          <div style="display:flex;gap:5px;">
+            <input type="text" id="quickFlagInput" placeholder="Flag a caption tweak right here & press Enter..." />
+            <button class="btn xs red" id="btnQuickFlagAdd">Flag</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT TAB 2: Resolve Color Grade & Facecam Transform -->
+      <div class="pane-body" id="rpane-color">
+        <div class="sec">
+          <div class="sec-hd"><span>Resolve Primary Color Grade</span><button class="btn xs" id="btnResetGrade">Reset</button></div>
+          <div class="row"><span class="lbl">Lift / Brightness</span><span class="mono-val" id="gBrightVal">+0.04</span></div>
+          <input type="range" id="gBright" min="-0.25" max="0.25" step="0.01" value="0.04" style="margin-bottom:6px;" />
+          <div class="row"><span class="lbl">Contrast</span><span class="mono-val" id="gContrastVal">1.08</span></div>
+          <input type="range" id="gContrast" min="0.75" max="1.40" step="0.01" value="1.08" style="margin-bottom:6px;" />
+          <div class="row"><span class="lbl">Saturation</span><span class="mono-val" id="gSatVal">1.12</span></div>
+          <input type="range" id="gSat" min="0.50" max="1.65" step="0.01" value="1.12" style="margin-bottom:6px;" />
+          <div class="row"><span class="lbl">Gamma</span><span class="mono-val" id="gGammaVal">1.00</span></div>
+          <input type="range" id="gGamma" min="0.70" max="1.40" step="0.02" value="1.00" />
+        </div>
+        <div class="sec">
+          <div class="sec-hd"><span>V2 · Facecam Crop Transform</span><button class="btn xs" id="btnResetCam">Reset</button></div>
+          <div class="mono-val" id="camSpecVal" style="margin-bottom:7px;">iw*0.37:ih*0.43:iw*0.00:ih*0.56</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+            <div><span class="lbl">X: <span class="mono-val" id="camXVal">0.00</span></span><input type="range" id="camX" min="0" max="0.80" step="0.01" value="0.00" /></div>
+            <div><span class="lbl">Y: <span class="mono-val" id="camYVal">0.56</span></span><input type="range" id="camY" min="0" max="0.80" step="0.01" value="0.56" /></div>
+            <div><span class="lbl">W: <span class="mono-val" id="camWVal">0.37</span></span><input type="range" id="camW" min="0.14" max="0.70" step="0.01" value="0.37" /></div>
+            <div><span class="lbl">H: <span class="mono-val" id="camHVal">0.43</span></span><input type="range" id="camH" min="0.14" max="0.70" step="0.01" value="0.43" /></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT TAB 3: Resolve Review Markers & Deterministic Gates -->
+      <div class="pane-body" id="rpane-flags">
+        <div class="sec" style="background:#212121;">
+          <div class="sec-hd"><span>Drop Review Marker / Flag</span><span class="val" id="pendingPinText">@ 01:00:00:00</span></div>
+          <div class="chip-row" id="flagCatRow" style="margin-bottom:6px;">
+            <button class="chip active" data-cat="Caption">Caption</button>
+            <button class="chip" data-cat="Alignment">Alignment</button>
+            <button class="chip" data-cat="Style">Style</button>
+            <button class="chip" data-cat="Color">Color</button>
+            <button class="chip" data-cat="Facecam">Facecam</button>
+            <button class="chip" data-cat="Hook">Hook</button>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:6px;align-items:center;">
+            <div class="chip-row" id="flagSevRow">
+              <button class="chip sev-blocker active" data-sev="blocker">Red</button>
+              <button class="chip sev-tweak" data-sev="tweak">Amber</button>
+              <button class="chip sev-note" data-sev="note">Cyan</button>
+            </div>
+            <select id="flagStageSelect">
+              <option value="01_ingest">01 Ingest</option>
+              <option value="02_split">02 Split</option>
+              <option value="03_upscale">03 2K CAS</option>
+              <option value="04_captions" selected>04 Captions</option>
+              <option value="05_hook">05 Hook</option>
+              <option value="06_gate">06 Gate β</option>
+            </select>
+          </div>
+          <textarea id="flagNoteInput" rows="2" placeholder="Describe change needed (auto-syncs to AI Bridge MCP & timeline marker)..." style="margin-bottom:6px;"></textarea>
+          <div style="display:flex;gap:5px;">
+            <button class="btn red" id="btnSubmitFlag" style="flex:1;">+ Drop Marker</button>
+            <button class="btn" id="btnPickOnFrame">Pin X,Y</button>
+          </div>
+        </div>
+        <div class="sec">
+          <div class="sec-hd">
+            <span>Timeline Markers (<span id="openFlagLabel">0 open</span>)</span>
+            <div style="display:flex;gap:4px;">
+              <button class="btn xs teal" id="btnCopyAgentPrompt">Copy Fix Prompt</button>
+              <button class="btn xs" id="btnClearFlags">Clear</button>
+            </div>
+          </div>
+          <div id="flagList" style="display:flex;flex-direction:column;gap:5px;"></div>
+        </div>
+        <div class="sec">
+          <div class="sec-hd"><span>Harness Quality Gates (β=1)</span><button class="btn xs" id="btnRunLocalCheck" style="display:none;">Run clip.py check</button></div>
+          <div id="gateList" style="display:flex;flex-direction:column;gap:5px;"></div>
+          <div class="codebox" id="localCheckOut" style="display:none;margin-top:6px;"></div>
+        </div>
+      </div>
+
+      <!-- RIGHT TAB 4: Deliver / CLI & Coding-Agent Handoff -->
+      <div class="pane-body" id="rpane-deliver">
+        <div class="sec">
+          <div class="sec-hd"><span>1 · Zero-Editor 2K CLI Command</span><button class="btn xs accent" id="btnCopyCli">Copy CLI</button></div>
+          <div class="codebox" id="cliOutput"></div>
+        </div>
+        <div class="sec">
+          <div class="sec-hd"><span>2 · AI Bridge Agent Fix Packet</span><button class="btn xs teal" id="btnCopyPrompt2">Copy Prompt</button></div>
+          <div class="codebox" id="promptOutput"></div>
+        </div>
+        <div class="sec">
+          <div class="sec-hd">
+            <span>3 · Timeline Diff &amp; Harness JSON</span>
+            <div style="display:flex;gap:4px;">
+              <button class="btn xs" id="btnSaveLocalFlags" style="display:none;">Sync State</button>
+              <button class="btn xs" id="btnExportJson">Export JSON</button>
+            </div>
+          </div>
+          <div class="codebox" id="specOutput"></div>
+        </div>
+      </div>
+    </aside>
   </div>
 
-  <nav class="workflow-strip" id="workflowStrip" title="6-Stage Harness Engineering Pipeline (Control-Agency-Runtime)"></nav>
-
-  <div class="top-actions">
-    <input type="file" id="videoUpload" accept="video/*" hidden />
-    <button class="btn sm" id="btnUpload" title="Load any local MP4/MOV/WebM instantly (0ms upload — runs locally in browser)">Drop Video</button>
-    <button class="btn sm flag-btn" id="btnPinMode" title="Click preview to pin an instant change flag (Shortcut: F)">Flag Change (F)</button>
-    <button class="btn sm primary" id="btnCopyCliTop">Copy CLI</button>
-    <a class="btn sm whop-btn" id="btnWhop" href="https://whop.com/checkout/plan_fOxPHqsLK2LxS" target="_blank" rel="noopener">Get 2K Engine ($24.50)</a>
-    <button class="btn sm primary" id="btnLocalRender" style="display:none;">Render 2K MP4</button>
-  </div>
-</header>
-
-<main class="main">
-  <!-- LEFT COLUMN: Caption & Workflow Customizer -->
-  <aside class="col">
-    <div class="section">
-      <div class="sec-head">
-        <span>01 · Caption Style (Zero External Editors)</span>
-        <span class="val" id="activeStyleFlag">--caption-style shine</span>
-      </div>
-      <div class="style-grid" id="styleGrid"></div>
+  <!-- 3. BOTTOM DAVINCI RESOLVE MULTI-TRACK NLE TIMELINE -->
+  <section class="timeline-panel">
+    <div class="tl-headers">
+      <div class="tl-ruler-hdr"><span>TIMELINE 1</span><span>60 FPS</span></div>
+      <div class="tr-hdr"><span class="tr-tag t1">T1</span><span class="tr-lbl" id="trT1Lbl">Captions (shine)</span><span class="tr-ms">S M</span></div>
+      <div class="tr-hdr"><span class="tr-tag v2">V2</span><span class="tr-lbl">Facecam 816px</span><span class="tr-ms">V L</span></div>
+      <div class="tr-hdr"><span class="tr-tag v1">V1</span><span class="tr-lbl">Gameplay 1744px</span><span class="tr-ms">V L</span></div>
+      <div class="tr-hdr"><span class="tr-tag a1">A1</span><span class="tr-lbl">Master -18 LUFS</span><span class="tr-ms">S M</span></div>
     </div>
 
-    <div class="section" id="colorSection">
-      <div class="sec-head">
-        <span>Accent Color (--caption-color)</span>
-        <span class="val" id="activeColorVal">green</span>
-      </div>
-      <div class="swatches" id="colorSwatches"></div>
-    </div>
-
-    <div class="section">
-      <div class="sec-head">
-        <span>Live Caption Script (Instant 60fps Sync)</span>
-        <button class="btn sm" id="btnAddChunk">+ Phrase</button>
-      </div>
-      <div class="chunk-list" id="chunkList"></div>
-    </div>
-
-    <div class="section">
-      <div class="sec-head">
-        <span>Alignment &amp; Typography</span>
-        <button class="btn sm" id="btnSnapSeam">Snap Seam</button>
-      </div>
-      <div class="field">
-        <div class="field-row">
-          <span class="label">Vertical Position (--pos-y in 1920-space)</span>
-          <span class="val" id="posYVal">612 (y=816 @ 2K)</span>
-        </div>
-        <input type="range" id="posYSlider" min="260" max="1520" step="2" value="612" />
-      </div>
-      <div class="field">
-        <div class="field-row">
-          <span class="label">Preview Scale</span>
-          <span class="val" id="fontScaleVal">1.00×</span>
-        </div>
-        <input type="range" id="fontScaleSlider" min="0.75" max="1.30" step="0.05" value="1.00" />
-      </div>
-      <div class="toggle-grid" style="margin-top:8px;">
-        <label class="toggle"><input type="checkbox" id="chkSafeZones" /> Shorts UI Safe Zones</label>
-        <label class="toggle"><input type="checkbox" id="chkSeamRuler" /> Flush Seam Ruler</label>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="sec-head">
-        <span>05 · Viral Shine Hook (--hook)</span>
-        <label style="display:flex;align-items:center;gap:4px;cursor:pointer;text-transform:none;font-weight:600;">
-          <input type="checkbox" id="chkHook" checked /> Enable (0–2.6s)
-        </label>
-      </div>
-      <div class="field">
-        <input type="text" id="hookInput" value="IShowSpeed | Breaks GTA 6" placeholder="Line 1 | Line 2 (18–42 chars)" />
-      </div>
-      <div class="chip-row" id="hookThemeRow">
-        <button class="chip active" data-theme="blue">Blue Shine</button>
-        <button class="chip" data-theme="vice">Vice City</button>
-        <button class="chip" data-theme="gold">Luxury Gold</button>
-      </div>
-    </div>
-
-    <div class="section">
-      <div class="sec-head">
-        <span>02–03 · Flush Split-Screen &amp; Pipeline Spec</span>
-        <span class="val" id="camSpecVal">iw*0.37:ih*0.43:0:ih*0.56</span>
-      </div>
-      <div class="field">
-        <div class="field-row"><span class="label">Facecam Crop X / Y / W / H</span><button class="btn sm" id="btnResetCam">Reset</button></div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
-          <div><span class="label">X: <span class="val" id="camXVal">0.00</span></span><input type="range" id="camX" min="0" max="0.80" step="0.01" value="0.00" /></div>
-          <div><span class="label">Y: <span class="val" id="camYVal">0.56</span></span><input type="range" id="camY" min="0" max="0.80" step="0.01" value="0.56" /></div>
-          <div><span class="label">W: <span class="val" id="camWVal">0.37</span></span><input type="range" id="camW" min="0.14" max="0.70" step="0.01" value="0.37" /></div>
-          <div><span class="label">H: <span class="val" id="camHVal">0.43</span></span><input type="range" id="camH" min="0.14" max="0.70" step="0.01" value="0.43" /></div>
+    <div class="tl-lanes" id="timelineLanes">
+      <div class="tl-ruler" id="tlRuler"></div>
+      <div class="tl-lane" id="laneT1"></div>
+      <div class="tl-lane" id="laneV2">
+        <div class="clip-bar v2" style="left:0%;width:100%;">
+          <span>Facecam Flush 816px · AMD CAS 0.60</span>
+          <span class="kf-diamond" style="left:8%;" title="1.10x Zoom Peak"></span>
+          <span class="kf-diamond" style="left:48%;" title="1.10x Zoom Peak"></span>
+          <span class="kf-diamond" style="left:82%;" title="1.10x Zoom Peak"></span>
         </div>
       </div>
-      <div class="field">
-        <div class="field-row"><span class="label">Clip Window (START:END sec)</span><span class="val" id="clipDurVal">30s</span></div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;">
-          <input type="number" id="clipStart" value="120" min="0" step="1" title="Start second" />
-          <input type="number" id="clipEnd" value="150" min="1" step="1" title="End second" />
-          <select id="qualitySelect">
-            <option value="2k" selected>2K VP9</option>
-            <option value="ultra">1080p CRF13</option>
-            <option value="fast">Fast VT</option>
-          </select>
+      <div class="tl-lane" id="laneV1">
+        <div class="clip-bar v1" style="left:0%;width:100%;">
+          <span id="v1ClipLabel">Gameplay Flush 1744px · 2K CRF 13 BT.709 (0px Gap)</span>
         </div>
       </div>
-      <div class="toggle-grid">
-        <label class="toggle"><input type="checkbox" id="chkColdOpen" checked /> 2.6s Cold-Open</label>
-        <label class="toggle"><input type="checkbox" id="chkSfx" checked /> Sub-Bass SFX</label>
-        <label class="toggle"><input type="checkbox" id="chkDeadAir" checked /> Trim Dead Air</label>
-        <label class="toggle"><input type="checkbox" id="chkZoom" checked /> 1.10× Zoom Peaks</label>
+      <div class="tl-lane" id="laneA1">
+        <div class="clip-bar a1" style="left:0%;width:100%;">
+          <canvas class="wave-canvas" id="waveCanvas" width="900" height="28"></canvas>
+          <span style="position:relative;z-index:2;">Audio Master · -18 LUFS + 260ms Sub-Bass SFX</span>
+        </div>
       </div>
-    </div>
-  </aside>
-
-  <!-- CENTER COLUMN: Zero-Lag 60fps Live Canvas Preview -->
-  <section class="stage-col">
-    <div class="stage-toolbar">
-      <div style="display:flex;align-items:center;gap:6px;">
-        <span class="pill live"><span class="dot"></span>ZERO-GAP 816+1744</span>
-        <span class="pill" id="sourcePill">Demo: GTA 6 1080p</span>
-      </div>
-      <div style="display:flex;align-items:center;gap:6px;">
-        <button class="btn sm" id="btnReplayHook">Replay Hook</button>
-        <button class="btn sm" id="btnClearDemo" style="display:none;">Use Demo</button>
-      </div>
-    </div>
-
-    <div class="canvas-shell" id="dropZone">
-      <div class="phone-frame" id="phoneFrame">
-        <canvas id="previewCanvas" width="720" height="1280"></canvas>
-        <div class="pin-layer" id="pinLayer"></div>
-        <div class="pin-banner" id="pinBanner">CLICK ANYWHERE ON FRAME TO PIN FLAG</div>
-      </div>
-    </div>
-
-    <div class="timeline-box">
-      <div class="transport">
-        <button class="btn sm primary" id="btnPlayPause">Pause</button>
-        <button class="btn sm" id="btnRestart">0.0s</button>
-        <span class="timecode" id="timecode">00:00.00 / 05.40</span>
-        <span style="flex:1"></span>
-        <span class="label" style="font-family:var(--mono);font-size:10px;">Space=Play · F=Flag · Alt+Click=Pin</span>
-      </div>
-      <div class="track" id="timelineTrack">
-        <div class="track-chunks" id="trackChunks"></div>
-        <div class="track-playhead" id="trackPlayhead"></div>
-        <div id="trackFlags"></div>
-      </div>
+      <div class="playhead-line" id="playheadLine"><div class="playhead-cap"></div></div>
     </div>
   </section>
 
-  <!-- RIGHT COLUMN: Instant Change Flagger, Deterministic Gates & Agent Handoff -->
-  <aside class="col">
-    <div class="tabs">
-      <button class="tab active" data-tab="flags">Flags <span class="cnt" id="cntFlags">0</span></button>
-      <button class="tab" data-tab="gates">Gates β <span class="cnt ok" id="cntGates">6/6</span></button>
-      <button class="tab" data-tab="handoff">Agent CLI</button>
+  <!-- 4. DAVINCI RESOLVE BOTTOM 6-PAGE WORKSPACE DOCK -->
+  <footer class="resolve-dock" id="resolveDock">
+    <button class="dock-btn" data-page="media">Media</button>
+    <button class="dock-btn" data-page="cut">Cut</button>
+    <button class="dock-btn active" data-page="edit">Edit</button>
+    <button class="dock-btn" data-page="fusion">Fusion</button>
+    <button class="dock-btn" data-page="color">Color</button>
+    <button class="dock-btn" data-page="deliver">Deliver &amp; AI Bridge</button>
+    <div class="dock-right">
+      <span id="dockInfo">1440×2560 · 60fps · Zero-Gap</span>
     </div>
+  </footer>
+</div>
 
-    <!-- TAB 1: Instant Change Flags -->
-    <div class="tab-pane active" id="pane-flags">
-      <div class="flag-composer">
-        <div class="field-row">
-          <span class="label" style="color:var(--text);">Flag Instant Change</span>
-          <span class="val" id="pendingPinText">@ t=0.00s (Frame-level)</span>
-        </div>
-        <div class="chip-row" id="flagCatRow">
-          <button class="chip active" data-cat="Caption">Caption</button>
-          <button class="chip" data-cat="Alignment">Alignment</button>
-          <button class="chip" data-cat="Style">Style</button>
-          <button class="chip" data-cat="Timing">Timing</button>
-          <button class="chip" data-cat="Facecam">Facecam</button>
-          <button class="chip" data-cat="Hook">Hook</button>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;align-items:center;">
-          <div class="chip-row" id="flagSevRow">
-            <button class="chip sev-blocker active" data-sev="blocker">Blocker</button>
-            <button class="chip sev-tweak" data-sev="tweak">Tweak</button>
-            <button class="chip" data-sev="note">Note</button>
-          </div>
-          <select id="flagStageSelect" title="Workflow stage affected">
-            <option value="01_ingest">01 Ingest</option>
-            <option value="02_split">02 Flush Split</option>
-            <option value="03_upscale">03 Anti-Blur 2K</option>
-            <option value="04_captions" selected>04 Pro Captions</option>
-            <option value="05_hook">05 Viral Hook</option>
-            <option value="06_gate">06 Gate β(s)=1</option>
-          </select>
-        </div>
-        <textarea id="flagNoteInput" rows="2" placeholder="Describe change needed (e.g. 'Move caption 20px up', 'Switch to stopmotion cream', 'Fix typo')..."></textarea>
-        <div style="display:flex;gap:6px;">
-          <button class="btn sm flag-btn" id="btnSubmitFlag" style="flex:1;justify-content:center;">+ Flag at Current Frame</button>
-          <button class="btn sm" id="btnPickOnFrame" title="Pin exact X,Y pixel on preview">Pin X,Y</button>
-        </div>
-      </div>
-
-      <div style="display:flex;align-items:center;justify-content:space-between;">
-        <span class="label">Change Trace Log (<span id="openFlagLabel">0 open</span>)</span>
-        <div style="display:flex;gap:5px;">
-          <button class="btn sm" id="btnCopyAgentPrompt">Copy Fix Prompt</button>
-          <button class="btn sm" id="btnClearFlags">Clear</button>
-        </div>
-      </div>
-      <div id="flagList" style="display:flex;flex-direction:column;gap:7px;"></div>
-    </div>
-
-    <!-- TAB 2: Deterministic Quality Gates (Harness Engineering) -->
-    <div class="tab-pane" id="pane-gates">
-      <div style="display:flex;align-items:center;justify-content:space-between;">
-        <span class="label">Deterministic Verification Oracles (β=1)</span>
-        <button class="btn sm" id="btnRunLocalCheck" style="display:none;">Run clip.py check</button>
-      </div>
-      <div id="gateList" style="display:flex;flex-direction:column;gap:7px;"></div>
-      <div class="codebox" id="localCheckOut" style="display:none;"></div>
-    </div>
-
-    <!-- TAB 3: Coding-Agent Handoff & CLI -->
-    <div class="tab-pane" id="pane-handoff">
-      <div class="field-row">
-        <span class="label">1 · Exact CLI Render Command</span>
-        <button class="btn sm primary" id="btnCopyCli">Copy Command</button>
-      </div>
-      <div class="codebox" id="cliOutput"></div>
-
-      <div class="field-row">
-        <span class="label">2 · Coding-Agent Fix Packet (Prompt + Trace)</span>
-        <button class="btn sm" id="btnCopyPrompt2">Copy Prompt</button>
-      </div>
-      <div class="codebox" id="promptOutput"></div>
-
-      <div class="field-row">
-        <span class="label">3 · HarnessCard + EditSpec JSON</span>
-        <div style="display:flex;gap:5px;">
-          <button class="btn sm" id="btnSaveLocalFlags" style="display:none;">Save to Workspace</button>
-          <button class="btn sm" id="btnExportJson">Download JSON</button>
-        </div>
-      </div>
-      <div class="codebox" id="specOutput"></div>
-    </div>
-  </aside>
-</main>
-
-<div class="toast" id="toast">Copied!</div>
+<div class="toast" id="toast">Ready</div>
 
 <script>
 (() => {
-  // ===== 1. HARNESS SPEC & CONSTANTS (Mirrors scripts/clip.py v4.0.6+ exactly) =====
+  // ===== 1. CONSTANTS & DEFAULT STATE (Mirrors scripts/clip.py + scripts/mcp_bridge.py v4.0.8) =====
   const STYLES = {
-    shine:      { name: "The Shine",       short: "SHINE",      defaultColor: "green", supportsColor: true,  desc: "Neon glow + 3 diagonal -28° light sweeps + soft glyph shadow" },
-    stopmotion: { name: "The Stop Motion", short: "STOPMOTION", defaultColor: "cream", supportsColor: true,  desc: "Baskerville italic + 15fps tactile erode-dilate dissolve" },
-    flicker:    { name: "The Flicker",     short: "FLICKER",    defaultColor: "white", supportsColor: true,  desc: "Tight bold sans + exact 233ms neon-tube spline flicker" },
-    inverted:   { name: "The Inverted",    short: "INVERTED",   defaultColor: "auto",  supportsColor: false, desc: "4:4:4 RGB color-corrected live-footage mask (zero edge artifacts)" },
-    hormozi:    { name: "Hormozi Karaoke", short: "HORMOZI",    defaultColor: "gold",  supportsColor: false, desc: "Bold Italic Impact word-by-word Electric Yellow pop (classic)" },
+    shine:      { name: "The Shine",       short: "SHINE",      defaultColor: "green", supportsColor: true,  desc: "Neon bloom + 3 diagonal -28° sweeps + soft shadow" },
+    stopmotion: { name: "The Stop Motion", short: "STOPMOTION", defaultColor: "cream", supportsColor: true,  desc: "Baskerville italic + 15fps erode-dilate dissolve" },
+    flicker:    { name: "The Flicker",     short: "FLICKER",    defaultColor: "white", supportsColor: true,  desc: "Tight bold sans + 233ms neon spline flicker" },
+    inverted:   { name: "The Inverted",    short: "INVERTED",   defaultColor: "auto",  supportsColor: false, desc: "4:4:4 RGB color-corrected live footage mask" },
+    hormozi:    { name: "Hormozi Karaoke", short: "HORMOZI",    defaultColor: "gold",  supportsColor: false, desc: "Bold Italic Impact Electric Yellow word pop" },
   };
   const COLORS = {
     auto:  { fill: "#5eff24", glow: "#54ff20", hi: "#daffb9", label: "auto" },
@@ -610,6 +805,7 @@
     hookText: "IShowSpeed | Breaks GTA 6",
     hookTheme: "blue",
     cam: { x: 0.00, y: 0.56, w: 0.37, h: 0.43 },
+    grade: { brightness: 0.04, contrast: 1.08, saturation: 1.12, gamma: 1.00 },
     clipStart: 120,
     clipEnd: 150,
     quality: "2k",
@@ -624,77 +820,84 @@
       { start: 3.60, end: 5.40, text: "GTA 6 is unreal!" },
     ],
     flags: [],
+    snapshots: {},
   };
 
-  let state = loadState();
+  let state = loadLocalState();
   let localConnected = false;
+  let lastLocalRev = 0;
+  let localMcpConfig = null;
   let playing = true;
   let playhead = 0.0;
   let lastTs = performance.now();
   let pinMode = false;
-  let pendingPin = null; // { x2k, y2k, nx, ny, t }
+  let compareOriginal = false;
+  let pendingPin = null;
   let selectedCat = "Caption";
   let selectedSev = "blocker";
+  let activeMcpClient = "antigravity";
 
-  // Pre-allocated zero-GC offscreen canvases for 60fps effects
-  const W = 720, H = 1280; // 0.5x of 2K 1440x2560 (Retina 2x on 360x640 viewport)
-  const SEAM_Y = 408;      // exact 816 / 2 (flush zero-gap split-screen!)
+  // Pre-allocated zero-GC canvases (60fps < 1ms/frame)
+  const W = 720, H = 1280, SEAM_Y = 408; // exact 0.5x of 2K 1440x2560 (816+1744 flush)
   const mainCanvas = document.getElementById("previewCanvas");
   const ctx = mainCanvas.getContext("2d", { alpha: false });
-
-  const fxCanvas = document.createElement("canvas");
-  fxCanvas.width = W; fxCanvas.height = 240;
+  const fxCanvas = document.createElement("canvas"); fxCanvas.width = W; fxCanvas.height = 240;
   const fxCtx = fxCanvas.getContext("2d");
-
-  const invCanvas = document.createElement("canvas");
-  invCanvas.width = W; invCanvas.height = 220;
+  const invCanvas = document.createElement("canvas"); invCanvas.width = W; invCanvas.height = 220;
   const invCtx = invCanvas.getContext("2d");
-
-  const hookCanvas = document.createElement("canvas");
-  hookCanvas.width = W; hookCanvas.height = 260;
+  const hookCanvas = document.createElement("canvas"); hookCanvas.width = W; hookCanvas.height = 260;
   const hookCtx = hookCanvas.getContext("2d");
 
-  // Demo image & optional user <video>
-  const demoImg = new Image();
-  demoImg.src = "./assets/demo_frame.jpg";
+  const demoImg = new Image(); demoImg.src = "./assets/demo_frame.jpg";
   let demoReady = false;
   demoImg.onload = () => { demoReady = true; };
 
   const userVideo = document.createElement("video");
-  userVideo.muted = true;
-  userVideo.loop = true;
-  userVideo.playsInline = true;
+  userVideo.muted = true; userVideo.loop = true; userVideo.playsInline = true;
   let hasUserVideo = false;
 
-  // FPS telemetry rolling window
   let frameCount = 0, frameMsSum = 0, fpsLastReport = performance.now();
 
-  function loadState() {
+  function loadLocalState() {
     try {
-      const saved = JSON.parse(localStorage.getItem("sta6_harness_v407") || "null");
+      const saved = JSON.parse(localStorage.getItem("sta6_resolve_harness_v408") || "null");
       if (saved && saved.captionStyle && Array.isArray(saved.chunks)) {
-        return { ...structuredClone(DEFAULT_STATE), ...saved, cam: { ...DEFAULT_STATE.cam, ...(saved.cam || {}) } };
+        return {
+          ...structuredClone(DEFAULT_STATE),
+          ...saved,
+          cam: { ...DEFAULT_STATE.cam, ...(saved.cam || {}) },
+          grade: { ...DEFAULT_STATE.grade, ...(saved.grade || {}) },
+        };
       }
     } catch {}
     return structuredClone(DEFAULT_STATE);
   }
-  function persist() {
-    try { localStorage.setItem("sta6_harness_v407", JSON.stringify(state)); } catch {}
+  function persistLocal() {
+    try { localStorage.setItem("sta6_resolve_harness_v408", JSON.stringify(state)); } catch {}
   }
 
   function totalDuration() {
     if (hasUserVideo && userVideo.duration && isFinite(userVideo.duration)) {
       return Math.min(60, Math.max(2, userVideo.duration));
     }
-    const maxChunk = state.chunks.reduce((m, c) => Math.max(m, c.end), 5.4);
-    return Math.max(3.0, maxChunk);
+    return Math.max(3.0, state.chunks.reduce((m, c) => Math.max(m, c.end), 5.4));
   }
 
-  // ===== 2. MATH & TEXT HELPERS =====
+  // ===== 2. TIMECODE, MATH & TRACKED TEXT =====
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   const easeOutCubic = t => { t = clamp(t, 0, 1); return 1 - Math.pow(1 - t, 3); };
   const easeInOutCubic = t => { t = clamp(t, 0, 1); return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2; };
   const easeOutBack = (t, s = 1.15) => { t = clamp(t, 0, 1) - 1; return t*t*((s+1)*t + s) + 1; };
+
+  function fmtSmpte(sec) {
+    // Authentic DaVinci Resolve 60fps SMPTE timecode starting at 01:00:00:00
+    const totalF = Math.max(0, Math.floor(sec * 60));
+    const ff = totalF % 60;
+    const totalS = Math.floor(totalF / 60);
+    const ss = totalS % 60;
+    const mm = Math.floor(totalS / 60) % 60;
+    return `01:${String(mm).padStart(2,"0")}:${String(ss).padStart(2,"0")}:${String(ff).padStart(2,"0")}`;
+  }
 
   function flickerOpacity(dt) {
     if (dt <= 0) return 0;
@@ -706,134 +909,116 @@
     return 1;
   }
 
-  function measureTracked(c, text, trackingPx) {
+  function measureTracked(c, text, tr) {
     let w = 0;
-    for (let i = 0; i < text.length; i++) {
-      w += c.measureText(text[i]).width + (i < text.length - 1 ? trackingPx : 0);
-    }
+    for (let i = 0; i < text.length; i++) w += c.measureText(text[i]).width + (i < text.length - 1 ? tr : 0);
     return w;
   }
-  function drawTracked(c, text, cx, cy, trackingPx, mode = "fill") {
-    const totalW = measureTracked(c, text, trackingPx);
+  function drawTracked(c, text, cx, cy, tr) {
+    const totalW = measureTracked(c, text, tr);
     let x = cx - totalW / 2;
-    c.textAlign = "left";
-    c.textBaseline = "middle";
+    c.textAlign = "left"; c.textBaseline = "middle";
     for (let i = 0; i < text.length; i++) {
-      const ch = text[i];
-      if (mode === "stroke") c.strokeText(ch, x, cy);
-      else c.fillText(ch, x, cy);
-      x += c.measureText(ch).width + trackingPx;
+      c.fillText(text[i], x, cy);
+      x += c.measureText(text[i]).width + tr;
     }
     return totalW;
   }
 
-  function effectiveColorSpec() {
-    const st = STYLES[state.captionStyle];
-    const key = state.captionColor === "auto" ? st.defaultColor : state.captionColor;
-    return COLORS[key] || COLORS.green;
-  }
-
   function splitHookLines(raw) {
-    const clean = raw.trim().replace(/\s+/g, " ");
+    const clean = (raw || "").trim().replace(/\s+/g, " ");
     if (!clean) return ["", ""];
-    if (clean.includes("|")) {
-      const [a, b] = clean.split("|", 2);
-      return [a.trim(), (b || "").trim()];
-    }
-    const parts = clean.split(" ");
-    if (parts.length <= 1) return [clean, ""];
-    if (parts[0].length >= 7) return [parts[0], parts.slice(1).join(" ")];
-    const mid = Math.ceil(parts.length / 2);
-    return [parts.slice(0, mid).join(" "), parts.slice(mid).join(" ")];
+    if (clean.includes("|")) { const [a, b] = clean.split("|", 2); return [a.trim(), (b || "").trim()]; }
+    const p = clean.split(" ");
+    if (p.length <= 1) return [clean, ""];
+    if (p[0].length >= 7) return [p[0], p.slice(1).join(" ")];
+    const m = Math.ceil(p.length / 2);
+    return [p.slice(0, m).join(" "), p.slice(m).join(" ")];
   }
 
-  // ===== 3. ZERO-LAG 60FPS CANVAS COMPOSITOR =====
-  function drawCover(src, sw, sh, sx, sy, cw, ch, dx, dy, dw, dh) {
-    // Aspect-fill crop matching FFmpeg scale=force_original_aspect_ratio=increase,crop
-    const srcRatio = cw / ch;
-    const dstRatio = dw / dh;
-    let rx = sx, ry = sy, rw = cw, rh = ch;
-    if (srcRatio > dstRatio) {
-      rw = ch * dstRatio;
-      rx = sx + (cw - rw) / 2;
-    } else {
-      rh = cw / dstRatio;
-      ry = sy + (ch - rh) / 2;
+  function activeViewSpec() {
+    // Supports Resolve AI Bridge A/B Snapshot comparison!
+    if (compareOriginal && state.snapshots && state.snapshots.original) {
+      const s = state.snapshots.original;
+      return {
+        captionStyle: s.caption_style || state.captionStyle,
+        captionColor: s.caption_color || state.captionColor,
+        posY: s.pos_y_1920 ?? state.posY,
+        fontScale: s.font_scale ?? state.fontScale,
+        hookEnabled: Boolean(s.hook),
+        hookText: s.hook || "",
+        hookTheme: s.hook_theme || state.hookTheme,
+        grade: s.grade || state.grade,
+        chunks: s.preview_chunks || state.chunks,
+      };
     }
+    return state;
+  }
+
+  // ===== 3. ZERO-LAG 60FPS CANVAS ENGINE =====
+  function drawCover(src, sx, sy, cw, ch, dx, dy, dw, dh) {
+    const sr = cw / ch, dr = dw / dh;
+    let rx = sx, ry = sy, rw = cw, rh = ch;
+    if (sr > dr) { rw = ch * dr; rx = sx + (cw - rw) / 2; }
+    else { rh = cw / dr; ry = sy + (ch - rh) / 2; }
     ctx.drawImage(src, rx, ry, rw, rh, dx, dy, dw, dh);
   }
 
-  function renderVideoBase(t) {
+  function renderVideoBase(t, spec) {
     const src = hasUserVideo && userVideo.readyState >= 2 ? userVideo : (demoReady ? demoImg : null);
-    if (!src) {
-      ctx.fillStyle = "#0b0f18";
-      ctx.fillRect(0, 0, W, H);
-      return;
-    }
+    if (!src) { ctx.fillStyle = "#111"; ctx.fillRect(0, 0, W, H); return; }
     const sw = hasUserVideo ? userVideo.videoWidth : demoImg.naturalWidth;
     const sh = hasUserVideo ? userVideo.videoHeight : demoImg.naturalHeight;
     const { x, y, w, h } = state.cam;
-    const zoomPunch = state.zoomPeaks && (t % 2.6) < 0.45 ? 1.07 : 1.0;
+    const g = spec.grade || state.grade;
+    const bright = (1 + g.brightness) * (1 / Math.max(0.5, g.gamma));
+    const zoom = state.zoomPeaks && (t % 2.6) < 0.45 ? 1.07 : 1.0;
 
-    // 1) Top Facecam (0..SEAM_Y = 408px = exact 816px @ 2K) — ZERO black gap!
-    const cw = sw * w / zoomPunch;
-    const ch = sh * h / zoomPunch;
-    const cx = sw * x + (sw * w - cw) / 2;
-    const cy = sh * y + (sh * h - ch) / 2;
     ctx.save();
-    ctx.filter = "brightness(1.04) contrast(1.08) saturate(1.12)";
-    drawCover(src, sw, sh, clamp(cx, 0, sw - cw), clamp(cy, 0, sh - ch), cw, ch, 0, 0, W, SEAM_Y);
+    ctx.filter = `brightness(${bright.toFixed(2)}) contrast(${g.contrast.toFixed(2)}) saturate(${g.saturation.toFixed(2)})`;
+    // Top Facecam (0..SEAM_Y = 408px = exact 816px @ 2K)
+    const cw = sw * w / zoom, ch = sh * h / zoom;
+    const cx = clamp(sw * x + (sw * w - cw) / 2, 0, sw - cw);
+    const cy = clamp(sh * y + (sh * h - ch) / 2, 0, sh - ch);
+    drawCover(src, cx, cy, cw, ch, 0, 0, W, SEAM_Y);
 
-    // 2) Bottom Gameplay (SEAM_Y..H = 872px = exact 1744px @ 2K) — auto-trim OBS header bar + subtle live pan on demo!
+    // Bottom Gameplay (SEAM_Y..H = 872px = exact 1744px @ 2K) — ZERO black gap + auto OBS header trim!
     const topTrim = hasUserVideo ? 0 : Math.round(sh * 0.06);
     const panX = hasUserVideo ? 0 : Math.sin(t * 0.9) * (sw * 0.045);
     const gw = sw * (hasUserVideo ? 1.0 : 0.90);
     const gx = clamp((sw - gw) / 2 + panX, 0, sw - gw);
-    drawCover(src, sw, sh, gx, topTrim, gw, sh - topTrim, 0, SEAM_Y, W, H - SEAM_Y);
+    drawCover(src, gx, topTrim, gw, sh - topTrim, 0, SEAM_Y, W, H - SEAM_Y);
     ctx.restore();
   }
 
-  function renderCaption(t) {
-    const chunk = state.chunks.find(c => t >= c.start && t < c.end);
+  function renderCaption(t, spec) {
+    const chunks = spec.chunks || state.chunks;
+    const chunk = chunks.find(c => t >= c.start && t < c.end);
     if (!chunk || !chunk.text.trim()) return;
-    const dt = t - chunk.start;
-    const dur = Math.max(0.14, chunk.end - chunk.start);
-    const style = state.captionStyle;
-    const cy = Math.round(state.posY * (H / 1920));
-    const sc = state.fontScale;
+    const dt = t - chunk.start, dur = Math.max(0.14, chunk.end - chunk.start);
+    const style = spec.captionStyle;
+    const cy = Math.round(spec.posY * (H / 1920));
+    const sc = spec.fontScale || 1.0;
 
     if (style === "hormozi") {
       const words = chunk.text.trim().toUpperCase().split(/\s+/);
-      const activeIdx = Math.min(words.length - 1, Math.floor((dt / dur) * words.length));
-      const wordDt = dt - (activeIdx / words.length) * dur;
+      const act = Math.min(words.length - 1, Math.floor((dt / dur) * words.length));
+      const wdt = dt - (act / words.length) * dur;
       const fpx = Math.round(48 * sc);
       ctx.save();
       ctx.font = `italic 900 ${fpx}px Impact, "Arial Black", sans-serif`;
       ctx.textBaseline = "middle";
-      const sp = fpx * 0.24;
-      const widths = words.map(w => ctx.measureText(w).width);
-      const totalW = widths.reduce((a, b) => a + b, 0) + sp * (words.length - 1);
-      let x = W / 2 - totalW / 2;
+      const sp = fpx * 0.24, ws = words.map(w => ctx.measureText(w).width);
+      let x = W / 2 - (ws.reduce((a,b)=>a+b, 0) + sp * (words.length - 1)) / 2;
       for (let i = 0; i < words.length; i++) {
-        const isAct = i === activeIdx;
-        const pop = isAct ? 1.08 - 0.08 * easeOutCubic(wordDt / 0.08) : 1.0;
-        const wx = x + widths[i] / 2;
-        ctx.save();
-        ctx.translate(wx, cy);
-        ctx.scale(pop, pop);
-        ctx.textAlign = "center";
-        ctx.lineJoin = "round";
-        ctx.shadowColor = "rgba(0,0,0,0.75)";
-        ctx.shadowBlur = 8;
-        ctx.shadowOffsetY = 3;
-        ctx.lineWidth = Math.round(8.5 * sc);
-        ctx.strokeStyle = "#000000";
-        ctx.strokeText(words[i], 0, 0);
-        ctx.shadowColor = "transparent";
-        ctx.fillStyle = isAct ? "#FFE500" : "#FFFFFF";
-        ctx.fillText(words[i], 0, 0);
+        const isA = i === act, pop = isA ? 1.08 - 0.08 * easeOutCubic(wdt / 0.08) : 1.0;
+        ctx.save(); ctx.translate(x + ws[i] / 2, cy); ctx.scale(pop, pop);
+        ctx.textAlign = "center"; ctx.lineJoin = "round";
+        ctx.shadowColor = "rgba(0,0,0,0.75)"; ctx.shadowBlur = 8; ctx.shadowOffsetY = 3;
+        ctx.lineWidth = Math.round(8.5 * sc); ctx.strokeStyle = "#000"; ctx.strokeText(words[i], 0, 0);
+        ctx.shadowColor = "transparent"; ctx.fillStyle = isA ? "#FFE500" : "#FFF"; ctx.fillText(words[i], 0, 0);
         ctx.restore();
-        x += widths[i] + sp;
+        x += ws[i] + sp;
       }
       ctx.restore();
       return;
@@ -847,7 +1032,7 @@
       const topY = clamp(Math.round(cy - stripH / 2), 0, H - stripH);
 
       invCtx.clearRect(0, 0, W, stripH);
-      // Step 1: Accumulate complete tracked anti-aliased text mask (source-over so multi-char glyphs never erase each other!)
+      // Step 1: Accumulate complete tracked text mask (source-over)
       invCtx.save();
       invCtx.globalCompositeOperation = "source-over";
       invCtx.globalAlpha = inP;
@@ -858,361 +1043,218 @@
       drawTracked(invCtx, chunk.text.trim(), 0, 0, -fpx * 0.042);
       invCtx.restore();
 
-      // Step 2: Fill exact text silhouette ONCE with color-corrected inverted live video (matches FFmpeg negate + eq!)
+      // Step 2: Fill exact silhouette ONCE with color-corrected inverted live footage (zero edge artifacts!)
       invCtx.save();
       invCtx.globalCompositeOperation = "source-in";
       invCtx.filter = "invert(1) contrast(1.18) brightness(1.06) saturate(1.25)";
       invCtx.drawImage(mainCanvas, 0, topY, W, stripH, 0, 0, W, stripH);
       invCtx.restore();
-
       ctx.drawImage(invCanvas, 0, topY);
       return;
     }
 
-    // Pro RGBA styles: shine, stopmotion, flicker (pre-allocated fxCanvas -> 0 GC)
-    const col = effectiveColorSpec();
-    const stripH = fxCanvas.height;
-    const midY = stripH / 2;
+    const stMeta = STYLES[style] || STYLES.shine;
+    const colKey = spec.captionColor === "auto" ? stMeta.defaultColor : spec.captionColor;
+    const col = COLORS[colKey] || COLORS.green;
+    const stripH = fxCanvas.height, midY = stripH / 2;
     const topY = clamp(Math.round(cy - midY), 0, H - stripH);
     fxCtx.clearRect(0, 0, W, stripH);
 
     if (style === "shine") {
-      const fpx = Math.round(39 * sc);
-      const inP = dt < 0.12 ? easeOutCubic(dt / 0.12) : 1.0;
-      const popSc = 0.94 + 0.06 * inP;
+      const fpx = Math.round(39 * sc), inP = dt < 0.12 ? easeOutCubic(dt / 0.12) : 1.0;
       const sweepDur = clamp(dur, 0.85, 1.35);
       const pos = -0.35 + 1.70 * easeInOutCubic((dt % sweepDur) / sweepDur);
       const pulse = 1.0 + 0.30 * Math.exp(-Math.pow((pos - 0.5) / 0.36, 2));
-
-      fxCtx.save();
-      fxCtx.globalAlpha = inP;
-      fxCtx.translate(W / 2, midY);
-      fxCtx.scale(popSc, popSc);
+      fxCtx.save(); fxCtx.globalAlpha = inP; fxCtx.translate(W / 2, midY); fxCtx.scale(0.94 + 0.06 * inP, 0.94 + 0.06 * inP);
       fxCtx.font = `700 ${fpx}px "Helvetica Neue", -apple-system, sans-serif`;
-      const tr = -fpx * 0.042;
-      const txt = chunk.text.trim();
-      const tw = measureTracked(fxCtx, txt, tr);
-
-      // Soft glyph-hugging contact shadow (zero bar!)
-      fxCtx.shadowColor = "rgba(0,0,0,0.82)";
-      fxCtx.shadowBlur = 16;
-      fxCtx.shadowOffsetY = 3;
-      fxCtx.fillStyle = "rgba(0,0,0,0.65)";
-      drawTracked(fxCtx, txt, 0, 0, tr);
-
-      // 3-layer optical bloom
-      fxCtx.shadowOffsetY = 0;
-      fxCtx.shadowColor = col.glow;
-      for (const blur of [28 * pulse, 13 * pulse, 5]) {
-        fxCtx.shadowBlur = blur;
-        fxCtx.fillStyle = col.fill;
-        drawTracked(fxCtx, txt, 0, 0, tr);
-      }
-
-      // Vertical depth gradient fill
+      const tr = -fpx * 0.042, txt = chunk.text.trim(), tw = measureTracked(fxCtx, txt, tr);
+      fxCtx.shadowColor = "rgba(0,0,0,0.82)"; fxCtx.shadowBlur = 16; fxCtx.shadowOffsetY = 3;
+      fxCtx.fillStyle = "rgba(0,0,0,0.65)"; drawTracked(fxCtx, txt, 0, 0, tr);
+      fxCtx.shadowOffsetY = 0; fxCtx.shadowColor = col.glow;
+      for (const b of [28 * pulse, 13 * pulse, 5]) { fxCtx.shadowBlur = b; fxCtx.fillStyle = col.fill; drawTracked(fxCtx, txt, 0, 0, tr); }
       fxCtx.shadowColor = "transparent";
-      const vg = fxCtx.createLinearGradient(0, -fpx * 0.5, 0, fpx * 0.5);
-      vg.addColorStop(0, col.hi);
-      vg.addColorStop(0.32, col.fill);
-      vg.addColorStop(1, col.fill);
-      fxCtx.fillStyle = vg;
-      drawTracked(fxCtx, txt, 0, 0, tr);
-
-      // 3 parallel -28° diagonal specular shine sweeps clipped cleanly to glyphs
-      fxCtx.globalCompositeOperation = "source-atop";
-      fxCtx.rotate((-28 * Math.PI) / 180);
+      const vg = fxCtx.createLinearGradient(0, -fpx*0.5, 0, fpx*0.5);
+      vg.addColorStop(0, col.hi); vg.addColorStop(0.32, col.fill); vg.addColorStop(1, col.fill);
+      fxCtx.fillStyle = vg; drawTracked(fxCtx, txt, 0, 0, tr);
+      fxCtx.globalCompositeOperation = "source-atop"; fxCtx.rotate((-28 * Math.PI) / 180);
       const sx = -tw / 2 + pos * tw;
-      const drawBeam = (offset, width, alpha) => {
-        const g = fxCtx.createLinearGradient(sx + offset - width, 0, sx + offset + width, 0);
-        g.addColorStop(0, "rgba(255,255,255,0)");
-        g.addColorStop(0.5, `rgba(255,255,255,${alpha})`);
-        g.addColorStop(1, "rgba(255,255,255,0)");
-        fxCtx.fillStyle = g;
-        fxCtx.fillRect(sx + offset - width, -stripH, width * 2, stripH * 2);
+      const beam = (off, bw, al) => {
+        const g = fxCtx.createLinearGradient(sx+off-bw, 0, sx+off+bw, 0);
+        g.addColorStop(0, "rgba(255,255,255,0)"); g.addColorStop(0.5, `rgba(255,255,255,${al})`); g.addColorStop(1, "rgba(255,255,255,0)");
+        fxCtx.fillStyle = g; fxCtx.fillRect(sx+off-bw, -stripH, bw*2, stripH*2);
       };
-      drawBeam(-tw * 0.16, Math.max(14, tw * 0.055), 0.45);
-      drawBeam(0, Math.max(24, tw * 0.12), 0.92);
-      drawBeam(tw * 0.17, Math.max(12, tw * 0.05), 0.36);
-      fxCtx.restore();
-      ctx.drawImage(fxCanvas, 0, topY);
-      return;
-    }
-
-    if (style === "stopmotion") {
-      // Quantize to authentic 15 fps stop-motion cadence!
-      const qStep = Math.floor(dt * 15);
-      const qDt = qStep / 15;
+      beam(-tw*0.16, Math.max(14, tw*0.055), 0.45); beam(0, Math.max(24, tw*0.12), 0.92); beam(tw*0.17, Math.max(12, tw*0.05), 0.36);
+      fxCtx.restore(); ctx.drawImage(fxCanvas, 0, topY);
+    } else if (style === "stopmotion") {
+      const qStep = Math.floor(dt * 15), qDt = qStep / 15;
       const p = qDt >= 0.42 ? 1.0 : easeOutCubic(qDt / 0.42);
       const visA = p >= 1.0 ? 1.0 : easeOutCubic(Math.min(1.0, p * 1.45));
-      const jx = p < 0.96 ? (((qStep * 7) % 3) - 1) : 0;
-      const jy = p < 0.96 ? (((qStep * 5) % 3) - 1) : 0;
-      const fpx = Math.round(42 * sc);
-
-      fxCtx.save();
-      fxCtx.globalAlpha = visA;
-      fxCtx.translate(W / 2 + jx, midY + jy);
-      fxCtx.font = `italic 700 ${fpx}px Baskerville, Georgia, "Times New Roman", serif`;
-      if (p < 0.98) {
-        // Organic circular erode-dilate blur dissolve feel at 15fps
-        fxCtx.filter = `blur(${((1 - p) * 4.5).toFixed(2)}px)`;
-      }
-      const tr = -fpx * 0.015;
-      const txt = chunk.text.trim();
-      fxCtx.shadowColor = "rgba(0,0,0,0.82)";
-      fxCtx.shadowBlur = 14;
-      fxCtx.shadowOffsetY = 3;
-      fxCtx.fillStyle = "rgba(0,0,0,0.65)";
-      drawTracked(fxCtx, txt, 0, 0, tr);
-
-      fxCtx.shadowOffsetY = 0;
-      fxCtx.shadowColor = col.glow;
-      fxCtx.shadowBlur = 10 * (0.4 + 0.6 * p);
-      fxCtx.fillStyle = col.fill;
-      drawTracked(fxCtx, txt, 0, 0, tr);
-      fxCtx.restore();
-      ctx.drawImage(fxCanvas, 0, topY);
-      return;
-    }
-
-    if (style === "flicker") {
+      const jx = p < 0.96 ? (((qStep * 7) % 3) - 1) : 0, jy = p < 0.96 ? (((qStep * 5) % 3) - 1) : 0;
+      const fpx = Math.round(42 * sc), tr = -fpx * 0.015, txt = chunk.text.trim();
+      fxCtx.save(); fxCtx.globalAlpha = visA; fxCtx.translate(W / 2 + jx, midY + jy);
+      fxCtx.font = `italic 700 ${fpx}px Baskerville, Georgia, serif`;
+      if (p < 0.98) fxCtx.filter = `blur(${((1 - p) * 4.5).toFixed(2)}px)`;
+      fxCtx.shadowColor = "rgba(0,0,0,0.82)"; fxCtx.shadowBlur = 14; fxCtx.shadowOffsetY = 3;
+      fxCtx.fillStyle = "rgba(0,0,0,0.65)"; drawTracked(fxCtx, txt, 0, 0, tr);
+      fxCtx.shadowOffsetY = 0; fxCtx.shadowColor = col.glow; fxCtx.shadowBlur = 10 * (0.4 + 0.6 * p);
+      fxCtx.fillStyle = col.fill; drawTracked(fxCtx, txt, 0, 0, tr);
+      fxCtx.restore(); ctx.drawImage(fxCanvas, 0, topY);
+    } else if (style === "flicker") {
       const op = dt >= 0.24 ? 1.0 : flickerOpacity(dt);
       if (op <= 0.01) return;
-      const fpx = Math.round(39 * sc);
-      const txt = chunk.text.trim();
-      const tr = -fpx * 0.042;
-      fxCtx.save();
-      fxCtx.globalAlpha = op;
-      fxCtx.translate(W / 2, midY);
+      const fpx = Math.round(39 * sc), tr = -fpx * 0.042, txt = chunk.text.trim();
+      fxCtx.save(); fxCtx.globalAlpha = op; fxCtx.translate(W / 2, midY);
       fxCtx.font = `700 ${fpx}px "Helvetica Neue", -apple-system, sans-serif`;
-
-      fxCtx.shadowColor = "rgba(0,0,0,0.82)";
-      fxCtx.shadowBlur = 15;
-      fxCtx.shadowOffsetY = 3;
-      fxCtx.fillStyle = "rgba(0,0,0,0.65)";
-      drawTracked(fxCtx, txt, 0, 0, tr);
-
-      fxCtx.shadowOffsetY = 0;
-      fxCtx.shadowColor = col.glow;
-      fxCtx.shadowBlur = 18 * (0.55 + 0.45 * op);
-      fxCtx.fillStyle = col.fill;
-      drawTracked(fxCtx, txt, 0, 0, tr);
-      fxCtx.restore();
-      ctx.drawImage(fxCanvas, 0, topY);
+      fxCtx.shadowColor = "rgba(0,0,0,0.82)"; fxCtx.shadowBlur = 15; fxCtx.shadowOffsetY = 3;
+      fxCtx.fillStyle = "rgba(0,0,0,0.65)"; drawTracked(fxCtx, txt, 0, 0, tr);
+      fxCtx.shadowOffsetY = 0; fxCtx.shadowColor = col.glow; fxCtx.shadowBlur = 18 * (0.55 + 0.45 * op);
+      fxCtx.fillStyle = col.fill; drawTracked(fxCtx, txt, 0, 0, tr);
+      fxCtx.restore(); ctx.drawImage(fxCanvas, 0, topY);
     }
   }
 
-  function renderHook(t) {
-    if (!state.hookEnabled || !state.hookText.trim() || t > 2.65) return;
-    const [l1, l2] = splitHookLines(state.hookText);
-    const theme = HOOK_THEMES[state.hookTheme] || HOOK_THEMES.blue;
-    const outP = t > 2.24 ? easeInOutCubic((t - 2.24) / 0.36) : 0;
-    const outA = 1 - outP;
+  function renderHook(t, spec) {
+    if (!spec.hookEnabled || !spec.hookText.trim() || t > 2.65) return;
+    const [l1, l2] = splitHookLines(spec.hookText);
+    const theme = HOOK_THEMES[spec.hookTheme] || HOOK_THEMES.blue;
+    const outP = t > 2.24 ? easeInOutCubic((t - 2.24) / 0.36) : 0, outA = 1 - outP;
     if (outA <= 0.01) return;
-
-    const in1 = easeOutCubic(t / 0.30);
-    const sc1 = (0.88 + 0.12 * easeOutBack(t / 0.34)) * (1 - 0.05 * outP);
+    const in1 = easeOutCubic(t / 0.30), sc1 = (0.88 + 0.12 * easeOutBack(t / 0.34)) * (1 - 0.05 * outP);
     const sh1 = -0.45 + 1.90 * easeInOutCubic((t - 0.30) / 1.25);
-    const hookCenterY = Math.round(885 * (H / 1920));
-    const midY = hookCanvas.height / 2;
-
+    const hookCY = Math.round(885 * (H / 1920)), midY = hookCanvas.height / 2;
     hookCtx.clearRect(0, 0, W, hookCanvas.height);
-    // Invisible-edge soft radial scrim (zero box, zero border!)
     const scrim = hookCtx.createRadialGradient(W/2, midY, 10, W/2, midY, 220);
-    scrim.addColorStop(0, `rgba(0,0,0,${(0.46 * in1 * outA).toFixed(3)})`);
-    scrim.addColorStop(1, "rgba(0,0,0,0)");
-    hookCtx.fillStyle = scrim;
-    hookCtx.fillRect(0, 0, W, hookCanvas.height);
-
-    const drawHookLine = (txt, yOff, fpx, sc, alpha, c1, c2, glow, shPos) => {
-      if (!txt || alpha <= 0.01) return;
-      hookCtx.save();
-      hookCtx.globalAlpha = alpha;
-      hookCtx.translate(W / 2, midY + yOff);
-      hookCtx.scale(sc, sc);
+    scrim.addColorStop(0, `rgba(0,0,0,${(0.45 * in1 * outA).toFixed(3)})`); scrim.addColorStop(1, "rgba(0,0,0,0)");
+    hookCtx.fillStyle = scrim; hookCtx.fillRect(0, 0, W, hookCanvas.height);
+    const drawLine = (txt, yOff, fpx, sc, al, c1, c2, glow, shPos) => {
+      if (!txt || al <= 0.01) return;
+      hookCtx.save(); hookCtx.globalAlpha = al; hookCtx.translate(W/2, midY + yOff); hookCtx.scale(sc, sc);
       hookCtx.font = `700 ${fpx}px "Helvetica Neue", -apple-system, sans-serif`;
-      const tr = -fpx * 0.045;
-      const tw = measureTracked(hookCtx, txt, tr);
-      hookCtx.shadowColor = glow;
-      hookCtx.shadowBlur = 24;
-      hookCtx.fillStyle = c1;
-      drawTracked(hookCtx, txt, 0, 0, tr);
+      const tr = -fpx * 0.045, tw = measureTracked(hookCtx, txt, tr);
+      hookCtx.shadowColor = glow; hookCtx.shadowBlur = 24; hookCtx.fillStyle = c1; drawTracked(hookCtx, txt, 0, 0, tr);
       hookCtx.shadowColor = "transparent";
-      const g = hookCtx.createLinearGradient(0, -fpx*0.5, 0, fpx*0.5);
-      g.addColorStop(0, c1); g.addColorStop(1, c2);
-      hookCtx.fillStyle = g;
-      drawTracked(hookCtx, txt, 0, 0, tr);
-      // Glossy diagonal shine pass
-      hookCtx.save();
-      hookCtx.beginPath();
-      hookCtx.rect(-tw/2 - 10, -fpx, tw + 20, fpx * 2);
-      hookCtx.clip();
+      const g = hookCtx.createLinearGradient(0, -fpx*0.5, 0, fpx*0.5); g.addColorStop(0, c1); g.addColorStop(1, c2);
+      hookCtx.fillStyle = g; drawTracked(hookCtx, txt, 0, 0, tr);
+      hookCtx.save(); hookCtx.beginPath(); hookCtx.rect(-tw/2 - 10, -fpx, tw + 20, fpx*2); hookCtx.clip();
       const bx = -tw/2 + shPos * tw;
-      const sg = hookCtx.createLinearGradient(bx - 36, -fpx*0.5, bx + 36, fpx*0.5);
-      sg.addColorStop(0, "rgba(255,255,255,0)");
-      sg.addColorStop(0.5, "rgba(255,255,255,0.65)");
-      sg.addColorStop(1, "rgba(255,255,255,0)");
-      hookCtx.globalCompositeOperation = "lighter";
-      hookCtx.fillStyle = sg;
-      drawTracked(hookCtx, txt, 0, 0, tr);
-      hookCtx.restore();
-      hookCtx.restore();
+      const sg = hookCtx.createLinearGradient(bx-36, -fpx*0.5, bx+36, fpx*0.5);
+      sg.addColorStop(0,"rgba(255,255,255,0)"); sg.addColorStop(0.5,"rgba(255,255,255,0.65)"); sg.addColorStop(1,"rgba(255,255,255,0)");
+      hookCtx.globalCompositeOperation = "lighter"; hookCtx.fillStyle = sg; drawTracked(hookCtx, txt, 0, 0, tr);
+      hookCtx.restore(); hookCtx.restore();
     };
-
-    const dy1 = (1 - in1) * 16;
-    drawHookLine(l1, (l2 ? -26 : 0) + dy1, 60, sc1, in1 * outA, theme.c1, theme.c2, theme.glow, sh1);
+    drawLine(l1, (l2 ? -26 : 0) + (1 - in1) * 16, 60, sc1, in1 * outA, theme.c1, theme.c2, theme.glow, sh1);
     if (l2) {
       const in2 = easeOutCubic((t - 0.09) / 0.30);
-      const sc2 = (0.90 + 0.10 * easeOutBack((t - 0.09) / 0.34)) * (1 - 0.05 * outP);
-      const sh2 = -0.45 + 1.90 * easeInOutCubic((t - 0.46) / 1.25);
-      drawHookLine(l2, 26 + (1 - in2) * 14, 40, sc2, in2 * outA, "#ffffff", "#d8e4f5", "rgba(255,255,255,0.65)", sh2);
+      drawLine(l2, 26 + (1 - in2) * 14, 40, (0.90 + 0.10 * easeOutBack((t - 0.09) / 0.34)) * (1 - 0.05 * outP),
+        in2 * outA, "#fff", "#d8e4f5", "rgba(255,255,255,0.65)", -0.45 + 1.90 * easeInOutCubic((t - 0.46) / 1.25));
     }
-    ctx.drawImage(hookCanvas, 0, Math.round(hookCenterY - midY));
+    ctx.drawImage(hookCanvas, 0, Math.round(hookCY - midY));
   }
 
   function renderGuides() {
+    if (compareOriginal) {
+      ctx.save(); ctx.fillStyle = "rgba(232,90,60,0.9)"; ctx.fillRect(10, 10, 210, 24);
+      ctx.fillStyle = "#fff"; ctx.font = "700 11px ui-monospace, Menlo, monospace";
+      ctx.fillText("COMPARE: ORIGINAL SNAPSHOT", 18, 26); ctx.restore();
+    }
     if (state.seamRuler) {
-      ctx.save();
-      ctx.strokeStyle = "rgba(94,255,36,0.9)";
-      ctx.lineWidth = 2;
-      ctx.setLineDash([8, 6]);
-      ctx.beginPath(); ctx.moveTo(0, SEAM_Y); ctx.lineTo(W, SEAM_Y); ctx.stroke();
-      ctx.setLineDash([]);
-      ctx.fillStyle = "rgba(8,10,15,0.82)";
-      ctx.fillRect(12, SEAM_Y - 26, 212, 20);
-      ctx.fillStyle = "#5eff24";
-      ctx.font = '700 11px ui-monospace, Menlo, monospace';
-      ctx.fillText("FLUSH SEAM y=816 (0px GAP)", 20, SEAM_Y - 12);
-      ctx.restore();
+      ctx.save(); ctx.strokeStyle = "rgba(74,222,128,0.92)"; ctx.lineWidth = 2; ctx.setLineDash([8,6]);
+      ctx.beginPath(); ctx.moveTo(0, SEAM_Y); ctx.lineTo(W, SEAM_Y); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = "rgba(18,18,18,0.85)"; ctx.fillRect(10, SEAM_Y - 24, 212, 19);
+      ctx.fillStyle = "#4ade80"; ctx.font = "700 11px ui-monospace, Menlo, monospace";
+      ctx.fillText("FLUSH SEAM y=816 (0px GAP)", 16, SEAM_Y - 11); ctx.restore();
     }
     if (state.safeZones) {
-      const topDead = Math.round(240 * (H / 1920));
-      const botDead = Math.round(1420 * (H / 1920));
-      const rightDead = Math.round(W * 0.84);
-      ctx.save();
-      ctx.fillStyle = "rgba(244,63,94,0.18)";
-      ctx.fillRect(0, 0, W, topDead);
-      ctx.fillRect(0, botDead, W, H - botDead);
-      ctx.fillRect(rightDead, topDead, W - rightDead, botDead - topDead);
-      ctx.strokeStyle = "rgba(244,63,94,0.75)";
-      ctx.lineWidth = 1.5;
-      ctx.setLineDash([6, 4]);
-      ctx.beginPath();
-      ctx.moveTo(0, topDead); ctx.lineTo(W, topDead);
-      ctx.moveTo(0, botDead); ctx.lineTo(W, botDead);
-      ctx.moveTo(rightDead, topDead); ctx.lineTo(rightDead, botDead);
-      ctx.stroke();
-      ctx.fillStyle = "#fda4af";
-      ctx.font = '700 12px ui-monospace, Menlo, monospace';
-      ctx.fillText("TOP SHORTS UI ZONE", 14, 24);
-      ctx.fillText("BOTTOM SHORTS / REELS UI ZONE (KEEP CAPTIONS ABOVE)", 14, botDead + 24);
-      ctx.restore();
+      const tD = Math.round(240 * H / 1920), bD = Math.round(1420 * H / 1920), rD = Math.round(W * 0.84);
+      ctx.save(); ctx.fillStyle = "rgba(229,57,53,0.18)";
+      ctx.fillRect(0, 0, W, tD); ctx.fillRect(0, bD, W, H - bD); ctx.fillRect(rD, tD, W - rD, bD - tD);
+      ctx.strokeStyle = "rgba(229,57,53,0.75)"; ctx.lineWidth = 1.5; ctx.setLineDash([6,4]);
+      ctx.beginPath(); ctx.moveTo(0,tD); ctx.lineTo(W,tD); ctx.moveTo(0,bD); ctx.lineTo(W,bD); ctx.moveTo(rD,tD); ctx.lineTo(rD,bD); ctx.stroke();
+      ctx.fillStyle = "#ff8a80"; ctx.font = "700 11px ui-monospace, Menlo, monospace";
+      ctx.fillText("TOP SHORTS UI", 12, 22); ctx.fillText("BOTTOM SHORTS / REELS UI ZONE", 12, bD + 22); ctx.restore();
     }
   }
 
   function tick(now) {
     const t0 = performance.now();
-    const dtSec = Math.min(0.05, (now - lastTs) / 1000);
+    const dt = Math.min(0.05, (now - lastTs) / 1000);
     lastTs = now;
     const dur = totalDuration();
-
     if (playing) {
-      if (hasUserVideo && !userVideo.paused) {
-        playhead = userVideo.currentTime % dur;
-      } else {
-        playhead = (playhead + dtSec) % dur;
-      }
+      playhead = (hasUserVideo && !userVideo.paused) ? (userVideo.currentTime % dur) : ((playhead + dt) % dur);
     }
-
-    renderVideoBase(playhead);
-    renderCaption(playhead);
-    renderHook(playhead);
+    const spec = activeViewSpec();
+    renderVideoBase(playhead, spec);
+    renderCaption(playhead, spec);
+    renderHook(playhead, spec);
     renderGuides();
 
-    // Update lightweight DOM transport elements
     const pct = clamp((playhead / dur) * 100, 0, 100);
-    document.getElementById("trackPlayhead").style.left = pct.toFixed(2) + "%";
-    document.getElementById("timecode").textContent = `${fmtTime(playhead)} / ${dur.toFixed(2)}s`;
+    document.getElementById("playheadLine").style.left = pct.toFixed(2) + "%";
+    const smpte = fmtSmpte(playhead);
+    document.getElementById("smpteDisplay").textContent = smpte;
+    document.getElementById("quickTimeVal").textContent = smpte;
 
-    // Highlight active phrase row without rebuilding DOM
     const rows = document.getElementById("chunkList").children;
     for (let i = 0; i < state.chunks.length && i < rows.length; i++) {
       const c = state.chunks[i];
       rows[i].classList.toggle("playing", playhead >= c.start && playhead < c.end);
     }
 
-    // Measure actual frame execution time (zero-lag proof!)
     frameMsSum += (performance.now() - t0);
     frameCount++;
     if (now - fpsLastReport >= 500) {
       const fps = Math.round((frameCount * 1000) / (now - fpsLastReport));
-      const avgMs = (frameMsSum / Math.max(1, frameCount)).toFixed(1);
-      document.getElementById("fpsText").textContent = `${fps} FPS · ${avgMs}ms`;
+      const ms = (frameMsSum / Math.max(1, frameCount)).toFixed(1);
+      document.getElementById("fpsText").textContent = `${fps} FPS · ${ms}ms`;
       frameCount = 0; frameMsSum = 0; fpsLastReport = now;
     }
     requestAnimationFrame(tick);
   }
 
-  function fmtTime(s) {
-    const m = Math.floor(s / 60);
-    const rem = (s % 60).toFixed(2).padStart(5, "0");
-    return `${String(m).padStart(2, "0")}:${rem}`;
+  // ===== 4. GATES, CLI, AI BRIDGE MCP & RESOLVE TIMELINE RENDERERS =====
+  function camCropString() {
+    const { x, y, w, h } = state.cam;
+    return `iw*${w.toFixed(2)}:ih*${h.toFixed(2)}:iw*${x.toFixed(2)}:ih*${y.toFixed(2)}`;
   }
 
-  // ===== 4. DETERMINISTIC HARNESS GATES (β(s)=1) =====
   function evaluateGates() {
     const clipDur = Math.max(0, Number(state.clipEnd) - Number(state.clipStart));
     const hookClean = state.hookText.replace(/\|/g, " ").replace(/\s+/g, " ").trim();
     const hasEmoji = /[\u{1F300}-\u{1FAFF}]/u.test(hookClean);
-    const hasShortsTag = /#shorts/i.test(hookClean);
+    const hasShorts = /#shorts/i.test(hookClean);
     const openBlockers = state.flags.filter(f => !f.resolved && f.severity === "blocker").length;
     const safeY = state.posY >= 260 && state.posY <= 1380;
-
     return [
-      {
-        id: "ZERO_GAP_SEAM", stage: "02_split",
-        status: "pass",
-        detail: "Flush 816+1744 (2K) edge-to-edge split-screen; bar_h=0 + auto OBS letterbox trim.",
-      },
-      {
-        id: "CAPTION_SAFE_ZONE", stage: "04_captions",
-        status: safeY ? "pass" : "warn",
-        detail: safeY
-          ? `--pos-y ${state.posY} (y=${Math.round(state.posY*2560/1920)} @ 2K) clears Shorts/Reels top & bottom UI.`
-          : `--pos-y ${state.posY} enters YouTube Shorts UI collision zone (<260 or >1380).`,
-      },
-      {
-        id: "HOOK_PACKAGING", stage: "05_hook",
-        status: !state.hookEnabled || (hookClean.length >= 12 && hookClean.length <= 42 && !hasEmoji && !hasShortsTag) ? "pass" : "warn",
-        detail: !state.hookEnabled
-          ? "Hook disabled (optional)."
-          : `${hookClean.length} chars · ${hasEmoji ? "remove emoji" : "0 emojis"} · ${hasShortsTag ? "remove #shorts" : "0 #shorts"} (target 18–42ch).`,
-      },
-      {
-        id: "CLIP_DURATION", stage: "01_ingest",
-        status: clipDur >= 20 && clipDur <= 38 ? "pass" : "warn",
-        detail: `Clip window ${clipDur}s (STA-6 viral median: 24–36s optimal loop retention).`,
-      },
-      {
-        id: "ENCODER_VP9_TIER", stage: "03_upscale",
-        status: state.quality === "2k" ? "pass" : "warn",
-        detail: state.quality === "2k"
-          ? "1440×2560 @ 60fps CRF 13 BT.709 + AMD CAS (forces YouTube VP9/AV1 bitrate tier)."
-          : `Quality '${state.quality}' selected; switch to '2k' for YouTube VP9 tier trigger.`,
-      },
-      {
-        id: "OPEN_FLAGS_CLEAR", stage: "06_gate",
-        status: openBlockers === 0 ? "pass" : "fail",
-        detail: openBlockers === 0
-          ? "Zero open Blocker flags — ready for deterministic render."
-          : `${openBlockers} unresolved Blocker flag(s) require change before final export.`,
-      },
+      { id: "ZERO_GAP_SEAM", stage: "02_split", status: "pass", detail: "Flush 816+1744 (2K) edge-to-edge split-screen; 0px gap + auto OBS trim." },
+      { id: "CAPTION_SAFE_ZONE", stage: "04_captions", status: safeY ? "pass" : "warn", detail: `--pos-y ${state.posY} (y=${Math.round(state.posY*2560/1920)} @ 2K) ${safeY ? "clears" : "enters"} Shorts UI.` },
+      { id: "HOOK_PACKAGING", stage: "05_hook", status: !state.hookEnabled || (hookClean.length >= 12 && hookClean.length <= 42 && !hasEmoji && !hasShorts) ? "pass" : "warn", detail: `${hookClean.length}ch · ${hasEmoji?"remove emoji":"0 emojis"} · ${hasShorts?"remove #shorts":"0 #shorts"}.` },
+      { id: "CLIP_DURATION", stage: "01_ingest", status: clipDur >= 20 && clipDur <= 38 ? "pass" : "warn", detail: `${clipDur}s window (STA-6 viral target: 24–36s).` },
+      { id: "ENCODER_VP9_TIER", stage: "03_upscale", status: state.quality === "2k" ? "pass" : "warn", detail: state.quality === "2k" ? "1440×2560 CRF 13 BT.709 + AMD CAS (VP9 tier)." : `Quality '${state.quality}'; switch to 2k for VP9.` },
+      { id: "OPEN_FLAGS_CLEAR", stage: "06_gate", status: openBlockers === 0 ? "pass" : "fail", detail: openBlockers === 0 ? "Zero unresolved Red Blocker markers." : `${openBlockers} Red Blocker marker(s) blocking render.` },
     ];
   }
 
-  // ===== 5. CLI & CODING-AGENT HANDOFF GENERATORS =====
-  function camCropString() {
-    const { x, y, w, h } = state.cam;
-    return `iw*${w.toFixed(2)}:ih*${h.toFixed(2)}:iw*${x.toFixed(2)}:ih*${y.toFixed(2)}`;
+  function buildEditSpec() {
+    return {
+      source: state.sourceLabel,
+      clip: `${state.clipStart}:${state.clipEnd}`,
+      cam_crop: camCropString(),
+      layout: "aaron",
+      quality: state.quality,
+      caption_style: state.captionStyle,
+      caption_color: state.captionColor,
+      pos_y_1920: state.posY,
+      font_scale: state.fontScale,
+      hook: state.hookEnabled ? state.hookText : null,
+      hook_theme: state.hookTheme,
+      cold_open_s: state.coldOpen ? 2.6 : 0,
+      cold_open_sfx: state.coldOpenSfx,
+      trim_dead_air: state.trimDeadAir,
+      zoom_peaks: state.zoomPeaks,
+      grade: { ...state.grade },
+      preview_chunks: state.chunks,
+    };
   }
 
   function buildCliCommand() {
@@ -1223,96 +1265,118 @@
       `  --layout aaron --quality ${state.quality}`,
       `  --caption-style ${state.captionStyle}`,
     ];
-    if (STYLES[state.captionStyle].supportsColor && state.captionColor !== "auto") {
-      parts[parts.length - 1] += ` --caption-color ${state.captionColor}`;
-    }
-    const defaultPos = state.captionStyle === "inverted" ? 1180 : 612;
-    if (Math.abs(state.posY - defaultPos) >= 2) {
-      parts[parts.length - 1] += ` --pos-y ${state.posY}`;
-    }
-    const toggles = [];
-    if (state.coldOpen) toggles.push("--cold-open 2.6");
-    if (state.coldOpenSfx) toggles.push("--cold-open-sfx");
-    if (state.trimDeadAir) toggles.push("--trim-dead-air");
-    if (state.zoomPeaks) toggles.push("--zoom-peaks");
-    if (toggles.length) parts.push("  " + toggles.join(" "));
-    if (state.hookEnabled && state.hookText.trim()) {
-      const safeHook = state.hookText.replace(/"/g, '\\"');
-      parts.push(`  --hook "${safeHook}" --hook-theme ${state.hookTheme}`);
-    }
+    if (STYLES[state.captionStyle].supportsColor && state.captionColor !== "auto") parts[parts.length-1] += ` --caption-color ${state.captionColor}`;
+    const defPos = state.captionStyle === "inverted" ? 1180 : 612;
+    if (Math.abs(state.posY - defPos) >= 2) parts[parts.length-1] += ` --pos-y ${state.posY}`;
+    const tgs = [];
+    if (state.coldOpen) tgs.push("--cold-open 2.6");
+    if (state.coldOpenSfx) tgs.push("--cold-open-sfx");
+    if (state.trimDeadAir) tgs.push("--trim-dead-air");
+    if (state.zoomPeaks) tgs.push("--zoom-peaks");
+    if (tgs.length) parts.push("  " + tgs.join(" "));
+    if (state.hookEnabled && state.hookText.trim()) parts.push(`  --hook "${state.hookText.replace(/"/g,'\\"')}" --hook-theme ${state.hookTheme}`);
     parts.push("  --out-dir output");
     return parts.join(" \\\n");
   }
 
-  function buildHarnessSpec() {
-    const gates = evaluateGates();
-    return {
-      harness_card: {
-        name: "STA-6 Editing Harness",
-        version: "4.0.7",
-        architecture: "Control-Agency-Runtime (CAR) · awesome-harness-engineering",
-        invariants: ["zero_black_gap_816_1744", "deterministic_quality_gates", "trace_backed_human_flags"],
-      },
-      edit_spec: {
-        source: state.sourceLabel,
-        clip: `${state.clipStart}:${state.clipEnd}`,
-        cam_crop: camCropString(),
-        layout: "aaron",
-        quality: state.quality,
-        caption_style: state.captionStyle,
-        caption_color: state.captionColor,
-        pos_y_1920: state.posY,
-        hook: state.hookEnabled ? state.hookText : null,
-        hook_theme: state.hookTheme,
-        cold_open_s: state.coldOpen ? 2.6 : 0,
-        cold_open_sfx: state.coldOpenSfx,
-        trim_dead_air: state.trimDeadAir,
-        zoom_peaks: state.zoomPeaks,
-        preview_chunks: state.chunks,
-      },
-      gates: gates.map(g => ({ id: g.id, stage: g.stage, status: g.status, detail: g.detail })),
-      flags: state.flags,
-      cli_command: buildCliCommand().replace(/ \\\n\s+/g, " "),
-    };
-  }
-
   function buildAgentPrompt() {
     const open = state.flags.filter(f => !f.resolved);
-    const gates = evaluateGates().filter(g => g.status !== "pass");
+    const bad = evaluateGates().filter(g => g.status !== "pass");
     const lines = [
-      "Apply these flagged STA-6 editing harness updates in scripts/clip.py and re-verify with `clip.py check`:",
-      "",
-      `Active Spec: style=${state.captionStyle}, color=${state.captionColor}, pos_y=${state.posY}, hook="${state.hookEnabled ? state.hookText : 'none'}" (${state.hookTheme}), cam="${camCropString()}", quality=${state.quality}`,
+      "Use STA-6 AI Bridge MCP (`timeline_overview`, `customize_captions`, `set_clip_grade`, `resolve_marker`) or `scripts/clip.py` to apply these updates:",
+      `Spec: style=${state.captionStyle}, color=${state.captionColor}, pos_y=${state.posY}, grade=${JSON.stringify(state.grade)}, hook="${state.hookEnabled ? state.hookText : 'none'}" (${state.hookTheme})`,
     ];
     if (open.length) {
-      lines.push("", `Open Flags (${open.length}):`);
-      open.forEach((f, idx) => {
+      lines.push("", `Open Resolve Markers (${open.length}):`);
+      open.forEach((f, i) => {
         const pin = f.pin ? ` @ 2K(${f.pin.x2k},${f.pin.y2k})` : "";
-        lines.push(`${idx + 1}. [${f.severity.toUpperCase()} · ${f.stage} · ${f.category} · t=${f.t.toFixed(2)}s${pin}] ${f.note}`);
+        lines.push(`${i+1}. [${f.severity.toUpperCase()} · ${f.stage} · ${f.category} · ${fmtSmpte(f.t)}${pin}] ${f.note}`);
       });
-    } else {
-      lines.push("", "Open Flags: None — ready to render with the CLI command below.");
-    }
-    if (gates.length) {
+    } else lines.push("", "Open Markers: None — ready for 2K render.");
+    if (bad.length) {
       lines.push("", "Non-Passing Gates:");
-      gates.forEach(g => lines.push(`- ${g.id} (${g.status.toUpperCase()}): ${g.detail}`));
+      bad.forEach(g => lines.push(`- ${g.id} (${g.status.toUpperCase()}): ${g.detail}`));
     }
-    lines.push("", "Render Command:", buildCliCommand());
+    lines.push("", "Render CLI:", buildCliCommand());
     return lines.join("\n");
   }
 
-  // ===== 6. UI RENDERING & BINDING =====
-  function toast(msg) {
-    const el = document.getElementById("toast");
-    el.textContent = msg;
-    el.classList.add("show");
-    clearTimeout(toast._t);
-    toast._t = setTimeout(() => el.classList.remove("show"), 1900);
+  function renderMcpSetup() {
+    const pyPath = localMcpConfig ? localMcpConfig.mcpServers["sta6-ai-bridge"].command : "/path/to/STA-6/.venv/bin/python";
+    const srvPath = localMcpConfig ? localMcpConfig.mcpServers["sta6-ai-bridge"].args[0] : "/path/to/STA-6/scripts/mcp_bridge.py";
+    const cfg = JSON.stringify({ mcpServers: { "sta6-ai-bridge": { command: pyPath, args: [srvPath] } } }, null, 2);
+    const snippets = {
+      antigravity: `// Add to ~/.gemini/antigravity/mcp_config.json\n${cfg}\n// Then ask: "Call bridge_status, timeline_overview & project_health"`,
+      claude: `claude mcp add sta6-ai-bridge -- "${pyPath}" "${srvPath}"\n# Then ask Claude Code: "Inspect timeline_overview & fix open markers"`,
+      codex: `codex mcp add sta6-ai-bridge -- "${pyPath}" "${srvPath}"\n# Run /mcp in Codex -> call bridge_status & customize_captions`,
+      cursor: `// Cursor Settings -> MCP -> Add global MCP server:\n${cfg}`,
+      resolve: `# Optional: Bridge STA-6 markers into DaVinci Resolve Free/Studio:\nnpx davinci-resolve-ai-bridge-mcp\n# In Resolve: Workspace -> Scripts -> Resolve AI Bridge -> Start AI Bridge (Lua)\n# Ask AI: "Sync STA-6 timeline_overview markers into Resolve via add_marker"`,
+    };
+    document.getElementById("mcpSetupCode").textContent = snippets[activeMcpClient] || cfg;
   }
 
-  async function copyText(txt, label) {
-    try { await navigator.clipboard.writeText(txt); toast(label); }
-    catch { toast("Clipboard blocked — select & copy manually"); }
+  function drawAudioWaveform() {
+    const c = document.getElementById("waveCanvas");
+    const wctx = c.getContext("2d");
+    wctx.clearRect(0, 0, c.width, c.height);
+    wctx.fillStyle = "rgba(74, 222, 128, 0.55)";
+    const bars = 150, bw = c.width / bars;
+    for (let i = 0; i < bars; i++) {
+      // Procedural peak waveform matching 2.6s cold-open climax + steady -18 LUFS crest
+      const env = i < 16 ? 0.92 : (0.42 + 0.42 * Math.abs(Math.sin(i * 0.37) * Math.cos(i * 0.13)));
+      const h = Math.max(4, env * (c.height - 4));
+      wctx.fillRect(i * bw, (c.height - h) / 2, Math.max(1.5, bw - 2), h);
+    }
+  }
+
+  function renderTimelineTracks() {
+    const dur = totalDuration();
+    // 1. SMPTE Ruler Ticks + Resolve Markers
+    const ruler = document.getElementById("tlRuler");
+    ruler.innerHTML = "";
+    const step = dur <= 8 ? 0.5 : (dur <= 20 ? 1 : 2);
+    for (let s = 0; s <= dur + 0.001; s += step) {
+      const pct = clamp((s / dur) * 100, 0, 100);
+      const major = Math.abs(s % (step * 2)) < 0.01;
+      const tk = document.createElement("div");
+      tk.className = "tl-tick" + (major ? " major" : "");
+      tk.style.left = pct.toFixed(2) + "%";
+      if (major && pct < 95) tk.textContent = fmtSmpte(s).slice(3);
+      ruler.appendChild(tk);
+    }
+    state.flags.forEach((f, idx) => {
+      const m = document.createElement("div");
+      m.className = `tl-marker ${f.severity}${f.resolved ? " resolved" : ""}`;
+      m.style.left = clamp((f.t / dur) * 100, 1, 99) + "%";
+      m.title = `#${idx+1} [${f.category}] ${fmtSmpte(f.t)} — ${f.note}`;
+      m.onclick = (e) => { e.stopPropagation(); playing = false; syncPlayBtn(); seekTo(f.t); switchRightTab("flags"); };
+      ruler.appendChild(m);
+    });
+
+    // 2. T1 Captions + Hook Bar
+    const laneT1 = document.getElementById("laneT1");
+    laneT1.innerHTML = "";
+    if (state.hookEnabled && state.hookText.trim()) {
+      const hb = document.createElement("div");
+      hb.className = "clip-bar hook";
+      hb.style.left = "0%";
+      hb.style.width = `${clamp((2.6 / dur) * 100, 6, 100)}%`;
+      hb.textContent = `HOOK: ${state.hookText}`;
+      laneT1.appendChild(hb);
+    }
+    state.chunks.forEach(c => {
+      const b = document.createElement("div");
+      b.className = "clip-bar t1";
+      b.style.left = `${clamp((c.start / dur) * 100, 0, 100)}%`;
+      b.style.width = `${clamp(((c.end - c.start) / dur) * 100, 2, 100)}%`;
+      if (state.hookEnabled) b.style.top = "12px";
+      b.textContent = c.text;
+      b.onclick = (e) => { e.stopPropagation(); seekTo(c.start + 0.06); };
+      laneT1.appendChild(b);
+    });
+
+    document.getElementById("trT1Lbl").textContent = `Captions (${state.captionStyle})`;
+    document.getElementById("v1ClipLabel").textContent = `Gameplay Flush 1744px · ${state.quality.toUpperCase()} · ${state.sourceLabel}`;
   }
 
   function renderWorkflowStrip() {
@@ -1322,215 +1386,146 @@
     WORKFLOW_STAGES.forEach((st, idx) => {
       const stFlags = state.flags.filter(f => !f.resolved && f.stage === st.id);
       const stGates = gates.filter(g => g.stage === st.id);
-      const hasFail = stFlags.some(f => f.severity === "blocker") || stGates.some(g => g.status === "fail");
-      const hasWarn = stFlags.length > 0 || stGates.some(g => g.status === "warn");
-
+      const fail = stFlags.some(f => f.severity === "blocker") || stGates.some(g => g.status === "fail");
+      const warn = stFlags.length > 0 || stGates.some(g => g.status === "warn");
       const node = document.createElement("button");
-      node.className = "stage-node" + (state.activeStage === st.id ? " active" : "") + (hasFail ? " has-flag" : hasWarn ? " warn" : "");
-      let badgeTxt = "OK", badgeCls = "";
-      if (st.id === "04_captions") badgeTxt = STYLES[state.captionStyle].short;
-      if (stFlags.length) { badgeTxt = `${stFlags.length} FLAG`; badgeCls = hasFail ? "fail" : "warn"; }
-      else if (hasFail) { badgeTxt = "BLOCK"; badgeCls = "fail"; }
-      else if (hasWarn) { badgeTxt = "WARN"; badgeCls = "warn"; }
-
-      node.innerHTML = `<span class="stage-num">${st.num}</span><span>${st.label}</span><span class="stage-badge ${badgeCls}">${badgeTxt}</span>`;
-      node.onclick = () => {
-        state.activeStage = st.id;
-        document.getElementById("flagStageSelect").value = st.id;
-        renderWorkflowStrip();
-      };
+      node.className = "stage-node" + (state.activeStage === st.id ? " active" : "") + (fail ? " has-flag" : warn ? " warn" : "");
+      let bTxt = st.id === "04_captions" ? STYLES[state.captionStyle].short : "OK", bCls = "";
+      if (stFlags.length) { bTxt = `${stFlags.length} FLG`; bCls = fail ? "fail" : "warn"; }
+      else if (fail) { bTxt = "BLK"; bCls = "fail"; }
+      else if (warn) { bTxt = "WRN"; bCls = "warn"; }
+      node.innerHTML = `<span class="stage-num">${st.num}</span><span>${st.label}</span><span class="stage-badge ${bCls}">${bTxt}</span>`;
+      node.onclick = () => { state.activeStage = st.id; document.getElementById("flagStageSelect").value = st.id; renderWorkflowStrip(); };
       el.appendChild(node);
-      if (idx < WORKFLOW_STAGES.length - 1) {
-        const arr = document.createElement("span");
-        arr.className = "stage-arrow"; arr.textContent = "›";
-        el.appendChild(arr);
-      }
+      if (idx < WORKFLOW_STAGES.length - 1) { const s = document.createElement("span"); s.className = "stage-sep"; s.textContent = "›"; el.appendChild(s); }
     });
   }
 
   function renderStyleCards() {
     const grid = document.getElementById("styleGrid");
     grid.innerHTML = "";
-    const keys = ["shine", "stopmotion", "flicker", "inverted", "hormozi"];
-    keys.forEach((k, i) => {
+    ["shine", "stopmotion", "flicker", "inverted", "hormozi"].forEach((k, i) => {
       const m = STYLES[k];
-      const btn = document.createElement("button");
-      btn.className = "style-card" + (state.captionStyle === k ? " active" : "") + (i === 4 ? " span2" : "");
-      btn.innerHTML = `<div class="sc-name"><span>${m.name}</span><span class="sc-tag">${k}</span></div><div class="sc-desc">${m.desc}</div>`;
-      btn.onclick = () => {
+      const b = document.createElement("button");
+      b.className = "fx-card" + (state.captionStyle === k ? " active" : "") + (i === 4 ? " span2" : "");
+      b.innerHTML = `<div class="fx-top"><span>${m.name}</span><span class="fx-badge">${k}</span></div><div class="fx-desc">${m.desc}</div>`;
+      b.onclick = () => {
         state.captionStyle = k;
         state.captionColor = m.supportsColor ? m.defaultColor : "auto";
         state.posY = k === "inverted" ? 1180 : 612;
         syncControlsFromState();
         refreshAll();
-        toast(`Switched caption style → ${m.name}`);
+        toast(`Caption generator → ${m.name}`);
       };
-      grid.appendChild(btn);
+      grid.appendChild(b);
     });
   }
 
   function renderColorSwatches() {
     const box = document.getElementById("colorSwatches");
-    const supports = STYLES[state.captionStyle].supportsColor;
-    document.getElementById("colorSection").style.opacity = supports ? "1" : "0.45";
-    document.getElementById("activeColorVal").textContent = supports ? state.captionColor : "n/a (style native)";
+    const sup = STYLES[state.captionStyle].supportsColor;
+    document.getElementById("colorSection").style.opacity = sup ? "1" : "0.45";
+    document.getElementById("activeColorVal").textContent = sup ? state.captionColor : "native";
     box.innerHTML = "";
     Object.entries(COLORS).forEach(([k, c]) => {
-      const btn = document.createElement("button");
-      btn.className = "swatch" + (state.captionColor === k ? " active" : "");
-      btn.disabled = !supports;
-      btn.innerHTML = `<span class="swatch-dot" style="background:${c.fill}"></span>${c.label}`;
-      btn.onclick = () => {
-        state.captionColor = k;
-        refreshAll();
-      };
-      box.appendChild(btn);
+      const b = document.createElement("button");
+      b.className = "swatch" + (state.captionColor === k ? " active" : "");
+      b.disabled = !sup;
+      b.innerHTML = `<span class="sdot" style="background:${c.fill}"></span>${c.label}`;
+      b.onclick = () => { state.captionColor = k; refreshAll(); };
+      box.appendChild(b);
     });
   }
 
   function renderChunks() {
     const list = document.getElementById("chunkList");
-    const track = document.getElementById("trackChunks");
-    const dur = totalDuration();
     list.innerHTML = "";
-    track.innerHTML = "";
     state.chunks.forEach((c, idx) => {
       const row = document.createElement("div");
       row.className = "chunk-row";
-      row.innerHTML = `
-        <button class="chunk-time" title="Jump playhead to ${c.start.toFixed(1)}s">${c.start.toFixed(1)}s</button>
-        <input type="text" value="${c.text.replace(/"/g, "&quot;")}" />
-        <button class="chunk-del" title="Remove phrase">×</button>`;
-      row.querySelector(".chunk-time").onclick = () => seekTo(c.start + 0.05);
-      row.querySelector("input").oninput = (e) => {
-        state.chunks[idx].text = e.target.value;
-        persist();
-        renderTrackChunksOnly();
-        refreshOutputsOnly();
-      };
-      row.querySelector(".chunk-del").onclick = () => {
-        if (state.chunks.length <= 1) return;
-        state.chunks.splice(idx, 1);
-        refreshAll();
-      };
+      row.innerHTML = `<button class="chunk-tc">${c.start.toFixed(1)}s</button><input type="text" value="${c.text.replace(/"/g,"&quot;")}" /><button class="btn xs" style="padding:2px;">×</button>`;
+      row.querySelector(".chunk-tc").onclick = () => seekTo(c.start + 0.05);
+      row.querySelector("input").oninput = e => { state.chunks[idx].text = e.target.value; persistLocal(); renderTimelineTracks(); refreshOutputsOnly(); };
+      row.querySelector(".btn").onclick = () => { if (state.chunks.length > 1) { state.chunks.splice(idx, 1); refreshAll(); } };
       list.appendChild(row);
-    });
-    renderTrackChunksOnly();
-  }
-
-  function renderTrackChunksOnly() {
-    const track = document.getElementById("trackChunks");
-    const dur = totalDuration();
-    track.innerHTML = "";
-    state.chunks.forEach(c => {
-      const d = document.createElement("div");
-      d.className = "track-chunk";
-      d.style.left = `${clamp((c.start / dur) * 100, 0, 100)}%`;
-      d.style.width = `${clamp(((c.end - c.start) / dur) * 100, 2, 100)}%`;
-      d.textContent = c.text;
-      track.appendChild(d);
     });
   }
 
   function renderFlags() {
     const list = document.getElementById("flagList");
-    const pinLayer = document.getElementById("pinLayer");
-    const trackFlags = document.getElementById("trackFlags");
-    const dur = totalDuration();
-
-    const openCnt = state.flags.filter(f => !f.resolved).length;
-    document.getElementById("cntFlags").textContent = openCnt;
-    document.getElementById("cntFlags").className = "cnt" + (openCnt > 0 ? " alert" : " ok");
-    document.getElementById("openFlagLabel").textContent = `${openCnt} open / ${state.flags.length} total`;
-
-    list.innerHTML = "";
-    pinLayer.innerHTML = "";
-    trackFlags.innerHTML = "";
-
+    const pins = document.getElementById("pinLayer");
+    const open = state.flags.filter(f => !f.resolved).length;
+    document.getElementById("cntFlags").textContent = open;
+    document.getElementById("cntFlags").className = "cnt " + (open > 0 ? "alert" : "ok");
+    document.getElementById("openFlagLabel").textContent = `${open} open / ${state.flags.length}`;
+    list.innerHTML = ""; pins.innerHTML = "";
     if (!state.flags.length) {
-      list.innerHTML = `<div style="padding:18px 10px;text-align:center;color:var(--muted);font-size:12px;border:1px dashed var(--border);border-radius:8px;">
-        No changes flagged yet.<br/>Click <b>Flag Change (F)</b> or <b>Alt+Click</b> directly on the 9:16 preview to pin an instant review note.
-      </div>`;
+      list.innerHTML = `<div style="padding:12px;text-align:center;color:var(--muted);font-size:11px;border:1px dashed var(--border);border-radius:3px;">No markers yet. Press <b>F</b> or <b>Alt+Click</b> on the monitor to pin an instant change flag.</div>`;
       return;
     }
-
     state.flags.forEach((f, idx) => {
-      const num = idx + 1;
+      const n = idx + 1;
       const card = document.createElement("div");
       card.className = `flag-card ${f.severity}${f.resolved ? " resolved" : ""}`;
-      const pinBadge = f.pin ? `<span>@ (${f.pin.x2k},${f.pin.y2k})</span>` : "";
+      const pinTxt = f.pin ? ` · (${f.pin.x2k},${f.pin.y2k})` : "";
       card.innerHTML = `
-        <div class="flag-top">
-          <div class="flag-meta">
-            <strong style="color:var(--text);">#${num}</strong>
-            <span>${f.category}</span>
-            <span>·</span>
-            <span>${f.stage}</span>
-            <span>·</span>
-            <button class="btn sm" style="padding:1px 5px;font-family:var(--mono);font-size:10px;" data-jump>${fmtTime(f.t)}</button>
-            ${pinBadge}
-          </div>
-          <div class="flag-actions">
-            <button class="btn sm" data-toggle>${f.resolved ? "Reopen" : "Done"}</button>
-            <button class="btn sm" data-del style="color:var(--red);">×</button>
+        <div class="row" style="margin-bottom:0;">
+          <span style="font-family:var(--mono);font-size:10px;color:var(--muted);"><b style="color:#fff;">#${n}</b> ${f.category} · ${f.stage}${pinTxt}</span>
+          <div style="display:flex;gap:3px;">
+            <button class="btn xs" data-jmp>${fmtSmpte(f.t).slice(3)}</button>
+            <button class="btn xs" data-tog>${f.resolved ? "Reopen" : "Done"}</button>
+            <button class="btn xs" data-del style="color:#ff8a80;">×</button>
           </div>
         </div>
-        <div class="flag-note">${escapeHtml(f.note)}</div>`;
-      card.querySelector("[data-jump]").onclick = () => { playing = false; syncPlayBtn(); seekTo(f.t); };
-      card.querySelector("[data-toggle]").onclick = () => { f.resolved = !f.resolved; refreshAll(); };
+        <div style="font-size:11.5px;line-height:1.35;">${escapeHtml(f.note)}</div>`;
+      card.querySelector("[data-jmp]").onclick = () => { playing = false; syncPlayBtn(); seekTo(f.t); };
+      card.querySelector("[data-tog]").onclick = () => { f.resolved = !f.resolved; refreshAll(); };
       card.querySelector("[data-del]").onclick = () => { state.flags.splice(idx, 1); refreshAll(); };
       list.appendChild(card);
 
-      // Timeline marker
-      const tf = document.createElement("div");
-      tf.className = "track-flag" + (f.resolved ? " resolved" : "");
-      tf.style.left = `${clamp((f.t / dur) * 100, 1, 99)}%`;
-      tf.title = `#${num} [${f.category}] ${f.note}`;
-      tf.onclick = (e) => { e.stopPropagation(); playing = false; syncPlayBtn(); seekTo(f.t); };
-      trackFlags.appendChild(tf);
-
-      // Canvas spatial pin
       if (f.pin) {
         const dot = document.createElement("div");
         dot.className = `pin-dot ${f.severity}${f.resolved ? " resolved" : ""}`;
         dot.style.left = `${(f.pin.nx * 100).toFixed(2)}%`;
         dot.style.top = `${(f.pin.ny * 100).toFixed(2)}%`;
-        dot.textContent = num;
-        dot.title = `#${num} (${fmtTime(f.t)}): ${f.note}`;
-        dot.onclick = () => { playing = false; syncPlayBtn(); seekTo(f.t); switchTab("flags"); };
-        pinLayer.appendChild(dot);
+        dot.textContent = n;
+        dot.title = `#${n} ${fmtSmpte(f.t)}: ${f.note}`;
+        dot.onclick = () => { playing = false; syncPlayBtn(); seekTo(f.t); switchRightTab("flags"); };
+        pins.appendChild(dot);
       }
     });
   }
 
   function renderGates() {
     const gates = evaluateGates();
-    const passCnt = gates.filter(g => g.status === "pass").length;
-    const hasFail = gates.some(g => g.status === "fail");
+    const pass = gates.filter(g => g.status === "pass").length;
+    const fail = gates.some(g => g.status === "fail");
     const badge = document.getElementById("cntGates");
-    badge.textContent = `${passCnt}/${gates.length}`;
-    badge.className = "cnt " + (hasFail ? "alert" : passCnt === gates.length ? "ok" : "");
-
+    badge.textContent = `${pass}/${gates.length}`;
+    badge.className = "cnt " + (fail ? "alert" : pass === gates.length ? "ok" : "");
     const box = document.getElementById("gateList");
     box.innerHTML = "";
     gates.forEach(g => {
-      const card = document.createElement("div");
-      card.className = "gate-card";
-      card.innerHTML = `
-        <div><div class="gate-title">${g.id}</div><div class="gate-detail">${g.detail}</div></div>
-        <span class="gate-status ${g.status}">${g.status.toUpperCase()}</span>`;
-      box.appendChild(card);
+      const c = document.createElement("div");
+      c.className = "gate-card";
+      c.innerHTML = `<div><div style="font-family:var(--mono);font-size:10.5px;font-weight:700;">${g.id}</div><div style="font-size:10.5px;color:var(--muted);">${g.detail}</div></div><span class="gate-st ${g.status}">${g.status.toUpperCase()}</span>`;
+      box.appendChild(c);
     });
   }
 
   function refreshOutputsOnly() {
     document.getElementById("cliOutput").textContent = buildCliCommand();
     document.getElementById("promptOutput").textContent = buildAgentPrompt();
-    document.getElementById("specOutput").textContent = JSON.stringify(buildHarnessSpec(), null, 2);
+    document.getElementById("specOutput").textContent = JSON.stringify({
+      harness_card: { name: "STA-6 Resolve-Style Editing Harness", version: "4.0.8", bridge: "sta6-ai-bridge MCP (12 tools)" },
+      edit_spec: buildEditSpec(),
+      flags: state.flags,
+      snapshots: Object.keys(state.snapshots || {}),
+    }, null, 2);
   }
 
-  function refreshAll() {
-    persist();
+  function refreshAll(pushLocal = true) {
+    persistLocal();
     document.getElementById("activeStyleFlag").textContent = `--caption-style ${state.captionStyle}`;
     document.getElementById("posYVal").textContent = `${state.posY} (y=${Math.round(state.posY*2560/1920)} @ 2K)`;
     document.getElementById("fontScaleVal").textContent = `${state.fontScale.toFixed(2)}×`;
@@ -1539,15 +1534,21 @@
     document.getElementById("camYVal").textContent = state.cam.y.toFixed(2);
     document.getElementById("camWVal").textContent = state.cam.w.toFixed(2);
     document.getElementById("camHVal").textContent = state.cam.h.toFixed(2);
+    document.getElementById("gBrightVal").textContent = (state.grade.brightness >= 0 ? "+" : "") + state.grade.brightness.toFixed(2);
+    document.getElementById("gContrastVal").textContent = state.grade.contrast.toFixed(2);
+    document.getElementById("gSatVal").textContent = state.grade.saturation.toFixed(2);
+    document.getElementById("gGammaVal").textContent = state.grade.gamma.toFixed(2);
     document.getElementById("clipDurVal").textContent = `${Math.max(0, state.clipEnd - state.clipStart)}s`;
+    document.getElementById("dockInfo").textContent = `${state.quality === "2k" ? "1440×2560" : "1080×1920"} · 60fps · Zero-Gap · ${state.captionStyle.toUpperCase()}`;
     renderStyleCards();
     renderColorSwatches();
     renderChunks();
     renderFlags();
     renderGates();
     renderWorkflowStrip();
+    renderTimelineTracks();
     refreshOutputsOnly();
-    if (localConnected) syncFlagsToLocal(false);
+    if (pushLocal && localConnected) pushStateToLocal(false);
   }
 
   function syncControlsFromState() {
@@ -1558,10 +1559,12 @@
     document.getElementById("chkHook").checked = state.hookEnabled;
     document.getElementById("hookInput").value = state.hookText;
     document.querySelectorAll("#hookThemeRow .chip").forEach(b => b.classList.toggle("active", b.dataset.theme === state.hookTheme));
-    document.getElementById("camX").value = state.cam.x;
-    document.getElementById("camY").value = state.cam.y;
-    document.getElementById("camW").value = state.cam.w;
-    document.getElementById("camH").value = state.cam.h;
+    document.getElementById("camX").value = state.cam.x; document.getElementById("camY").value = state.cam.y;
+    document.getElementById("camW").value = state.cam.w; document.getElementById("camH").value = state.cam.h;
+    document.getElementById("gBright").value = state.grade.brightness;
+    document.getElementById("gContrast").value = state.grade.contrast;
+    document.getElementById("gSat").value = state.grade.saturation;
+    document.getElementById("gGamma").value = state.grade.gamma;
     document.getElementById("clipStart").value = state.clipStart;
     document.getElementById("clipEnd").value = state.clipEnd;
     document.getElementById("qualitySelect").value = state.quality;
@@ -1571,220 +1574,286 @@
     document.getElementById("chkZoom").checked = state.zoomPeaks;
   }
 
-  function escapeHtml(s) {
-    return s.replace(/[&<>"']/g, m => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[m]));
+  function escapeHtml(s) { return s.replace(/[&<>"']/g, m => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[m])); }
+  function toast(msg) { const el = document.getElementById("toast"); el.textContent = msg; el.classList.add("show"); clearTimeout(toast._t); toast._t = setTimeout(() => el.classList.remove("show"), 1900); }
+  async function copyText(t, lbl) { try { await navigator.clipboard.writeText(t); toast(lbl); } catch { toast("Select & copy manually"); } }
+  function seekTo(sec) { playhead = clamp(sec, 0, totalDuration() - 0.01); if (hasUserVideo && isFinite(userVideo.duration)) userVideo.currentTime = playhead; updatePendingPinLabel(); }
+  function syncPlayBtn() { document.getElementById("btnPlayPause").textContent = playing ? "Pause" : "Play"; if (hasUserVideo) { playing ? userVideo.play().catch(()=>{}) : userVideo.pause(); } }
+  function setPinMode(on) { pinMode = on; mainCanvas.classList.toggle("pin-cursor", on); document.getElementById("btnPinMode").classList.toggle("on", on); document.getElementById("pinBanner").classList.toggle("show", on); }
+  function updatePendingPinLabel() { document.getElementById("pendingPinText").textContent = pendingPin ? `@ ${fmtSmpte(pendingPin.t)} · 2K(${pendingPin.x2k},${pendingPin.y2k})` : `@ ${fmtSmpte(playhead)}`; }
+
+  function switchLeftTab(n) {
+    document.querySelectorAll("[data-ltab]").forEach(b => b.classList.toggle("active", b.dataset.ltab === n));
+    document.querySelectorAll("[id^='lpane-']").forEach(p => p.classList.toggle("active", p.id === `lpane-${n}`));
+  }
+  function switchRightTab(n) {
+    document.querySelectorAll("[data-rtab]").forEach(b => b.classList.toggle("active", b.dataset.rtab === n));
+    document.querySelectorAll("[id^='rpane-']").forEach(p => p.classList.toggle("active", p.id === `rpane-${n}`));
   }
 
-  function seekTo(sec) {
-    playhead = clamp(sec, 0, totalDuration() - 0.01);
-    if (hasUserVideo && isFinite(userVideo.duration)) userVideo.currentTime = playhead;
-    updatePendingPinLabel();
-  }
-
-  function syncPlayBtn() {
-    document.getElementById("btnPlayPause").textContent = playing ? "Pause" : "Play";
-    if (hasUserVideo) { playing ? userVideo.play().catch(() => {}) : userVideo.pause(); }
-  }
-
-  function setPinMode(on) {
-    pinMode = on;
-    mainCanvas.classList.toggle("pin-cursor", on);
-    document.getElementById("btnPinMode").classList.toggle("pin-on", on);
-    document.getElementById("pinBanner").classList.toggle("show", on);
-  }
-
-  function updatePendingPinLabel() {
-    const el = document.getElementById("pendingPinText");
-    if (pendingPin) {
-      el.textContent = `@ t=${pendingPin.t.toFixed(2)}s · 2K(${pendingPin.x2k}, ${pendingPin.y2k})`;
-    } else {
-      el.textContent = `@ t=${playhead.toFixed(2)}s (Frame-level)`;
-    }
-  }
-
-  function switchTab(name) {
-    document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.dataset.tab === name));
-    document.querySelectorAll(".tab-pane").forEach(p => p.classList.toggle("active", p.id === `pane-${name}`));
-  }
-
-  function addFlag() {
-    const input = document.getElementById("flagNoteInput");
-    const note = input.value.trim();
-    if (!note) { input.focus(); toast("Type a quick note describing the change"); return; }
-    const stage = document.getElementById("flagStageSelect").value;
+  function addFlag(noteOverride = null) {
+    const inp = document.getElementById("flagNoteInput");
+    const note = (noteOverride !== null ? noteOverride : inp.value).trim();
+    if (!note) { inp.focus(); toast("Describe the change needed"); return; }
     state.flags.unshift({
-      id: "flg_" + Date.now().toString(36),
+      id: "mkr_" + Date.now().toString(36),
       t: Number((pendingPin ? pendingPin.t : playhead).toFixed(2)),
-      stage,
+      stage: document.getElementById("flagStageSelect").value,
       category: selectedCat,
       severity: selectedSev,
       note,
-      pin: pendingPin ? { x2k: pendingPin.x2k, y2k: pendingPin.y2k, nx: pendingPin.nx, ny: pendingPin.ny } : null,
-      spec_snapshot: { style: state.captionStyle, color: state.captionColor, pos_y: state.posY },
+      pin: pendingPin ? { ...pendingPin } : null,
       resolved: false,
       created_at: new Date().toISOString(),
     });
-    input.value = "";
-    pendingPin = null;
-    setPinMode(false);
-    updatePendingPinLabel();
+    if (noteOverride === null) inp.value = "";
+    pendingPin = null; setPinMode(false); updatePendingPinLabel();
     refreshAll();
-    toast("Change flagged instantly in harness trace!");
+    toast("Dropped Resolve marker & synced to AI Bridge!");
   }
 
-  // ===== 7. EVENT LISTENERS =====
-  document.querySelectorAll(".tab").forEach(t => t.onclick = () => switchTab(t.dataset.tab));
-  document.getElementById("posYSlider").oninput = e => { state.posY = Number(e.target.value); refreshAll(); };
-  document.getElementById("fontScaleSlider").oninput = e => { state.fontScale = Number(e.target.value); refreshAll(); };
-  document.getElementById("btnSnapSeam").onclick = () => {
-    state.posY = state.captionStyle === "inverted" ? 1180 : 612;
-    document.getElementById("posYSlider").value = state.posY;
-    refreshAll();
-    toast(`Snapped to optimal ${state.captionStyle === "inverted" ? "gameplay" : "flush seam"} Y=${state.posY}`);
-  };
-  document.getElementById("chkSafeZones").onchange = e => { state.safeZones = e.target.checked; persist(); };
-  document.getElementById("chkSeamRuler").onchange = e => { state.seamRuler = e.target.checked; persist(); };
-  document.getElementById("chkHook").onchange = e => { state.hookEnabled = e.target.checked; refreshAll(); };
-  document.getElementById("hookInput").oninput = e => { state.hookText = e.target.value; refreshAll(); };
-  document.querySelectorAll("#hookThemeRow .chip").forEach(b => b.onclick = () => {
-    state.hookTheme = b.dataset.theme;
-    syncControlsFromState();
-    refreshAll();
+  // ===== 5. EVENTS, DAVINCI PAGE DOCK & LIVE MCP BRIDGE =====
+  document.querySelectorAll("[data-ltab]").forEach(b => b.onclick = () => switchLeftTab(b.dataset.ltab));
+  document.querySelectorAll("[data-rtab]").forEach(b => b.onclick = () => switchRightTab(b.dataset.rtab));
+  document.getElementById("bridgePill").onclick = () => switchLeftTab("bridge");
+
+  // Bottom DaVinci Resolve 6-Page Workspace Switcher
+  document.querySelectorAll("#resolveDock .dock-btn").forEach(btn => {
+    btn.onclick = () => {
+      document.querySelectorAll("#resolveDock .dock-btn").forEach(x => x.classList.toggle("active", x === btn));
+      const p = btn.dataset.page;
+      if (p === "media") { switchLeftTab("media"); switchRightTab("color"); }
+      else if (p === "cut") { switchLeftTab("media"); switchRightTab("flags"); }
+      else if (p === "edit") { switchLeftTab("effects"); switchRightTab("caption"); }
+      else if (p === "fusion") { switchLeftTab("effects"); switchRightTab("caption"); toast("Fusion Caption FX & Viral Shine active"); }
+      else if (p === "color") { switchLeftTab("effects"); switchRightTab("color"); }
+      else if (p === "deliver") { switchLeftTab("bridge"); switchRightTab("deliver"); }
+    };
   });
 
-  ["camX", "camY", "camW", "camH"].forEach(id => {
-    const key = id.slice(3).toLowerCase();
-    document.getElementById(id).oninput = e => { state.cam[key] = Number(e.target.value); refreshAll(); };
+  // Inspector bindings
+  document.getElementById("posYSlider").oninput = e => { state.posY = Number(e.target.value); refreshAll(); };
+  document.getElementById("fontScaleSlider").oninput = e => { state.fontScale = Number(e.target.value); refreshAll(); };
+  document.getElementById("btnSnapSeam").onclick = () => { state.posY = state.captionStyle === "inverted" ? 1180 : 612; syncControlsFromState(); refreshAll(); toast(`Snapped Y=${state.posY}`); };
+  document.getElementById("chkSafeZones").onchange = e => { state.safeZones = e.target.checked; persistLocal(); };
+  document.getElementById("chkSeamRuler").onchange = e => { state.seamRuler = e.target.checked; persistLocal(); };
+  document.getElementById("chkHook").onchange = e => { state.hookEnabled = e.target.checked; refreshAll(); };
+  document.getElementById("hookInput").oninput = e => { state.hookText = e.target.value; refreshAll(); };
+  document.querySelectorAll("#hookThemeRow .chip").forEach(b => b.onclick = () => { state.hookTheme = b.dataset.theme; syncControlsFromState(); refreshAll(); });
+
+  [["gBright","brightness"],["gContrast","contrast"],["gSat","saturation"],["gGamma","gamma"]].forEach(([id, k]) => {
+    document.getElementById(id).oninput = e => { state.grade[k] = Number(e.target.value); refreshAll(); };
   });
-  document.getElementById("btnResetCam").onclick = () => {
-    state.cam = { x: 0.00, y: 0.56, w: 0.37, h: 0.43 };
-    syncControlsFromState(); refreshAll();
-  };
-  document.getElementById("clipStart").oninput = e => { state.clipStart = Math.max(0, Number(e.target.value) || 0); refreshAll(); };
-  document.getElementById("clipEnd").oninput = e => { state.clipEnd = Math.max(1, Number(e.target.value) || 1); refreshAll(); };
+  document.getElementById("btnResetGrade").onclick = () => { state.grade = { brightness: 0.04, contrast: 1.08, saturation: 1.12, gamma: 1.00 }; syncControlsFromState(); refreshAll(); };
+  ["camX","camY","camW","camH"].forEach(id => { document.getElementById(id).oninput = e => { state.cam[id.slice(3).toLowerCase()] = Number(e.target.value); refreshAll(); }; });
+  document.getElementById("btnResetCam").onclick = () => { state.cam = { x: 0.00, y: 0.56, w: 0.37, h: 0.43 }; syncControlsFromState(); refreshAll(); };
+  document.getElementById("clipStart").oninput = e => { state.clipStart = Math.max(0, Number(e.target.value)||0); refreshAll(); };
+  document.getElementById("clipEnd").oninput = e => { state.clipEnd = Math.max(1, Number(e.target.value)||1); refreshAll(); };
   document.getElementById("qualitySelect").onchange = e => { state.quality = e.target.value; refreshAll(); };
   document.getElementById("chkColdOpen").onchange = e => { state.coldOpen = e.target.checked; refreshAll(); };
   document.getElementById("chkSfx").onchange = e => { state.coldOpenSfx = e.target.checked; refreshAll(); };
   document.getElementById("chkDeadAir").onchange = e => { state.trimDeadAir = e.target.checked; refreshAll(); };
   document.getElementById("chkZoom").onchange = e => { state.zoomPeaks = e.target.checked; refreshAll(); };
-
   document.getElementById("btnAddChunk").onclick = () => {
-    const last = state.chunks[state.chunks.length - 1];
-    const st = last ? Number(last.end.toFixed(2)) : 0;
+    const last = state.chunks[state.chunks.length - 1], st = last ? Number(last.end.toFixed(2)) : 0;
     state.chunks.push({ start: st, end: Number((st + 1.8).toFixed(2)), text: "New caption line" });
     refreshAll();
   };
 
-  // Transport & timeline scrub
+  // Transport & Timeline scrubbing
   document.getElementById("btnPlayPause").onclick = () => { playing = !playing; syncPlayBtn(); };
   document.getElementById("btnRestart").onclick = () => seekTo(0);
+  document.getElementById("btnJumpEnd").onclick = () => seekTo(totalDuration() - 0.02);
+  document.getElementById("btnStepBack").onclick = () => { playing = false; syncPlayBtn(); seekTo(playhead - 1/60); };
+  document.getElementById("btnStepFwd").onclick = () => { playing = false; syncPlayBtn(); seekTo(playhead + 1/60); };
   document.getElementById("btnReplayHook").onclick = () => { seekTo(0); playing = true; syncPlayBtn(); };
 
-  const trackEl = document.getElementById("timelineTrack");
+  const tlEl = document.getElementById("timelineLanes");
   let scrubbing = false;
-  const scrubFromEvent = e => {
-    const r = trackEl.getBoundingClientRect();
-    const frac = clamp((e.clientX - r.left) / r.width, 0, 1);
-    seekTo(frac * totalDuration());
-  };
-  trackEl.onmousedown = e => { scrubbing = true; scrubFromEvent(e); };
-  window.addEventListener("mousemove", e => { if (scrubbing) scrubFromEvent(e); });
+  const scrub = e => { const r = tlEl.getBoundingClientRect(); seekTo(clamp((e.clientX - r.left) / r.width, 0, 1) * totalDuration()); };
+  tlEl.onmousedown = e => { scrubbing = true; scrub(e); };
+  window.addEventListener("mousemove", e => { if (scrubbing) scrub(e); });
   window.addEventListener("mouseup", () => { scrubbing = false; });
 
-  // Local instant video loader (0ms zero-upload browser blob!)
+  // Snapshot & Compare A/B (Resolve AI Bridge preview_timeline / compare_timelines)
+  document.getElementById("btnSnapTimeline").onclick = () => {
+    state.snapshots = state.snapshots || {};
+    state.snapshots.original = buildEditSpec();
+    refreshAll();
+    toast("Saved 'original' snapshot — tweak captions & click Compare A/B!");
+  };
+  document.getElementById("btnCompareSnap").onclick = () => {
+    if (!state.snapshots || !state.snapshots.original) {
+      state.snapshots = { ...(state.snapshots || {}), original: buildEditSpec() };
+      toast("Saved baseline snapshot first — make an edit, then click Compare A/B!");
+      refreshAll();
+      return;
+    }
+    compareOriginal = !compareOriginal;
+    document.getElementById("btnCompareSnap").classList.toggle("accent", compareOriginal);
+    toast(compareOriginal ? "Viewing ORIGINAL snapshot (A)" : "Viewing CURRENT edit (B)");
+  };
+
+  // Local 0ms Video Import
   function loadLocalFile(file) {
     if (!file || !file.type.startsWith("video/")) return;
     if (userVideo.src) URL.revokeObjectURL(userVideo.src);
     userVideo.src = URL.createObjectURL(file);
     userVideo.onloadedmetadata = () => {
-      hasUserVideo = true;
-      state.sourceLabel = file.name;
-      document.getElementById("sourcePill").textContent = `Local: ${file.name.slice(0, 22)}`;
-      document.getElementById("btnClearDemo").style.display = "inline-flex";
+      hasUserVideo = true; state.sourceLabel = file.name;
+      document.getElementById("userMediaCard").style.display = "grid";
+      document.getElementById("userMediaName").textContent = file.name;
+      document.getElementById("userMediaMeta").textContent = `${userVideo.videoWidth}×${userVideo.videoHeight} · ${userVideo.duration.toFixed(1)}s`;
+      document.getElementById("demoMediaCard").classList.remove("active");
+      document.getElementById("userMediaCard").classList.add("active");
       seekTo(0); playing = true; syncPlayBtn(); refreshAll();
-      toast(`Loaded ${file.name} at 60fps zero-lag!`);
+      toast(`Imported ${file.name} into Media Pool (0ms lag)!`);
     };
   }
   document.getElementById("btnUpload").onclick = () => document.getElementById("videoUpload").click();
+  document.getElementById("btnUpload2").onclick = () => document.getElementById("videoUpload").click();
   document.getElementById("videoUpload").onchange = e => loadLocalFile(e.target.files[0]);
-  document.getElementById("btnClearDemo").onclick = () => {
-    hasUserVideo = false;
-    userVideo.pause();
-    state.sourceLabel = "<VIDEO_OR_URL>";
-    document.getElementById("sourcePill").textContent = "Demo: GTA 6 1080p";
-    document.getElementById("btnClearDemo").style.display = "none";
+  document.getElementById("demoMediaCard").onclick = () => {
+    hasUserVideo = false; userVideo.pause(); state.sourceLabel = "<VIDEO_OR_URL>";
+    document.getElementById("demoMediaCard").classList.add("active");
+    document.getElementById("userMediaCard").classList.remove("active");
     refreshAll();
   };
+  document.getElementById("userMediaCard").onclick = () => {
+    if (!userVideo.src) return;
+    hasUserVideo = true;
+    document.getElementById("userMediaCard").classList.add("active");
+    document.getElementById("demoMediaCard").classList.remove("active");
+    playing = true; syncPlayBtn(); refreshAll();
+  };
   const dropZone = document.getElementById("dropZone");
-  dropZone.ondragover = e => { e.preventDefault(); };
+  dropZone.ondragover = e => e.preventDefault();
   dropZone.ondrop = e => { e.preventDefault(); loadLocalFile(e.dataTransfer.files[0]); };
 
-  // Instant Flagging interactions
+  // Flagging & Markers
   document.getElementById("btnPinMode").onclick = () => setPinMode(!pinMode);
   document.getElementById("btnPickOnFrame").onclick = () => setPinMode(true);
+  document.getElementById("btnQuickFlag").onclick = () => { switchRightTab("flags"); document.getElementById("flagNoteInput").focus(); };
+  document.getElementById("btnQuickFlagAdd").onclick = () => {
+    const q = document.getElementById("quickFlagInput");
+    if (!q.value.trim()) return;
+    addFlag(q.value); q.value = "";
+  };
+  document.getElementById("quickFlagInput").onkeydown = e => { if (e.key === "Enter") { e.preventDefault(); document.getElementById("btnQuickFlagAdd").click(); } };
   mainCanvas.onclick = e => {
     if (!pinMode && !e.altKey) return;
     const r = mainCanvas.getBoundingClientRect();
-    const nx = clamp((e.clientX - r.left) / r.width, 0, 1);
-    const ny = clamp((e.clientY - r.top) / r.height, 0, 1);
+    const nx = clamp((e.clientX - r.left) / r.width, 0, 1), ny = clamp((e.clientY - r.top) / r.height, 0, 1);
     pendingPin = { nx, ny, x2k: Math.round(nx * 1440), y2k: Math.round(ny * 2560), t: playhead };
-    playing = false; syncPlayBtn();
-    setPinMode(false);
-    switchTab("flags");
-    updatePendingPinLabel();
+    playing = false; syncPlayBtn(); setPinMode(false); switchRightTab("flags"); updatePendingPinLabel();
     document.getElementById("flagNoteInput").focus();
-    toast(`Pinned 2K(${pendingPin.x2k}, ${pendingPin.y2k}) @ ${fmtTime(playhead)} — enter change note`);
+    toast(`Pinned 2K(${pendingPin.x2k},${pendingPin.y2k}) @ ${fmtSmpte(playhead)}`);
   };
-  document.querySelectorAll("#flagCatRow .chip").forEach(b => b.onclick = () => {
-    selectedCat = b.dataset.cat;
-    document.querySelectorAll("#flagCatRow .chip").forEach(x => x.classList.toggle("active", x === b));
-  });
-  document.querySelectorAll("#flagSevRow .chip").forEach(b => b.onclick = () => {
-    selectedSev = b.dataset.sev;
-    document.querySelectorAll("#flagSevRow .chip").forEach(x => x.classList.toggle("active", x === b));
-  });
-  document.getElementById("btnSubmitFlag").onclick = addFlag;
-  document.getElementById("flagNoteInput").onkeydown = e => {
-    if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); addFlag(); }
-  };
-  document.getElementById("btnClearFlags").onclick = () => { state.flags = []; refreshAll(); toast("Cleared flags"); };
+  document.querySelectorAll("#flagCatRow .chip").forEach(b => b.onclick = () => { selectedCat = b.dataset.cat; document.querySelectorAll("#flagCatRow .chip").forEach(x => x.classList.toggle("active", x===b)); });
+  document.querySelectorAll("#flagSevRow .chip").forEach(b => b.onclick = () => { selectedSev = b.dataset.sev; document.querySelectorAll("#flagSevRow .chip").forEach(x => x.classList.toggle("active", x===b)); });
+  document.getElementById("btnSubmitFlag").onclick = () => addFlag();
+  document.getElementById("flagNoteInput").onkeydown = e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); addFlag(); } };
+  document.getElementById("btnClearFlags").onclick = () => { state.flags = []; refreshAll(); toast("Cleared markers"); };
 
-  // Copy & Export actions
-  document.getElementById("btnCopyCliTop").onclick = () => copyText(buildCliCommand(), "Copied exact clip.py CLI command!");
-  document.getElementById("btnCopyCli").onclick = () => copyText(buildCliCommand(), "Copied exact clip.py CLI command!");
+  // AI Bridge MCP Tabs & Live Tool Runner (works both locally AND on public web!)
+  document.querySelectorAll("#mcpClientTabs .chip").forEach(b => b.onclick = () => {
+    activeMcpClient = b.dataset.client;
+    document.querySelectorAll("#mcpClientTabs .chip").forEach(x => x.classList.toggle("active", x===b));
+    renderMcpSetup();
+  });
+  document.getElementById("btnCopyMcpSetup").onclick = () => copyText(document.getElementById("mcpSetupCode").textContent, "Copied AI Bridge MCP setup!");
+
+  async function runMcpTool(toolName) {
+    const outEl = document.getElementById("mcpToolOut");
+    if (localConnected) {
+      const r = await fetch("/api/mcp/call", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: toolName, arguments: toolName === "preview_timeline" ? { name: "original" } : {} }),
+      });
+      const data = await r.json();
+      outEl.textContent = JSON.stringify(data.result || data, null, 2);
+      await pullStateFromLocal();
+      toast(`MCP → ${toolName} OK`);
+      return;
+    }
+    // Zero-lag client-side simulation on static GitHub Pages!
+    let sim = {};
+    if (toolName === "bridge_status") sim = { connected: true, mode: "web-sandbox", server: "sta6-ai-bridge v4.0.8", mcp_tools: 12, open_flags: state.flags.filter(f=>!f.resolved).length };
+    else if (toolName === "timeline_overview") sim = { tracks: ["T1 Captions", "V2 Facecam 816px", "V1 Gameplay 1744px", "A1 Audio -18 LUFS"], edit_spec: buildEditSpec(), flags: state.flags };
+    else if (toolName === "project_health") { const g = evaluateGates(); sim = { ready_to_render: g.every(x=>x.status!=="fail"), gates: g }; }
+    else if (toolName === "preview_timeline") { state.snapshots = { ...(state.snapshots||{}), original: buildEditSpec() }; persistLocal(); sim = { ok: true, snapshot: "original", hint: "Edit captions & click compare_timelines or Compare A/B!" }; }
+    else if (toolName === "compare_timelines") {
+      const orig = (state.snapshots||{}).original;
+      const cur = buildEditSpec();
+      if (!orig) sim = { hint: "Run preview_timeline first to capture baseline snapshot." };
+      else {
+        const diffs = {};
+        for (const k of Object.keys(cur)) if (JSON.stringify(orig[k]) !== JSON.stringify(cur[k])) diffs[k] = { original: orig[k], current: cur[k] };
+        sim = { left: "original", right: "current", changed_fields: Object.keys(diffs).length, diffs };
+      }
+    } else if (toolName === "bridge_capabilities") sim = { styles: Object.keys(STYLES), colors: Object.keys(COLORS), hook_themes: Object.keys(HOOK_THEMES), zero_gap_invariant: "816+1744 @ 2K" };
+    outEl.textContent = JSON.stringify(sim, null, 2);
+    toast(`Simulated MCP → ${toolName}`);
+  }
+  document.querySelectorAll("#mcpToolGrid .mcp-btn").forEach(b => b.onclick = () => runMcpTool(b.dataset.tool));
+
+  // Copy & Export buttons
+  document.getElementById("btnCopyCliTop").onclick = () => copyText(buildCliCommand(), "Copied exact clip.py render command!");
+  document.getElementById("btnCopyCli").onclick = () => copyText(buildCliCommand(), "Copied exact clip.py render command!");
   document.getElementById("btnCopyAgentPrompt").onclick = () => copyText(buildAgentPrompt(), "Copied Coding-Agent Fix Prompt!");
   document.getElementById("btnCopyPrompt2").onclick = () => copyText(buildAgentPrompt(), "Copied Coding-Agent Fix Prompt!");
   document.getElementById("btnExportJson").onclick = () => {
-    const blob = new Blob([JSON.stringify(buildHarnessSpec(), null, 2)], { type: "application/json" });
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = `sta6_harness_spec_${state.captionStyle}.json`;
-    a.click();
-    toast("Downloaded sta6_harness_spec JSON!");
+    const blob = new Blob([document.getElementById("specOutput").textContent], { type: "application/json" });
+    const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = `sta6_resolve_harness_${state.captionStyle}.json`; a.click();
+    toast("Exported Harness JSON!");
   };
 
-  // Keyboard shortcuts (zero-friction studio controls)
   window.addEventListener("keydown", e => {
     if (["INPUT", "TEXTAREA", "SELECT"].includes(document.activeElement.tagName)) return;
     if (e.code === "Space") { e.preventDefault(); playing = !playing; syncPlayBtn(); }
-    if (e.key.toLowerCase() === "f") { e.preventDefault(); setPinMode(!pinMode); }
+    if (e.key.toLowerCase() === "f" || e.key.toLowerCase() === "m") { e.preventDefault(); setPinMode(!pinMode); }
     if (e.key === "Escape") { setPinMode(false); pendingPin = null; updatePendingPinLabel(); }
   });
 
-  // ===== 8. OPTIONAL LOCAL ENGINE BRIDGE (when served via scripts/harness.py) =====
-  async function syncFlagsToLocal(notify = true) {
+  // ===== 6. TWO-WAY LIVE SYNC WITH LOCAL AI BRIDGE (scripts/harness.py + scripts/mcp_bridge.py) =====
+  async function pushStateToLocal(notify = true) {
     if (!localConnected) return;
     try {
-      await fetch("/api/flags", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(buildHarnessSpec()),
+      const r = await fetch("/api/state", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ edit_spec: buildEditSpec(), flags: state.flags, snapshots: state.snapshots }),
       });
-      if (notify) toast("Saved harness_flags.json to workspace!");
+      const d = await r.json();
+      if (d.revision) { lastLocalRev = d.revision; document.getElementById("mcpRevLabel").textContent = `rev #${d.revision}`; }
+      if (notify) toast("Synced harness_state.json with AI Bridge MCP!");
     } catch {}
   }
 
-  async function detectLocalEngine() {
+  async function pullStateFromLocal() {
+    if (!localConnected) return;
+    try {
+      const r = await fetch("/api/state", { cache: "no-store" });
+      if (!r.ok) return;
+      const d = await r.json();
+      if (!d.revision || d.revision <= lastLocalRev) return;
+      lastLocalRev = d.revision;
+      document.getElementById("mcpRevLabel").textContent = `rev #${d.revision}`;
+      const es = d.edit_spec || {};
+      if (es.caption_style && STYLES[es.caption_style]) state.captionStyle = es.caption_style;
+      if (es.caption_color && COLORS[es.caption_color]) state.captionColor = es.caption_color;
+      if (es.pos_y_1920) state.posY = Number(es.pos_y_1920);
+      if (es.hook !== undefined) { state.hookEnabled = Boolean(es.hook); state.hookText = es.hook || ""; }
+      if (es.hook_theme) state.hookTheme = es.hook_theme;
+      if (es.grade) state.grade = { ...state.grade, ...es.grade };
+      if (Array.isArray(es.preview_chunks) && es.preview_chunks.length) state.chunks = es.preview_chunks;
+      if (Array.isArray(d.flags)) state.flags = d.flags;
+      if (d.snapshots) state.snapshots = d.snapshots;
+      syncControlsFromState();
+      refreshAll(false);
+    } catch {}
+  }
+
+  async function detectLocalBridge() {
     if (location.protocol === "file:") return;
     try {
       const r = await fetch("/api/health", { cache: "no-store" });
@@ -1792,45 +1861,46 @@
       const d = await r.json();
       if (!d.ok) return;
       localConnected = true;
-      document.getElementById("modePill").classList.add("local");
-      document.getElementById("modeText").textContent = `LOCAL v${d.version}`;
+      localMcpConfig = d.mcp_config || null;
+      lastLocalRev = d.revision || 0;
+      document.getElementById("bridgePill").classList.add("live");
+      document.getElementById("bridgeText").textContent = `MCP: ${d.mcp_tools} LIVE`;
+      document.getElementById("mcpRevLabel").textContent = `rev #${lastLocalRev}`;
       document.getElementById("btnWhop").style.display = "none";
       document.getElementById("btnLocalRender").style.display = "inline-flex";
       document.getElementById("btnRunLocalCheck").style.display = "inline-flex";
       document.getElementById("btnSaveLocalFlags").style.display = "inline-flex";
-      document.getElementById("btnSaveLocalFlags").onclick = () => syncFlagsToLocal(true);
+      renderMcpSetup();
+      document.getElementById("btnSaveLocalFlags").onclick = () => pushStateToLocal(true);
       document.getElementById("btnRunLocalCheck").onclick = async () => {
         const out = document.getElementById("localCheckOut");
-        out.style.display = "block";
-        out.textContent = "Running scripts/clip.py check (2K zero-gap + 5 styles)...";
-        const res = await fetch("/api/check", { method: "POST" });
-        out.textContent = await res.text();
+        out.style.display = "block"; out.textContent = "Running scripts/clip.py check...";
+        out.textContent = await (await fetch("/api/check", { method: "POST" })).text();
       };
       document.getElementById("btnLocalRender").onclick = async () => {
-        const src = prompt("Local video path or YouTube/Twitch URL to render:", state.sourceLabel === "<VIDEO_OR_URL>" ? "" : state.sourceLabel);
+        const src = prompt("Local video path or YouTube/Twitch URL:", state.sourceLabel === "<VIDEO_OR_URL>" ? "" : state.sourceLabel);
         if (!src) return;
-        state.sourceLabel = src.trim();
-        refreshAll();
-        toast("Rendering 2K 60fps MP4 locally via clip.py...");
-        const res = await fetch("/api/render", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(buildHarnessSpec().edit_spec),
+        state.sourceLabel = src.trim(); refreshAll();
+        toast("Rendering 2K 60fps via AI Bridge...");
+        const res = await fetch("/api/mcp/call", {
+          method: "POST", headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name: "render_current_timeline", arguments: { source: state.sourceLabel } }),
         });
         const txt = await res.text();
-        switchTab("gates");
-        const out = document.getElementById("localCheckOut");
-        out.style.display = "block";
-        out.textContent = txt;
-        toast(res.ok ? "2K 60fps render complete!" : "Render failed — see Gates output");
+        switchRightTab("flags");
+        const out = document.getElementById("localCheckOut"); out.style.display = "block"; out.textContent = txt;
+        toast(res.ok ? "Render finished — see Gates output" : "Render blocked or failed");
       };
+      setInterval(pullStateFromLocal, 1400);
     } catch {}
   }
 
   // Boot!
+  drawAudioWaveform();
   syncControlsFromState();
-  refreshAll();
-  detectLocalEngine();
+  renderMcpSetup();
+  refreshAll(false);
+  detectLocalBridge();
   requestAnimationFrame(tick);
 })();
 </script>
