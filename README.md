@@ -5,6 +5,9 @@
 </p>
 
 <p align="center">
+  <a href="https://hrlpavan.github.io/STA-6/">
+    <img src="https://img.shields.io/badge/LAUNCH%20LIVE%2060FPS%20EDITING%20HARNESS-TRY%20NOW%20(0%20LAG)-0EA5E9?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Launch Live 60fps STA-6 Editing Harness" />
+  </a>
   <a href="https://whop.com/checkout/plan_fOxPHqsLK2LxS">
     <img src="https://img.shields.io/badge/50%25%20OFF%20CODE%3A%20STA650-$24.50%20ONE--TIME-FA4616?style=for-the-badge&logo=whop&logoColor=white" alt="50% Off Promo Code STA650 — $24.50 One-Time" />
   </a>
@@ -16,11 +19,27 @@
   </a>
 </p>
 
-# STA 6 — Signal Theft Auto VI (v4.0.6 Zero-Gap Flush Split-Screen + 5 Pro Motion Captions + 2K Autopilot)
+# STA 6 — Signal Theft Auto VI (v4.0.7 Zero-Lag 60fps Editing Harness + 5 Pro Captions + 2K Autopilot)
 
 > **50% OFF Launch Offer (First 50 Clippers Only):** Enter promo code **`STA650`** at Whop checkout to drop the Lifetime License from ~~`$49`~~ to **`$24.50` one-time** (no monthly fees).
 >
-> **Paid Source Code & Pre-Trained ML Engine:** The full `STA 6 v4.0.6` Python pipeline, flush zero-gap split-screen renderer, 5 zero-editor pro motion caption styles (`clip.py captions`), 60fps Animated Viral Shine Hook generator, Zero-Loss 2K anti-blur engine, pre-trained 137-channel Tri-Stage ML weights (`models/viral_model_v4.json`), and automation skill are **private** and unlock **immediately upon purchase on Whop**.
+> **Try the Live Zero-Lag Editing Harness Right Now:** **[Open STA-6 Editing Harness (`hrlpavan.github.io/STA-6`) →](https://hrlpavan.github.io/STA-6/)** — customize all 5 caption styles at **60fps (`<1ms/frame`)**, inspect the 6-stage Harness Engineering workflow & deterministic quality gates (`β=1`), drop any local video for instant preview, and **pin instant change flags directly on the 9:16 frame** to export a structured Coding-Agent Fix Prompt + CLI command.
+>
+> **Paid Source Code & Pre-Trained ML Engine:** The full `STA 6 v4.0.7` Python pipeline, local harness server (`scripts/harness.py`), flush zero-gap 2K rendering engine, 5 pro motion caption styles (`clip.py captions`), 60fps Animated Viral Shine Hook generator, and pre-trained 137-channel Tri-Stage ML weights (`models/viral_model_v4.json`) are **private** and unlock **immediately upon purchase on Whop**.
+
+---
+
+## What's New in `v4.0.7` — Zero-Lag 60fps Web Editing Harness
+
+Built on **Harness Engineering** principles ([`walkinglabs/awesome-harness-engineering`](https://github.com/walkinglabs/awesome-harness-engineering)) — **Control–Agency–Runtime (`CAR`)**, deterministic quality gates (`β=1`), and trace-backed human review flags:
+
+<p align="center">
+  <a href="https://hrlpavan.github.io/STA-6/">
+    <img src="docs/assets/v407_editing_harness_preview.jpg" alt="STA 6 v4.0.7 — Zero-Lag 60fps Browser Editing Harness with Live Inverted Captions & Spatial Flag Pins" width="100%" />
+  </a>
+  <br />
+  <em><a href="https://hrlpavan.github.io/STA-6/"><b>Launch Live Editing Harness (60 FPS · 0.3ms/frame · Zero Lag) →</b></a> — Visual 6-stage pipeline, live caption customization, click-to-pin instant change flags, deterministic Shorts gates &amp; 1-click Coding-Agent CLI export</em>
+</p>
 
 ---
 
@@ -31,7 +50,7 @@ No monthly subscription. Pay once via **Whop** (Card, Apple Pay, Google Pay, loc
 ### **[Claim 50% OFF on Whop (Code: `STA650` → `$24.50` One-Time) →](https://whop.com/checkout/plan_fOxPHqsLK2LxS)**
 
 **How instant delivery works after payment:**
-1. **Immediate Download Inside Whop:** The second your payment completes, Whop automatically unlocks the private **STA 6 v4.0.6 — Download & Setup** hub containing **`STA-6-v4.0.6.zip`** and the 60-second macOS Apple Silicon setup guide.
+1. **Immediate Download Inside Whop:** The second your payment completes, Whop automatically unlocks the private **STA 6 v4.0.7 — Download & Setup** hub containing **`STA-6-v4.0.7.zip`** and the 60-second macOS Apple Silicon setup guide.
 2. **Private GitHub Repo Access (`STA-6-pro`):** Enter your GitHub username at checkout to also receive collaborator access to the private `STA-6-pro` repository for all future `v4.x` updates.
 3. **Earn 30% as a Clipper Affiliate:** Share STA 6 through Whop's Global Affiliate program ([whop.com/agensi/sta-6](https://whop.com/agensi/sta-6/)) and earn **`$14.70` per full-price sale**.
 
