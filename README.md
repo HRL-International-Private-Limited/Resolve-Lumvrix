@@ -1,20 +1,44 @@
 <div align="center">
-  <a href="https://hrl-international-private-limited.github.io/Resolve-Lumvrix/"><img src="docs/assets/rl.png" alt="Resolve Lumvrix™ Official Emblem — HRL International Pvt. Ltd." width="108" /></a>
+  <a href="https://whop.com/agensi/sta-6/"><img src="docs/assets/rl.png" alt="Resolve Lumvrix™ Official Emblem — HRL International Pvt. Ltd." width="108" /></a>
 
-  <h1>Resolve Lumvrix™ <code>v4.3.0</code></h1>
-
-  <p><b>Paste YouTube Link &rarr; Multi-Agent Live Clipper (Claude / Codex / Antigravity Tokens) + HRL Light Theme 60fps Studio + 2K Engine</b><br />Built &amp; Owned by <a href="https://github.com/HRL-International-Private-Limited"><b>HRL International Private Limited</b></a></p>
+  <h1>Resolve Lumvrix™ Pro <code>(STA-6 Pro)</code></h1>
+  <h3>⚠️ PUBLIC ACCESS DISCONTINUED · PRO LICENSE REQUIRED</h3>
+  <p><b>Free public usage of this repository is permanently disabled.</b><br />All active development, neural voice models, and v4.5.0+ updates are exclusively available in our <b>Private Pro Repository</b> (<a href="https://github.com/hrlpavan/STA-6-pro"><b><code>hrlpavan/STA-6-pro</code></b></a>) for licensed <b>HRL International</b> buyers.</p>
 
   <p>
-    <a href="https://hrl-international-private-limited.github.io/Resolve-Lumvrix/"><img src="https://img.shields.io/badge/LIVE%20STUDIO-60FPS%20%C2%B7%200%20LAG-D1002D?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Launch Resolve Lumvrix Live Studio" /></a>&nbsp;<a href="https://whop.com/checkout/plan_fOxPHqsLK2LxS"><img src="https://img.shields.io/badge/50%25%20OFF%20STA650-$24.50%20LIFETIME-FA4616?style=for-the-badge&logo=whop&logoColor=white" alt="50% Off Promo Code STA650" /></a>&nbsp;<a href="https://whop.com/agensi/sta-6/"><img src="https://img.shields.io/badge/WHOP-STOREFRONT-111111?style=for-the-badge" alt="Whop Storefront" /></a>&nbsp;<a href="https://github.com/HRL-International-Private-Limited"><img src="https://img.shields.io/badge/HRL%20INT'L-PVT.%20LTD.-00C853?style=for-the-badge&logo=github&logoColor=white" alt="HRL International Pvt. Ltd." /></a>
+    <a href="https://whop.com/checkout/plan_fOxPHqsLK2LxS"><img src="https://img.shields.io/badge/UPGRADE%20TO%20PRO-WHOP%20LIFETIME%20LICENSE-D1002D?style=for-the-badge&logo=whop&logoColor=white" alt="Upgrade to Pro License" /></a>&nbsp;<a href="https://whop.com/checkout/plan_fOxPHqsLK2LxS"><img src="https://img.shields.io/badge/50%25%20OFF%20PROMO-STA650-FA4616?style=for-the-badge&logo=tag&logoColor=white" alt="50% Off Promo Code STA650" /></a>&nbsp;<a href="https://github.com/hrlpavan/STA-6-pro"><img src="https://img.shields.io/badge/PRO%20SOURCE-PRIVATE%20REPO%20ONLY-111111?style=for-the-badge&logo=github&logoColor=white" alt="Private Pro Repository" /></a>&nbsp;<a href="https://github.com/HRL-International-Private-Limited"><img src="https://img.shields.io/badge/HRL%20INT'L-PVT.%20LTD.-00C853?style=for-the-badge&logo=github&logoColor=white" alt="HRL International Pvt. Ltd." /></a>
   </p>
-
-  <a href="https://hrl-international-private-limited.github.io/Resolve-Lumvrix/"><img src="docs/assets/v430_resolve_lumvrix_preview.jpg" alt="Resolve Lumvrix™ v4.3.0 — Live YouTube AI Agent Clipper + HRL Executive Light Theme + DaVinci Resolve Timeline" width="100%" /></a>
-  <p><em><a href="https://hrl-international-private-limited.github.io/Resolve-Lumvrix/"><b>Launch Resolve Lumvrix™ v4.3.0 Live in Your Browser (YouTube AI Agent Clipper · HRL Light Theme · 60 FPS) →</b></a></em></p>
 </div>
 
-> **50% OFF Launch Offer (First 50 Clippers Only):** Use promo code **`STA650`** at Whop checkout to drop the Lifetime License from ~~`$49`~~ to **`$24.50` one-time** (zero monthly fees).  
-> **Ownership & IP:** **Resolve Lumvrix™** and the `RL` emblem (`rl.png`) are proprietary software and trademarks of **[HRL International Private Limited](https://github.com/HRL-International-Private-Limited)** (`HRL International Pvt. Ltd.`). See [`PATENTS_AND_IP_NOTICE.md`](PATENTS_AND_IP_NOTICE.md) and [`LICENSE`](LICENSE).
+> [!CAUTION]
+> ### 🛑 Unlicensed Public Usage Is Strictly Prohibited
+> This public repository is **deprecated and closed to the public**. No further updates, bug fixes, or neural weights will be published here.  
+> Attempting to use, fork, deploy, or redistribute this software without an official commercial license from **HRL International Private Limited** is in direct violation of our Intellectual Property, Patent, and Copyright charters (see [`PATENTS_AND_IP_NOTICE.md`](PATENTS_AND_IP_NOTICE.md) and [`LICENSE`](LICENSE)).
+
+---
+
+## 🔒 What Is Available Exclusively in the Pro Version (`STA-6 Pro` v4.5.0+)?
+
+All ongoing production features, neural voice cloner weights, and updates are maintained exclusively inside the **Private Pro Repository** ([`github.com/hrlpavan/STA-6-pro`](https://github.com/hrlpavan/STA-6-pro)):
+
+| Pro Feature | Free Public Repo (`STA-6`) | **Official Pro Version (`STA-6 Pro` v4.5.0+)** |
+| :--- | :---: | :---: |
+| **"This is HRL" 1:1 Flow-Matched Voice Cloner** | ❌ **Disabled** | ✅ **Included** (F5-TTS diffusion cloner on Apple Silicon GPU, exact vocal tract matching) |
+| **HRL Navya 10/10 Cheerful Smiling Voice (Hinglish & English)** | ❌ **Disabled** | ✅ **Included** (Bilingual RJ delivery, natural smiling giggles, crisp *"Nav-ya"* cadence) |
+| **Long-Form Narrated Deep-Dive Studio (8:05+ to 26:00)** | ❌ **Disabled** | ✅ **Included** (Romayroh 30×–60× RPM architecture, chapter cards, full subtitle alignment) |
+| **14-Tool AI Bridge MCP Server (`resolve-lumvrix` v4.5.0)** | ❌ **Disabled** | ✅ **Included** (Claude Code, Antigravity, Cursor two-way sync with fail-closed gates) |
+| **Zero-Gap Flush Split-Screen (1440×2560 2K @ 60fps)** | ❌ **Deprecated** | ✅ **Active** (AMD CAS sharpening, VP9/AV1 forced YouTube tier) |
+| **137-Channel Tri-Stage Viral ML Scorer & Radar** | ❌ **Disabled** | ✅ **Active** (Trained on 2,193 Shorts + 139 paired MP4s + 18 Gold viral benchmarks) |
+| **Private GitHub Collaborator Access & Daily Updates** | ❌ **No** | ✅ **Instant Access** ([`hrlpavan/STA-6-pro`](https://github.com/hrlpavan/STA-6-pro)) |
+
+---
+
+## 💳 How to Upgrade & Unlock Pro Access
+
+1. **Purchase Your Pro License:** Go to **[Whop Storefront (whop.com/agensi/sta-6)](https://whop.com/checkout/plan_fOxPHqsLK2LxS)**.  
+   *(Use promo code **`STA650`** at checkout for **50% OFF** — Lifetime License drops from `$49` to `$24.50` one-time).*
+2. **Instant Collaborator Invite:** Enter your GitHub username at checkout. You will automatically receive a collaborator invite to the private **[`STA-6-pro`](https://github.com/hrlpavan/STA-6-pro)** repository.
+3. **Download Full v4.5.0 Studio:** Instant ZIP download and setup script provided in your private Whop members dashboard.
 
 ---
 
