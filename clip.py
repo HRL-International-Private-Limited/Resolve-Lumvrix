@@ -1875,6 +1875,7 @@ def synthesize_human_voice(
                 raise ValueError("ElevenLabs requires an API key (pass --api-key or set ELEVENLABS_API_KEY, or use free --provider kokoro).")
             vid = used_voice if len(used_voice) >= 15 else "EXAVITQu4vr4xnSDxMaL"
             url = f"https://api.elevenlabs.io/v1/text-to-speech/{vid}"
+            assert urllib.parse.urlparse(url).hostname == "api.elevenlabs.io", "Invalid ElevenLabs API host"
             payload = json.dumps({
                 "text": clean_text,
                 "model_id": "eleven_multilingual_v2",
@@ -1882,7 +1883,7 @@ def synthesize_human_voice(
             }).encode("utf-8")
             req = urllib.request.Request(
                 url, data=payload,
-                headers={"xi-api-key": key, "Content-Type": "application/json", "Accept": "audio/mpeg"},
+                headers={"xi-api-key": key, "Content-Type": "application/json", "Accept": "audio/mpeg", "User-Agent": "Resolve-Lumvrix/4.5.0"},
                 method="POST",
             )
             mp3_p = work / "el.mp3"
@@ -1895,7 +1896,8 @@ def synthesize_human_voice(
             if not key:
                 raise ValueError("Gemini TTS requires GEMINI_API_KEY from https://aistudio.google.com/apikey (or use free --provider kokoro).")
             g_voice = used_voice if used_voice in VOICE_PROVIDERS["gemini"]["voices"] else "Puck"
-            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key={key}"
+            url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent"
+            assert urllib.parse.urlparse(url).hostname == "generativelanguage.googleapis.com", "Invalid Google Generative Language API host"
             payload = json.dumps({
                 "contents": [{"parts": [{"text": clean_text}]}],
                 "generationConfig": {
@@ -1903,7 +1905,7 @@ def synthesize_human_voice(
                     "speechConfig": {"voiceConfig": {"prebuiltVoiceConfig": {"voiceName": g_voice}}},
                 },
             }).encode("utf-8")
-            req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json"}, method="POST")
+            req = urllib.request.Request(url, data=payload, headers={"x-goog-api-key": key, "Content-Type": "application/json", "User-Agent": "Resolve-Lumvrix/4.5.0"}, method="POST")
             import base64
             with urllib.request.urlopen(req, timeout=45) as resp:
                 data = json.loads(resp.read().decode("utf-8"))
@@ -1921,8 +1923,10 @@ def synthesize_human_voice(
             if not key:
                 raise ValueError("Groq PlayAI TTS requires GROQ_API_KEY from https://console.groq.com/keys (or use free --provider kokoro).")
             gr_voice = used_voice if used_voice in VOICE_PROVIDERS["groq"]["voices"] else "Angelo-PlayAI"
+            url = "https://api.groq.com/openai/v1/audio/speech"
+            assert urllib.parse.urlparse(url).hostname == "api.groq.com", "Invalid Groq API host"
             req = urllib.request.Request(
-                "https://api.groq.com/openai/v1/audio/speech",
+                url,
                 data=json.dumps({"model": "playai-tts", "input": clean_text, "voice": gr_voice, "response_format": "wav"}).encode("utf-8"),
                 headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json", "User-Agent": "Resolve-Lumvrix/4.4.0"},
                 method="POST",
