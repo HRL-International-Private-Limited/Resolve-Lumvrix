@@ -6,7 +6,7 @@
   <p><b>Free public usage of this repository is permanently disabled.</b><br />All active development, neural voice models, and v4.5.0+ updates are exclusively available in our <b>Private Pro Repository</b> (<a href="https://github.com/hrlpavan/STA-6-pro"><b><code>hrlpavan/STA-6-pro</code></b></a>) for licensed <b>HRL International</b> buyers.</p>
 
   <p>
-    <a href="https://whop.com/checkout/plan_fOxPHqsLK2LxS"><img src="https://img.shields.io/badge/UPGRADE%20TO%20PRO-WHOP%20LIFETIME%20LICENSE-D1002D?style=for-the-badge&logo=whop&logoColor=white" alt="Upgrade to Pro License" /></a>&nbsp;<a href="https://whop.com/checkout/plan_fOxPHqsLK2LxS"><img src="https://img.shields.io/badge/50%25%20OFF%20PROMO-STA650-FA4616?style=for-the-badge&logo=tag&logoColor=white" alt="50% Off Promo Code STA650" /></a>&nbsp;<a href="https://github.com/hrlpavan/STA-6-pro"><img src="https://img.shields.io/badge/PRO%20SOURCE-PRIVATE%20REPO%20ONLY-111111?style=for-the-badge&logo=github&logoColor=white" alt="Private Pro Repository" /></a>&nbsp;<a href="https://github.com/HRL-International-Private-Limited"><img src="https://img.shields.io/badge/HRL%20INT'L-PVT.%20LTD.-00C853?style=for-the-badge&logo=github&logoColor=white" alt="HRL International Pvt. Ltd." /></a>
+    <a href="https://m8ven.ai/mcp/hrl-international-private-limited/resolve-lumvrix?s=readme"><img src="https://m8ven.ai/badge/mcp/hrl-international-private-limited/resolve-lumvrix?variant=verified" alt="M8ven Verified" /></a>&nbsp;<a href="https://m8ven.ai/mcp/hrl-international-private-limited/resolve-lumvrix?s=readme"><img src="https://m8ven.ai/badge/mcp/hrl-international-private-limited/resolve-lumvrix" alt="M8ven Score" /></a>&nbsp;<a href="https://whop.com/checkout/plan_fOxPHqsLK2LxS"><img src="https://img.shields.io/badge/UPGRADE%20TO%20PRO-WHOP%20LIFETIME%20LICENSE-D1002D?style=for-the-badge&logo=whop&logoColor=white" alt="Upgrade to Pro License" /></a>&nbsp;<a href="https://whop.com/checkout/plan_fOxPHqsLK2LxS"><img src="https://img.shields.io/badge/50%25%20OFF%20PROMO-STA650-FA4616?style=for-the-badge&logo=tag&logoColor=white" alt="50% Off Promo Code STA650" /></a>&nbsp;<a href="https://github.com/hrlpavan/STA-6-pro"><img src="https://img.shields.io/badge/PRO%20SOURCE-PRIVATE%20REPO%20ONLY-111111?style=for-the-badge&logo=github&logoColor=white" alt="Private Pro Repository" /></a>&nbsp;<a href="https://github.com/HRL-International-Private-Limited"><img src="https://img.shields.io/badge/HRL%20INT'L-PVT.%20LTD.-00C853?style=for-the-badge&logo=github&logoColor=white" alt="HRL International Pvt. Ltd." /></a>
   </p>
 </div>
 
@@ -26,10 +26,39 @@ All ongoing production features, neural voice cloner weights, and updates are ma
 | **"This is HRL" 1:1 Flow-Matched Voice Cloner** | ❌ **Disabled** | ✅ **Included** (F5-TTS diffusion cloner on Apple Silicon GPU, exact vocal tract matching) |
 | **HRL Navya 10/10 Cheerful Smiling Voice (Hinglish & English)** | ❌ **Disabled** | ✅ **Included** (Bilingual RJ delivery, natural smiling giggles, crisp *"Nav-ya"* cadence) |
 | **Long-Form Narrated Deep-Dive Studio (8:05+ to 26:00)** | ❌ **Disabled** | ✅ **Included** (Romayroh 30×–60× RPM architecture, chapter cards, full subtitle alignment) |
-| **14-Tool AI Bridge MCP Server (`resolve-lumvrix` v4.5.0)** | ❌ **Disabled** | ✅ **Included** (Claude Code, Antigravity, Cursor two-way sync with fail-closed gates) |
+| **14-Tool AI Bridge MCP Server (`resolve-lumvrix` v4.5.0)** | ✅ **Available (M8ven Verified)** | ✅ **Included** (Claude Code, Antigravity, Cursor two-way sync with fail-closed gates) |
 | **Zero-Gap Flush Split-Screen (1440×2560 2K @ 60fps)** | ❌ **Deprecated** | ✅ **Active** (AMD CAS sharpening, VP9/AV1 forced YouTube tier) |
 | **137-Channel Tri-Stage Viral ML Scorer & Radar** | ❌ **Disabled** | ✅ **Active** (Trained on 2,193 Shorts + 139 paired MP4s + 18 Gold viral benchmarks) |
 | **Private GitHub Collaborator Access & Daily Updates** | ❌ **No** | ✅ **Instant Access** ([`hrlpavan/STA-6-pro`](https://github.com/hrlpavan/STA-6-pro)) |
+
+---
+
+## 🛡️ M8ven Verified MCP Server (`resolve-lumvrix` v4.5.0)
+
+[![M8ven Verified](https://m8ven.ai/badge/mcp/hrl-international-private-limited/resolve-lumvrix?variant=verified)](https://m8ven.ai/mcp/hrl-international-private-limited/resolve-lumvrix?s=readme)
+[![M8ven Score](https://m8ven.ai/badge/mcp/hrl-international-private-limited/resolve-lumvrix)](https://m8ven.ai/mcp/hrl-international-private-limited/resolve-lumvrix?s=readme)
+
+Resolve Lumvrix is independently indexed, monitored, and verified on the **[M8ven Trust Index](https://m8ven.ai/mcp/hrl-international-private-limited/resolve-lumvrix)**.
+
+### Connecting via MCP Client
+Add the following configuration to your `claude_desktop_config.json`, Cursor, or Antigravity MCP settings:
+
+```json
+{
+  "mcpServers": {
+    "resolve-lumvrix": {
+      "command": "python3",
+      "args": ["/path/to/Resolve-Lumvrix/mcp_bridge.py"]
+    }
+  }
+}
+```
+
+### Self-Check & Tool Verification
+Verify the server and all 14 tools in 0.5s:
+```bash
+python3 mcp_bridge.py --check
+```
 
 ---
 

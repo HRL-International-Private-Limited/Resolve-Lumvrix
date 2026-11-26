@@ -1,0 +1,13 @@
+[project]
+name = "resolve-lumvrix"
+version = "4.5.0"
+description = "Resolve Lumvrix™ AI Bridge MCP Server (v4.5.0) — 14-Tool Multi-Agent Video & Caption Studio"
+authors = [{ name = "HRL International Private Limited", email = "pavankcet@gmail.com" }]
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "mcp>=1.0.0",
+]
+
+[project.scripts]
+resolve-lumvrix = "mcp_bridge:main"
