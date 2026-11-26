@@ -6,7 +6,7 @@
   <p><b>Free public usage of this repository is permanently disabled.</b><br />All active development, neural voice models, and v4.5.0+ updates are exclusively available in our <b>Private Pro Repository</b> (<a href="https://github.com/hrlpavan/STA-6-pro"><b><code>hrlpavan/STA-6-pro</code></b></a>) for licensed <b>HRL International</b> buyers.</p>
 
   <p>
-    <a href="https://m8ven.ai/mcp/hrl-international-private-limited/resolve-lumvrix?s=readme"><img src="https://m8ven.ai/badge/mcp/hrl-international-private-limited/resolve-lumvrix?variant=verified" alt="M8ven Verified" /></a>&nbsp;<a href="https://m8ven.ai/mcp/hrl-international-private-limited/resolve-lumvrix?s=readme"><img src="https://m8ven.ai/badge/mcp/hrl-international-private-limited/resolve-lumvrix" alt="M8ven Score" /></a>&nbsp;<a href="https://whop.com/checkout/plan_fOxPHqsLK2LxS"><img src="https://img.shields.io/badge/UPGRADE%20TO%20PRO-WHOP%20LIFETIME%20LICENSE-D1002D?style=for-the-badge&logo=whop&logoColor=white" alt="Upgrade to Pro License" /></a>&nbsp;<a href="https://whop.com/checkout/plan_fOxPHqsLK2LxS"><img src="https://img.shields.io/badge/50%25%20OFF%20PROMO-STA650-FA4616?style=for-the-badge&logo=tag&logoColor=white" alt="50% Off Promo Code STA650" /></a>&nbsp;<a href="https://github.com/hrlpavan/STA-6-pro"><img src="https://img.shields.io/badge/PRO%20SOURCE-PRIVATE%20REPO%20ONLY-111111?style=for-the-badge&logo=github&logoColor=white" alt="Private Pro Repository" /></a>&nbsp;<a href="https://github.com/HRL-International-Private-Limited"><img src="https://img.shields.io/badge/HRL%20INT'L-PVT.%20LTD.-00C853?style=for-the-badge&logo=github&logoColor=white" alt="HRL International Pvt. Ltd." /></a>
+    <a href="https://m8ven.ai/mcp/hrl-international-private-limited-resolve-lumvrix-g38zhk?s=readme"><img src="https://m8ven.ai/badge/mcp/hrl-international-private-limited-resolve-lumvrix-g38zhk?v=4c15eddab0a9540636fe547bacfa90df" alt="M8ven Verified Publisher" /></a>&nbsp;<a href="https://whop.com/checkout/plan_fOxPHqsLK2LxS"><img src="https://img.shields.io/badge/UPGRADE%20TO%20PRO-WHOP%20LIFETIME%20LICENSE-D1002D?style=for-the-badge&logo=whop&logoColor=white" alt="Upgrade to Pro License" /></a>&nbsp;<a href="https://whop.com/checkout/plan_fOxPHqsLK2LxS"><img src="https://img.shields.io/badge/50%25%20OFF%20PROMO-STA650-FA4616?style=for-the-badge&logo=tag&logoColor=white" alt="50% Off Promo Code STA650" /></a>&nbsp;<a href="https://github.com/hrlpavan/STA-6-pro"><img src="https://img.shields.io/badge/PRO%20SOURCE-PRIVATE%20REPO%20ONLY-111111?style=for-the-badge&logo=github&logoColor=white" alt="Private Pro Repository" /></a>&nbsp;<a href="https://github.com/HRL-International-Private-Limited"><img src="https://img.shields.io/badge/HRL%20INT'L-PVT.%20LTD.-00C853?style=for-the-badge&logo=github&logoColor=white" alt="HRL International Pvt. Ltd." /></a>
   </p>
 </div>
 
@@ -33,12 +33,11 @@ All ongoing production features, neural voice cloner weights, and updates are ma
 
 ---
 
-## 🛡️ M8ven Verified MCP Server (`resolve-lumvrix` v4.5.0)
+## 🛡️ M8ven Verified Publisher MCP Server (`resolve-lumvrix` v4.5.0)
 
-[![M8ven Verified](https://m8ven.ai/badge/mcp/hrl-international-private-limited/resolve-lumvrix?variant=verified)](https://m8ven.ai/mcp/hrl-international-private-limited/resolve-lumvrix?s=readme)
-[![M8ven Score](https://m8ven.ai/badge/mcp/hrl-international-private-limited/resolve-lumvrix)](https://m8ven.ai/mcp/hrl-international-private-limited/resolve-lumvrix?s=readme)
+[![M8ven Score](https://m8ven.ai/badge/mcp/hrl-international-private-limited-resolve-lumvrix-g38zhk?v=4c15eddab0a9540636fe547bacfa90df)](https://m8ven.ai/mcp/hrl-international-private-limited-resolve-lumvrix-g38zhk?s=readme)
 
-Resolve Lumvrix is independently indexed, monitored, and verified on the **[M8ven Trust Index](https://m8ven.ai/mcp/hrl-international-private-limited/resolve-lumvrix)**.
+Resolve Lumvrix is independently indexed, monitored, and verified on the **[M8ven Trust Index](https://m8ven.ai/mcp/hrl-international-private-limited-resolve-lumvrix-g38zhk)**.
 
 ### Connecting via MCP Client
 Add the following configuration to your `claude_desktop_config.json`, Cursor, or Antigravity MCP settings:
