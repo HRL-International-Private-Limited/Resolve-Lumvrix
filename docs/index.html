@@ -11,10 +11,10 @@
 <style>
   /* ===== RESOLVE LUMVRIX™ (v4.2.0) — HRL INTERNATIONAL MASTER DESIGN LANGUAGE (LIGHT THEME DEFAULT) ===== */
   :root {
-    --hrl-crimson: #D1002D;
-    --hrl-crimson-dark: #A50024;
-    --hrl-crimson-tint: rgba(209, 0, 45, 0.08);
-    --hrl-crimson-glow: rgba(209, 0, 45, 0.25);
+    --hrl-crimson: #8BE395;
+    --hrl-crimson-dark: #6ECF79;
+    --hrl-crimson-tint: rgba(139, 227, 149, 0.12);
+    --hrl-crimson-glow: rgba(139, 227, 149, 0.35);
 
     --bg: #FFFFFF;
     --surface: #FFFFFF;
@@ -25,9 +25,9 @@
     --text: #1D1D1F;
     --muted: #515154;
     --dim: #86868B;
-    --primary: #D1002D;
-    --primary-hi: #A50024;
-    --playhead: #D1002D;
+    --primary: #8BE395;
+    --primary-hi: #6ECF79;
+    --playhead: #8BE395;
     --red: #D1002D;
     --amber: #D97706;
     --green: #15803D;
@@ -90,7 +90,7 @@
   .brand { display: flex; align-items: center; gap: 10px; white-space: nowrap; }
   .logo-mark {
     width: 32px; height: 32px; flex-shrink: 0; border-radius: 8px; object-fit: cover;
-    box-shadow: 0 2px 8px rgba(209, 0, 45, 0.22); border: 1px solid rgba(209, 0, 45, 0.28);
+    box-shadow: 0 2px 8px rgba(139, 227, 149, 0.22); border: 1px solid rgba(139, 227, 149, 0.28);
   }
   .brand-title { font-size: 15.5px; font-weight: 800; letter-spacing: -0.025em; color: var(--text); }
   .brand-title span { color: var(--hrl-crimson); font-weight: 800; }
@@ -102,7 +102,7 @@
   .brand-owner-btn:hover { color: var(--hrl-crimson); background: var(--hrl-crimson-tint); }
   .ver-tag {
     font-family: var(--mono); font-size: 10.5px; font-weight: 600; color: var(--hrl-crimson);
-    background: var(--hrl-crimson-tint); border: 1px solid rgba(209, 0, 45, 0.22); padding: 2px 8px; border-radius: 9999px;
+    background: var(--hrl-crimson-tint); border: 1px solid rgba(139, 227, 149, 0.22); padding: 2px 8px; border-radius: 9999px;
   }
 
   /* Official HRL Company Motto Hero Pill (Master Design System Pattern 1) */
@@ -117,10 +117,10 @@
     border-color: var(--border-hi); box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06); transform: translateY(-1px);
   }
   .motto-tag {
-    background: linear-gradient(135deg, #D1002D 0%, #B80026 100%); color: #FFFFFF;
+    background: linear-gradient(135deg, #8BE395 0%, #6ECF79 100%); color: #0A1E0D;
     font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
     padding: 4px 10px; border-radius: 9999px; line-height: 1;
-    box-shadow: 0 1px 3px rgba(209, 0, 45, 0.28); flex-shrink: 0;
+    box-shadow: 0 1px 3px rgba(139, 227, 149, 0.28); flex-shrink: 0;
   }
   .motto-text {
     color: var(--text); font-size: 11.5px; font-weight: 600; letter-spacing: -0.012em; line-height: 1;
@@ -134,7 +134,7 @@
   }
   .status-pill:hover { border-color: var(--border-hi); background: var(--surface3); }
   .status-pill.ok { border-color: rgba(21, 128, 61, 0.28); background: rgba(21, 128, 61, 0.07); color: var(--green); }
-  .status-pill.blocked { border-color: rgba(209, 0, 45, 0.45); background: var(--hrl-crimson-tint); color: var(--hrl-crimson); }
+  .status-pill.blocked { border-color: rgba(139, 227, 149, 0.45); background: var(--hrl-crimson-tint); color: var(--hrl-crimson); }
   .dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; flex-shrink: 0; }
   .fps-chip {
     font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--green); padding: 4px 10px; border-radius: 9999px;
@@ -151,17 +151,17 @@
   .btn:hover { background: var(--surface3); border-color: var(--border-hi); transform: translateY(-1px); }
   .btn.sm { padding: 5px 11px; font-size: 11.5px; border-radius: 9999px; }
   .btn.flag-cta {
-    background: var(--hrl-crimson-tint); border-color: rgba(209, 0, 45, 0.28); color: var(--hrl-crimson);
+    background: var(--hrl-crimson-tint); border-color: rgba(139, 227, 149, 0.28); color: var(--hrl-crimson);
   }
   .btn.flag-cta:hover, .btn.flag-cta.on { background: var(--hrl-crimson); border-color: var(--hrl-crimson); color: #fff; }
   .btn.export-cta {
     background: var(--hrl-crimson); border-color: transparent; color: #fff;
     padding: 8px 20px; font-weight: 700; box-shadow: 0 4px 14px var(--hrl-crimson-glow);
   }
-  .btn.export-cta:hover { background: var(--hrl-crimson-dark); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(209, 0, 45, 0.35); }
+  .btn.export-cta:hover { background: var(--hrl-crimson-dark); transform: translateY(-1px); box-shadow: 0 6px 18px rgba(139, 227, 149, 0.35); }
   .badge-num {
     font-family: var(--mono); font-size: 10.5px; font-weight: 800; padding: 1px 6px; border-radius: 9999px;
-    background: rgba(209, 0, 45, 0.16); color: currentColor;
+    background: rgba(139, 227, 149, 0.16); color: currentColor;
   }
   .btn.flag-cta.on .badge-num, .btn.flag-cta:hover .badge-num { background: rgba(255, 255, 255, 0.22); color: #fff; }
 
@@ -184,8 +184,8 @@
   .rail-btn svg { width: 20px; height: 20px; stroke-width: 1.85; }
   .rail-btn:hover { background: var(--surface); color: var(--text); border-color: var(--border); }
   .rail-btn.active {
-    background: var(--surface); border-color: rgba(209, 0, 45, 0.28); color: var(--hrl-crimson);
-    box-shadow: 0 3px 10px rgba(209, 0, 45, 0.08);
+    background: var(--surface); border-color: rgba(139, 227, 149, 0.28); color: var(--hrl-crimson);
+    box-shadow: 0 3px 10px rgba(139, 227, 149, 0.08);
   }
   .rail-dot {
     position: absolute; top: 6px; right: 7px; min-width: 16px; height: 16px; padding: 0 4px;
@@ -231,7 +231,7 @@
     transition: all .2s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .preset:hover { border-color: var(--border-hi); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04); }
-  .preset.active { border-color: var(--hrl-crimson); background: var(--hrl-crimson-tint); box-shadow: 0 4px 12px rgba(209, 0, 45, 0.08); }
+  .preset.active { border-color: var(--hrl-crimson); background: var(--hrl-crimson-tint); box-shadow: 0 4px 12px rgba(139, 227, 149, 0.08); }
   .preset.span2 { grid-column: span 2; }
   .preset-preview {
     font-size: 14.5px; font-weight: 800; line-height: 1.15; letter-spacing: -0.3px;
@@ -353,7 +353,7 @@
     color: var(--muted); font-size: 11.5px; font-weight: 600; cursor: pointer; transition: all .15s;
   }
   .ctrl-chip:hover { color: var(--text); background: var(--surface2); }
-  .ctrl-chip.active { color: var(--hrl-crimson); background: var(--hrl-crimson-tint); border-color: rgba(209, 0, 45, 0.28); }
+  .ctrl-chip.active { color: var(--hrl-crimson); background: var(--hrl-crimson-tint); border-color: rgba(139, 227, 149, 0.28); }
 
   /* 3. DAVINCI RESOLVE STUDIO-STYLE BOTTOM TIMELINE (ADAPTED TO HRL LIGHT & DARK DESIGN SYSTEM) */
   .timeline {
@@ -372,8 +372,8 @@
     transition: all .15s;
   }
   .tl-ico-btn:hover { background: var(--surface2); color: var(--text); }
-  .tl-ico-btn.active { color: var(--hrl-crimson); background: var(--hrl-crimson-tint); border-color: rgba(209, 0, 45, 0.28); }
-  .tl-ico-btn.view-open { background: var(--surface2); color: var(--hrl-crimson); border-color: rgba(209, 0, 45, 0.35); }
+  .tl-ico-btn.active { color: var(--hrl-crimson); background: var(--hrl-crimson-tint); border-color: rgba(139, 227, 149, 0.28); }
+  .tl-ico-btn.view-open { background: var(--surface2); color: var(--hrl-crimson); border-color: rgba(139, 227, 149, 0.35); }
   .tl-sep { width: 1px; height: 16px; background: var(--tl-border); margin: 0 4px; }
 
   /* Floating Resolve Timeline View Options Popover */
@@ -427,7 +427,7 @@
     font-size: 10.5px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center;
     border: 1px solid rgba(0, 113, 227, 0.35); background: rgba(0, 113, 227, 0.08); color: #0071E3;
   }
-  .tl-badge.target { border-color: rgba(209, 0, 45, 0.45); background: var(--hrl-crimson-tint); color: var(--hrl-crimson); }
+  .tl-badge.target { border-color: rgba(139, 227, 149, 0.45); background: var(--hrl-crimson-tint); color: var(--hrl-crimson); }
   .tl-mini-ico {
     width: 19px; height: 19px; border-radius: 4px; border: none; background: transparent;
     color: var(--dim); cursor: pointer; display: inline-flex; align-items: center; justify-content: center;
@@ -503,7 +503,7 @@
   .playhead-head {
     position: absolute; top: 0; left: -7px; width: 16px; height: 13px; background: var(--hrl-crimson);
     clip-path: polygon(0 0, 100% 0, 100% 56%, 50% 100%, 0 56%);
-    filter: drop-shadow(0 1px 2px rgba(209, 0, 45, 0.4));
+    filter: drop-shadow(0 1px 2px rgba(139, 227, 149, 0.4));
   }
 
   /* Flag & Gate Cards inside Drawer */
@@ -580,8 +580,8 @@
   }
   .user-pill:hover { border-color: var(--border-hi); background: var(--surface3); }
   .user-avatar {
-    width: 22px; height: 22px; border-radius: 50%; background: var(--primary);
-    color: #fff; display: flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px; border-radius: 50%; background: #8BE395;
+    color: #0A1E0D; font-weight: 800; display: flex; align-items: center; justify-content: center;
     font-size: 11px; font-weight: 700; text-transform: uppercase;
   }
   .vip-chip {
@@ -602,7 +602,7 @@
   }
   .user-dropdown-item:hover { background: var(--surface2); }
   .user-dropdown-item.danger { color: var(--red); }
-  .user-dropdown-item.danger:hover { background: rgba(209,0,45,0.08); }
+  .user-dropdown-item.danger:hover { background: rgba(139, 227, 149,0.08); }
   .user-dropdown-sep { height: 1px; background: var(--border); margin: 4px 0; }
 
   /* Responsive Viewport & Laptop Screen Optimization */
@@ -658,7 +658,7 @@
 
       
       <button class="btn sm" id="btnOpenPlans" title="Upwork-style Membership Plans" style="background:var(--surface2);border:1px solid var(--border);border-radius:20px;font-size:12px;font-weight:600;padding:4px 12px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;transition:all .18s ease;">
-        <span id="planDot" style="color:#108a00;font-size:9px;">●</span>
+        <span id="planDot" style="color:#8BE395;font-size:9px;">●</span>
         <span id="planNavLabel">Plans</span>
       </button>
 
@@ -668,7 +668,7 @@
 
       <!-- Minimalist Auth / Log In Button & User Pill -->
       <div id="authContainer" style="position:relative;">
-        <button class="btn sm" id="btnOpenLogin" style="background:var(--primary);color:#fff;font-weight:600;padding:5px 13px;border-radius:8px;border:none;cursor:pointer;">
+        <button class="btn sm" id="btnOpenLogin" style="background:#8BE395;color:#0A1E0D;font-weight:700;font-weight:600;padding:5px 13px;border-radius:8px;border:none;cursor:pointer;">
           Log In
         </button>
       </div>
@@ -769,7 +769,7 @@
 
       <!-- PANEL 3: YOUTUBE AI AGENT CLIPPER & MEDIA -->
       <div class="drawer-scroll" id="panel-media">
-        <div class="card" style="border-color:rgba(209,0,45,.28);">
+        <div class="card" style="border-color:rgba(139, 227, 149,.28);">
           <div class="card-title"><span>1. YouTube AI Agent Clipper</span><span class="field-val" id="ytJobBadge">READY</span></div>
           <div class="field">
             <div class="field-row"><span>Paste YouTube Link (or Local VOD)</span></div>
@@ -930,7 +930,7 @@
           <span class="motto-text">We Can Do Everything Related To Software Sector Without Any Excuses!</span>
         </div>
         <!-- Live Agent Clipping Floating Stage Bar (Pause / Change / Skip In-Between!) -->
-        <div id="stageAgentBar" style="display:none;align-items:center;gap:8px;background:var(--surface);border:1.5px solid var(--hrl-crimson);padding:4px 10px 4px 12px;border-radius:9999px;box-shadow:0 6px 20px rgba(209,0,45,.15);">
+        <div id="stageAgentBar" style="display:none;align-items:center;gap:8px;background:var(--surface);border:1.5px solid var(--hrl-crimson);padding:4px 10px 4px 12px;border-radius:9999px;box-shadow:0 6px 20px rgba(139, 227, 149,.15);">
           <span class="dot" style="color:var(--hrl-crimson);"></span>
           <span id="stageAgentText" style="font-size:11.5px;font-weight:700;color:var(--text);">Agent Clipping Live...</span>
           <button class="btn sm" id="btnStagePauseChange">Pause &amp; Change</button>
@@ -1108,7 +1108,7 @@
     <!-- Header -->
     <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;">
       <div>
-        <div style="display:inline-flex;align-items:center;gap:6px;padding:3px 10px;background:rgba(16,138,0,0.12);color:#108a00;border:1px solid rgba(16,138,0,0.25);border-radius:14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">
+        <div style="display:inline-flex;align-items:center;gap:6px;padding:3px 10px;background:rgba(139,227,149,0.15);color:#8BE395;border:1px solid rgba(139,227,149,0.35);border-radius:14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">
           <span>⚡</span> Membership Plans
         </div>
         <h2 style="font-size:22px;font-weight:800;letter-spacing:-0.03em;color:var(--text);margin-bottom:6px;">Choose the plan that fits your workflow</h2>
@@ -1128,19 +1128,19 @@
         
         <ul style="list-style:none;padding:0;margin:0 0 24px 0;flex-grow:1;display:flex;flex-direction:column;gap:10px;font-size:12.5px;">
           <li style="display:flex;align-items:flex-start;gap:10px;">
-            <span style="color:#108a00;font-weight:bold;">✓</span>
+            <span style="color:#8BE395;font-weight:bold;">✓</span>
             <span>Standard 1080p 60fps export</span>
           </li>
           <li style="display:flex;align-items:flex-start;gap:10px;">
-            <span style="color:#108a00;font-weight:bold;">✓</span>
+            <span style="color:#8BE395;font-weight:bold;">✓</span>
             <span>2 built-in caption styles (Minimal, Shine)</span>
           </li>
           <li style="display:flex;align-items:flex-start;gap:10px;">
-            <span style="color:#108a00;font-weight:bold;">✓</span>
+            <span style="color:#8BE395;font-weight:bold;">✓</span>
             <span>Basic timeline trimmer & zero-gap snap</span>
           </li>
           <li style="display:flex;align-items:flex-start;gap:10px;">
-            <span style="color:#108a00;font-weight:bold;">✓</span>
+            <span style="color:#8BE395;font-weight:bold;">✓</span>
             <span>Live 60fps canvas preview</span>
           </li>
           <li style="display:flex;align-items:flex-start;gap:10px;color:var(--dim);">
@@ -1163,9 +1163,9 @@
       </div>
 
       <!-- Studio Pro Plan Card (Featured Upwork Style) -->
-      <div id="cardPro" style="background:var(--surface);border:2px solid #108a00;border-radius:14px;padding:26px 24px;display:flex;flex-direction:column;position:relative;box-shadow:0 12px 30px rgba(16,138,0,0.12);">
+      <div id="cardPro" style="background:var(--surface);border:2px solid #108a00;border-radius:14px;padding:26px 24px;display:flex;flex-direction:column;position:relative;box-shadow:0 12px 30px rgba(139,227,149,0.15);">
         <!-- Upwork-Style Popular Badge -->
-        <div style="position:absolute;top:-12px;right:20px;background:#108a00;color:#ffffff;font-size:10px;font-weight:800;text-transform:uppercase;padding:3px 12px;border-radius:20px;letter-spacing:0.5px;box-shadow:0 2px 8px rgba(16,138,0,0.4);">
+        <div style="position:absolute;top:-12px;right:20px;background:#8BE395; color:#0A1E0D;color:#ffffff;font-size:10px;font-weight:800;text-transform:uppercase;padding:3px 12px;border-radius:20px;letter-spacing:0.5px;box-shadow:0 2px 8px rgba(139,227,149,0.4);">
           Most Popular
         </div>
 
@@ -1175,32 +1175,32 @@
         
         <ul style="list-style:none;padding:0;margin:0 0 24px 0;flex-grow:1;display:flex;flex-direction:column;gap:10px;font-size:12.5px;">
           <li style="display:flex;align-items:flex-start;gap:10px;">
-            <span style="color:#108a00;font-weight:bold;">✓</span>
+            <span style="color:#8BE395;font-weight:bold;">✓</span>
             <span><strong style="color:var(--text);">Unlimited 2K 60fps</strong> Zero-Gap Split-Screen Exports</span>
           </li>
           <li style="display:flex;align-items:flex-start;gap:10px;">
-            <span style="color:#108a00;font-weight:bold;">✓</span>
+            <span style="color:#8BE395;font-weight:bold;">✓</span>
             <span><strong style="color:var(--text);">All 5 Pro Caption Styles</strong> (Hormozi, Neon Glow, Stopmotion, Minimal, Flicker)</span>
           </li>
           <li style="display:flex;align-items:flex-start;gap:10px;">
-            <span style="color:#108a00;font-weight:bold;">✓</span>
+            <span style="color:#8BE395;font-weight:bold;">✓</span>
             <span><strong style="color:var(--text);">YouTube & Twitch AI Clipper</strong> (Multimodal viral moment ranking)</span>
           </li>
           <li style="display:flex;align-items:flex-start;gap:10px;">
-            <span style="color:#108a00;font-weight:bold;">✓</span>
+            <span style="color:#8BE395;font-weight:bold;">✓</span>
             <span><strong style="color:var(--text);">Studio Voiceover Engine</strong> (54 natural voices + -16 LUFS mastering)</span>
           </li>
           <li style="display:flex;align-items:flex-start;gap:10px;">
-            <span style="color:#108a00;font-weight:bold;">✓</span>
+            <span style="color:#8BE395;font-weight:bold;">✓</span>
             <span><strong style="color:var(--text);">14 AI Bridge MCP Tools</strong> for Antigravity, Claude, and Codex</span>
           </li>
           <li style="display:flex;align-items:flex-start;gap:10px;">
-            <span style="color:#108a00;font-weight:bold;">✓</span>
+            <span style="color:#8BE395;font-weight:bold;">✓</span>
             <span><strong style="color:var(--text);">0% Watermark & Commercial Rights</strong></span>
           </li>
         </ul>
 
-        <button id="btnSwitchPro" style="width:100%;padding:12px 18px;border-radius:24px;font-weight:700;font-size:13px;text-align:center;border:none;background:#108a00;color:#ffffff;cursor:pointer;box-shadow:0 4px 14px rgba(16,138,0,0.35);transition:all .2s ease;">
+        <button id="btnSwitchPro" style="width:100%;padding:12px 18px;border-radius:24px;font-weight:700;font-size:13px;text-align:center;border:none;background:#8BE395; color:#0A1E0D;color:#ffffff;cursor:pointer;box-shadow:0 4px 14px rgba(139,227,149,0.35);transition:all .2s ease;">
           Upgrade to Pro
         </button>
       </div>
@@ -1235,7 +1235,7 @@
         <label style="display:block;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:5px;">Password</label>
         <input type="password" id="loginPass" placeholder="••••••••••••" style="width:100%;padding:9px 11px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none;" />
       </div>
-      <button type="submit" id="btnSubmitLogin" class="btn primary" style="width:100%;padding:9px;background:var(--primary);color:#fff;font-weight:600;border-radius:8px;font-size:13px;margin-top:2px;border:none;cursor:pointer;">
+      <button type="submit" id="btnSubmitLogin" class="btn primary" style="width:100%;padding:9px;background:#8BE395;color:#0A1E0D;font-weight:700;font-weight:600;border-radius:8px;font-size:13px;margin-top:2px;border:none;cursor:pointer;">
         Sign In
       </button>
     </form>
@@ -1300,7 +1300,7 @@
   <div class="modal" style="max-width:560px;">
     <div class="modal-hd">
       <div style="display:flex;align-items:center;gap:11px;">
-        <img src="assets/rl.png" alt="Resolve Lumvrix™ Logo" style="width:42px;height:42px;border-radius:10px;object-fit:cover;border:1px solid rgba(209,0,45,.32);" />
+        <img src="assets/rl.png" alt="Resolve Lumvrix™ Logo" style="width:42px;height:42px;border-radius:10px;object-fit:cover;border:1px solid rgba(139, 227, 149,.32);" />
         <div>
           <h2 style="font-size:16px;">Resolve Lumvrix™ <span style="font-size:11px;color:var(--hrl-crimson);font-weight:700;">v4.2.0</span></h2>
           <div style="font-size:11.5px;color:var(--muted);">Proprietary Software of <b>HRL International Private Limited</b></div>
@@ -2552,7 +2552,7 @@
       }
     } else {
       authContainer.innerHTML = `
-        <button class="btn sm" id="btnOpenLogin" style="background:var(--primary);color:#fff;font-weight:600;padding:5px 13px;border-radius:8px;border:none;cursor:pointer;">
+        <button class="btn sm" id="btnOpenLogin" style="background:#8BE395;color:#0A1E0D;font-weight:700;font-weight:600;padding:5px 13px;border-radius:8px;border:none;cursor:pointer;">
           Log In
         </button>
       `;
@@ -2628,9 +2628,9 @@
         btnOpenSubscribe.style.border = "1px solid var(--border)";
       } else {
         btnOpenSubscribe.innerHTML = "<span>⚡</span> <span>Pro ($29/mo)</span>";
-        btnOpenSubscribe.style.background = "linear-gradient(135deg, #D1002D, #FF2A55)";
+        btnOpenSubscribe.style.background = "linear-gradient(135deg, #8BE395, #6ECF79)";
         btnOpenSubscribe.style.color = "#fff";
-        btnOpenSubscribe.style.boxShadow = "0 2px 10px rgba(209,0,45,0.3)";
+        btnOpenSubscribe.style.boxShadow = "0 2px 10px rgba(139, 227, 149,0.3)";
       }
     }
   }
@@ -2702,7 +2702,7 @@
         btnSwitchPro.style.background = "#108a00";
         btnSwitchPro.style.color = "#ffffff";
         btnSwitchPro.style.border = "none";
-        btnSwitchPro.style.boxShadow = "0 4px 14px rgba(16,138,0,0.35)";
+        btnSwitchPro.style.boxShadow = "0 4px 14px rgba(139,227,149,0.35)";
       }
     }
   }
