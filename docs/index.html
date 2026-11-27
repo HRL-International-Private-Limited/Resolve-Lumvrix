@@ -656,7 +656,14 @@
       
       
 
+      
+      <button class="btn sm" id="btnOpenPlans" title="Upwork-style Membership Plans" style="background:var(--surface2);border:1px solid var(--border);border-radius:20px;font-size:12px;font-weight:600;padding:4px 12px;display:inline-flex;align-items:center;gap:6px;cursor:pointer;transition:all .18s ease;">
+        <span id="planDot" style="color:#108a00;font-size:9px;">●</span>
+        <span id="planNavLabel">Plans</span>
+      </button>
+
       <button class="btn export-cta sm" id="btnOpenExport" style="padding:5px 13px;border-radius:8px;font-weight:600;">Export</button>
+
 
 
       <!-- Minimalist Auth / Log In Button & User Pill -->
@@ -1094,69 +1101,114 @@
 
 <!-- CLIDEO-STYLE CLEAN EXPORT MODAL -->
 
-<!-- SINGLE PRO SUBSCRIPTION MODAL -->
-<div class="modal-bg" id="subscriptionModal">
-  <div class="modal" style="max-width:440px;padding:28px 24px;border-radius:18px;background:var(--surface);border:1px solid var(--border-hi);box-shadow:0 28px 70px rgba(0,0,0,0.5);">
-    <div class="modal-hd" style="border-bottom:none;padding:0 0 16px 0;">
-      <div style="display:flex;align-items:center;gap:12px;">
-        <div style="width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg, #D1002D, #FF2A55);display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;font-weight:800;box-shadow:0 4px 14px rgba(209,0,45,0.35);">
-          ⚡
+
+<!-- UPWORK-INSPIRED MEMBERSHIP PLANS MODAL (p2p) -->
+<div class="modal-bg" id="plansModal">
+  <div class="modal" style="max-width:820px;width:95%;padding:32px 28px;border-radius:16px;background:var(--surface);border:1px solid var(--border-hi);box-shadow:0 30px 80px rgba(0,0,0,0.6);">
+    <!-- Header -->
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;">
+      <div>
+        <div style="display:inline-flex;align-items:center;gap:6px;padding:3px 10px;background:rgba(16,138,0,0.12);color:#108a00;border:1px solid rgba(16,138,0,0.25);border-radius:14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">
+          <span>⚡</span> Membership Plans
         </div>
-        <div>
-          <h2 style="font-size:18px;font-weight:700;letter-spacing:-0.02em;">Resolve Lumvrix Pro</h2>
-          <p style="font-size:12px;color:var(--muted);margin-top:1px;">All-in-one AI Video Studio Subscription</p>
-        </div>
+        <h2 style="font-size:22px;font-weight:800;letter-spacing:-0.03em;color:var(--text);margin-bottom:6px;">Choose the plan that fits your workflow</h2>
+        <p style="font-size:13px;color:var(--muted);line-height:1.4;">Switch or cancel anytime. All plans include 60fps real-time preview and zero-gap export.</p>
       </div>
-      <button class="btn sm" id="btnCloseSubscribe" style="border-radius:50%;width:28px;height:28px;padding:0;display:flex;align-items:center;justify-content:center;border:none;background:var(--surface2);cursor:pointer;">✕</button>
+      <button class="btn sm" id="btnClosePlans" style="border-radius:50%;width:32px;height:32px;padding:0;display:flex;align-items:center;justify-content:center;border:none;background:var(--surface2);font-size:14px;cursor:pointer;">✕</button>
     </div>
 
-    <!-- Pricing Card: One Plan, Everything Included -->
-    <div style="background:var(--surface2);border:1px solid var(--border-hi);border-radius:14px;padding:18px;margin-bottom:18px;position:relative;overflow:hidden;">
-      <div style="position:absolute;top:12px;right:12px;background:var(--green);color:#fff;font-size:10px;font-weight:800;padding:2px 8px;border-radius:6px;letter-spacing:0.04em;">
-        ONLY PLAN
-      </div>
-      <div style="display:flex;align-items:baseline;gap:6px;margin-bottom:6px;">
-        <span style="font-size:32px;font-weight:800;letter-spacing:-0.03em;color:var(--text);">$29</span>
-        <span style="font-size:13px;color:var(--muted);font-weight:600;">/ month</span>
-      </div>
-      <p style="font-size:12px;color:var(--muted);margin-bottom:14px;">Instant access to the complete 60fps AI studio engine — no terminal, no git setup required.</p>
+    <!-- 2-Card Comparison Grid -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;text-align:left;">
+      
+      <!-- Basic Plan Card -->
+      <div id="cardBasic" style="background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:26px 24px;display:flex;flex-direction:column;position:relative;">
+        <div style="font-size:17px;font-weight:700;color:var(--text);margin-bottom:6px;">Community Basic</div>
+        <div style="font-size:24px;font-weight:800;color:var(--text);margin-bottom:6px;">Free <span style="font-size:12px;font-weight:500;color:var(--muted);">to start</span></div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:20px;min-height:36px;line-height:1.4;">Essential functionality for individual video editing, fast clipping, and standard exports.</div>
+        
+        <ul style="list-style:none;padding:0;margin:0 0 24px 0;flex-grow:1;display:flex;flex-direction:column;gap:10px;font-size:12.5px;">
+          <li style="display:flex;align-items:flex-start;gap:10px;">
+            <span style="color:#108a00;font-weight:bold;">✓</span>
+            <span>Standard 1080p 60fps export</span>
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:10px;">
+            <span style="color:#108a00;font-weight:bold;">✓</span>
+            <span>2 built-in caption styles (Minimal, Shine)</span>
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:10px;">
+            <span style="color:#108a00;font-weight:bold;">✓</span>
+            <span>Basic timeline trimmer & zero-gap snap</span>
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:10px;">
+            <span style="color:#108a00;font-weight:bold;">✓</span>
+            <span>Live 60fps canvas preview</span>
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:10px;color:var(--dim);">
+            <span style="color:#9ca3af;">✕</span>
+            <span>No YouTube / Twitch AI multi-clipper</span>
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:10px;color:var(--dim);">
+            <span style="color:#9ca3af;">✕</span>
+            <span>No Kokoro-82M neural voice synthesis</span>
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:10px;color:var(--dim);">
+            <span style="color:#9ca3af;">✕</span>
+            <span>No 2K VP9 high-bitrate master rendering</span>
+          </li>
+        </ul>
 
-      <!-- Feature Checklist -->
-      <div style="display:flex;flex-direction:column;gap:8px;font-size:12.5px;color:var(--text);">
-        <div style="display:flex;align-items:center;gap:8px;">
-          <span style="color:var(--green);font-weight:800;">✓</span>
-          <span><strong>Unlimited 2K 60fps</strong> Zero-Gap Split-Screen Exports</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <span style="color:var(--green);font-weight:800;">✓</span>
-          <span><strong>All 5 AI Caption Styles</strong> (Hormozi, Neon Glow, Stopmotion, Minimal, Flicker)</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <span style="color:var(--green);font-weight:800;">✓</span>
-          <span><strong>YouTube & Twitch AI Clipper</strong> (Multimodal viral moment mining)</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <span style="color:var(--green);font-weight:800;">✓</span>
-          <span><strong>Studio Voiceover Engine</strong> (54 natural voices + -16 LUFS mastering)</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <span style="color:var(--green);font-weight:800;">✓</span>
-          <span><strong>Cloud Render & AI Agent Bridge</strong> (Full API access)</span>
-        </div>
+        <button id="btnSwitchBasic" style="width:100%;padding:11px 18px;border-radius:24px;font-weight:600;font-size:13px;text-align:center;border:1px solid var(--border-hi);background:transparent;color:var(--text);cursor:pointer;transition:all .2s ease;">
+          Current Plan
+        </button>
       </div>
+
+      <!-- Studio Pro Plan Card (Featured Upwork Style) -->
+      <div id="cardPro" style="background:var(--surface);border:2px solid #108a00;border-radius:14px;padding:26px 24px;display:flex;flex-direction:column;position:relative;box-shadow:0 12px 30px rgba(16,138,0,0.12);">
+        <!-- Upwork-Style Popular Badge -->
+        <div style="position:absolute;top:-12px;right:20px;background:#108a00;color:#ffffff;font-size:10px;font-weight:800;text-transform:uppercase;padding:3px 12px;border-radius:20px;letter-spacing:0.5px;box-shadow:0 2px 8px rgba(16,138,0,0.4);">
+          Most Popular
+        </div>
+
+        <div style="font-size:17px;font-weight:700;color:var(--text);margin-bottom:6px;">Studio Pro</div>
+        <div style="font-size:24px;font-weight:800;color:var(--text);margin-bottom:6px;">$19.99 <span style="font-size:12px;font-weight:500;color:var(--muted);">/ month</span></div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:20px;min-height:36px;line-height:1.4;">Designed for creators, streamers, and agencies scaling content acquisition & production speed.</div>
+        
+        <ul style="list-style:none;padding:0;margin:0 0 24px 0;flex-grow:1;display:flex;flex-direction:column;gap:10px;font-size:12.5px;">
+          <li style="display:flex;align-items:flex-start;gap:10px;">
+            <span style="color:#108a00;font-weight:bold;">✓</span>
+            <span><strong style="color:var(--text);">Unlimited 2K 60fps</strong> Zero-Gap Split-Screen Exports</span>
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:10px;">
+            <span style="color:#108a00;font-weight:bold;">✓</span>
+            <span><strong style="color:var(--text);">All 5 Pro Caption Styles</strong> (Hormozi, Neon Glow, Stopmotion, Minimal, Flicker)</span>
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:10px;">
+            <span style="color:#108a00;font-weight:bold;">✓</span>
+            <span><strong style="color:var(--text);">YouTube & Twitch AI Clipper</strong> (Multimodal viral moment ranking)</span>
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:10px;">
+            <span style="color:#108a00;font-weight:bold;">✓</span>
+            <span><strong style="color:var(--text);">Studio Voiceover Engine</strong> (54 natural voices + -16 LUFS mastering)</span>
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:10px;">
+            <span style="color:#108a00;font-weight:bold;">✓</span>
+            <span><strong style="color:var(--text);">14 AI Bridge MCP Tools</strong> for Antigravity, Claude, and Codex</span>
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:10px;">
+            <span style="color:#108a00;font-weight:bold;">✓</span>
+            <span><strong style="color:var(--text);">0% Watermark & Commercial Rights</strong></span>
+          </li>
+        </ul>
+
+        <button id="btnSwitchPro" style="width:100%;padding:12px 18px;border-radius:24px;font-weight:700;font-size:13px;text-align:center;border:none;background:#108a00;color:#ffffff;cursor:pointer;box-shadow:0 4px 14px rgba(16,138,0,0.35);transition:all .2s ease;">
+          Upgrade to Pro
+        </button>
+      </div>
+
     </div>
-
-    <!-- 1-Click Subscription Form -->
-    <form id="subscribeForm" onsubmit="return false;" style="display:flex;flex-direction:column;gap:12px;">
-      <button type="button" id="btnActivateSubscription" style="width:100%;padding:12px;background:linear-gradient(135deg, #D1002D, #FF2A55);color:#fff;font-weight:700;border-radius:10px;font-size:14px;border:none;cursor:pointer;box-shadow:0 4px 18px rgba(209,0,45,0.4);display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s ease;">
-        <span>Start 7-Day Free Trial ($29/mo)</span>
-      </button>
-      <div style="text-align:center;font-size:11px;color:var(--muted);">
-        Cancel anytime in 1 click. Zero setup friction.
-      </div>
-    </form>
   </div>
 </div>
+
 <!-- MINIMALIST LOGIN MODAL -->
 <div class="modal-bg" id="loginModal">
   <div class="modal" style="max-width:400px;padding:26px 22px;border-radius:16px;background:var(--surface);border:1px solid var(--border-hi);box-shadow:0 24px 60px rgba(0,0,0,0.45);">
@@ -2601,6 +2653,82 @@
   }
 
   updateSubscriptionUI();
+
+  
+  // ===== UPWORK-INSPIRED MEMBERSHIP PLANS (p2p) CONTROLLER =====
+  const plansModal = document.getElementById("plansModal");
+  const btnOpenPlans = document.getElementById("btnOpenPlans");
+  const btnClosePlans = document.getElementById("btnClosePlans");
+  const btnSwitchBasic = document.getElementById("btnSwitchBasic");
+  const btnSwitchPro = document.getElementById("btnSwitchPro");
+  const planNavLabel = document.getElementById("planNavLabel");
+  const planDot = document.getElementById("planDot");
+  const cardBasic = document.getElementById("cardBasic");
+  const cardPro = document.getElementById("cardPro");
+
+  function getActivePlan() {
+    return localStorage.getItem("lumvrix_plan") || "PRO"; // Default Pro access
+  }
+
+  function updatePlansUI() {
+    const plan = getActivePlan();
+    if (plan === "PRO") {
+      if (planNavLabel) planNavLabel.textContent = "Pro Active";
+      if (planDot) planDot.style.color = "#108a00";
+      if (btnSwitchPro) {
+        btnSwitchPro.textContent = "Current Plan";
+        btnSwitchPro.style.background = "transparent";
+        btnSwitchPro.style.color = "var(--text)";
+        btnSwitchPro.style.border = "1px solid var(--border-hi)";
+        btnSwitchPro.style.boxShadow = "none";
+      }
+      if (btnSwitchBasic) {
+        btnSwitchBasic.textContent = "Switch to Basic";
+        btnSwitchBasic.style.background = "var(--surface3)";
+        btnSwitchBasic.style.color = "var(--text)";
+        btnSwitchBasic.style.border = "none";
+      }
+    } else {
+      if (planNavLabel) planNavLabel.textContent = "Basic";
+      if (planDot) planDot.style.color = "var(--muted)";
+      if (btnSwitchBasic) {
+        btnSwitchBasic.textContent = "Current Plan";
+        btnSwitchBasic.style.background = "transparent";
+        btnSwitchBasic.style.color = "var(--text)";
+        btnSwitchBasic.style.border = "1px solid var(--border-hi)";
+      }
+      if (btnSwitchPro) {
+        btnSwitchPro.textContent = "Upgrade to Pro";
+        btnSwitchPro.style.background = "#108a00";
+        btnSwitchPro.style.color = "#ffffff";
+        btnSwitchPro.style.border = "none";
+        btnSwitchPro.style.boxShadow = "0 4px 14px rgba(16,138,0,0.35)";
+      }
+    }
+  }
+
+  if (btnOpenPlans) btnOpenPlans.onclick = () => plansModal.classList.add("show");
+  if (btnClosePlans) btnClosePlans.onclick = () => plansModal.classList.remove("show");
+
+  if (btnSwitchPro) {
+    btnSwitchPro.onclick = () => {
+      localStorage.setItem("lumvrix_plan", "PRO");
+      updatePlansUI();
+      plansModal.classList.remove("show");
+      toast("✓ Upgraded to Studio Pro! 2K 60fps & all 5 styles unlocked.");
+    };
+  }
+
+  if (btnSwitchBasic) {
+    btnSwitchBasic.onclick = () => {
+      localStorage.setItem("lumvrix_plan", "BASIC");
+      updatePlansUI();
+      plansModal.classList.remove("show");
+      toast("Switched to Community Basic plan.");
+    };
+  }
+
+  updatePlansUI();
 
   // Boot!
   drawFilmstrip(); drawWave(); syncInputs(); renderMcpSetup(); refreshAll(false); connectLocal(); requestAnimationFrame(tick);
