@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -569,6 +569,41 @@
     .stage { min-height: 540px; }
     .timeline { height: 150px; }
   }
+
+  /* Minimalist Redesign Refinements */
+  [data-theme="dark"] .topbar { background: rgba(18, 18, 22, 0.90); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+  .brand-title { font-weight: 700; font-size: 15px; letter-spacing: -0.02em; }
+  .user-pill {
+    display: inline-flex; align-items: center; gap: 7px; padding: 4px 10px;
+    background: var(--surface2); border: 1px solid var(--border); border-radius: 20px;
+    cursor: pointer; transition: all 0.2s ease; position: relative;
+  }
+  .user-pill:hover { border-color: var(--border-hi); background: var(--surface3); }
+  .user-avatar {
+    width: 22px; height: 22px; border-radius: 50%; background: var(--primary);
+    color: #fff; display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+  }
+  .vip-chip {
+    font-size: 9px; font-weight: 700; letter-spacing: 0.04em;
+    background: var(--green); color: #fff; padding: 1px 5px; border-radius: 4px;
+  }
+  .user-dropdown {
+    position: absolute; top: calc(100% + 8px); right: 0; min-width: 210px;
+    background: var(--surface); border: 1px solid var(--border-hi); border-radius: 12px;
+    box-shadow: 0 16px 36px rgba(0,0,0,0.35); padding: 8px; z-index: 100;
+    display: none; flex-direction: column; gap: 4px; animation: fadeIn .15s ease;
+  }
+  .user-dropdown.show { display: flex; }
+  .user-dropdown-item {
+    display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 8px;
+    font-size: 12px; color: var(--text); text-decoration: none; border: none; background: transparent;
+    cursor: pointer; text-align: left; transition: background .15s ease; width: 100%;
+  }
+  .user-dropdown-item:hover { background: var(--surface2); }
+  .user-dropdown-item.danger { color: var(--red); }
+  .user-dropdown-item.danger:hover { background: rgba(209,0,45,0.08); }
+  .user-dropdown-sep { height: 1px; background: var(--border); margin: 4px 0; }
 </style>
 </head>
 <body>
@@ -582,36 +617,41 @@
   <header class="topbar">
     <div class="brand">
       <img class="logo-mark" src="assets/rl.png" alt="Resolve Lumvrix™ Logo" />
-      <span class="brand-title">Resolve <span>Lumvrix</span><sup class="brand-tm">TM</sup></span>
-      <span class="ver-tag">v4.3.0</span>
-      <span class="fps-chip" id="fpsText">60 FPS · 0.6ms</span>
+      <span class="brand-title">Resolve <span>Lumvrix</span></span>
+      <!-- Hidden compatibility hooks -->
+      <span class="ver-tag" style="display:none;">v4.5.0</span>
+      <span class="fps-chip" id="fpsText" style="display:none;">60 FPS</span>
     </div>
 
     <div class="top-center">
-      <button class="btn sm flag-cta" id="btnOpenAutopilotTop" title="Paste YouTube Link & Auto-Clip with Claude, Codex, or Antigravity">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-        <span>YouTube AI Clipper</span>
-      </button>
-      <button class="status-pill ok" id="btnWorkflowStatus" title="View all 6 Editing Workflow Stages & Quality Checks">
+      <button class="status-pill ok" id="btnWorkflowStatus" title="System Ready">
         <span class="dot"></span>
-        <span id="workflowStatusText">Workflow Ready · 6/6 Checks</span>
+        <span id="workflowStatusText">Studio Ready</span>
+      </button>
+      <button class="btn sm" id="btnOpenAutopilotTop" title="AI Video Clipper" style="border-radius:20px;font-size:11.5px;padding:3px 10px;background:var(--surface2);">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        <span>AI Clipper</span>
       </button>
     </div>
 
     <div class="top-right">
-      <button class="btn sm" id="btnThemeToggle" title="Switch HRL Executive Light / Cinema Dark Theme">
+      <!-- Hidden compatibility buttons so existing JS does not throw errors -->
+      <button id="btnFlagMode" style="display:none;"><span id="topFlagBadge">0</span></button>
+      <button id="btnBridgeTop" style="display:none;"><span class="dot" id="bridgeDot"></span><span id="bridgeTopLabel">AI Bridge</span></button>
+
+      <button class="btn sm icon-only" id="btnThemeToggle" title="Toggle Cinema Dark / Light Theme" style="border-radius:50%;width:30px;height:30px;padding:0;display:flex;align-items:center;justify-content:center;">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41m11.32-11.32 1.41-1.41"/></svg>
-        <span id="themeBtnLbl">Light</span>
+        <span id="themeBtnLbl" style="display:none;">Dark</span>
       </button>
-      <button class="btn flag-cta" id="btnFlagMode" title="Click anywhere on the video to flag a change (Shortcut: F)">
-        <span>Flag Change</span>
-        <span class="badge-num" id="topFlagBadge">0</span>
-      </button>
-      <button class="btn" id="btnBridgeTop" title="Connect Antigravity, Claude Code, Codex, Cursor or DaVinci Resolve">
-        <span class="dot" id="bridgeDot" style="color:var(--teal);"></span>
-        <span id="bridgeTopLabel">AI Bridge</span>
-      </button>
-      <button class="btn export-cta" id="btnOpenExport">Export</button>
+
+      <button class="btn export-cta sm" id="btnOpenExport" style="padding:5px 13px;border-radius:8px;font-weight:600;">Export</button>
+
+      <!-- Minimalist Auth / Log In Button & User Pill -->
+      <div id="authContainer" style="position:relative;">
+        <button class="btn sm" id="btnOpenLogin" style="background:var(--primary);color:#fff;font-weight:600;padding:5px 13px;border-radius:8px;border:none;cursor:pointer;">
+          Log In
+        </button>
+      </div>
     </div>
   </header>
 
@@ -1040,6 +1080,60 @@
 </div>
 
 <!-- CLIDEO-STYLE CLEAN EXPORT MODAL -->
+<!-- MINIMALIST LOGIN MODAL -->
+<div class="modal-bg" id="loginModal">
+  <div class="modal" style="max-width:400px;padding:26px 22px;border-radius:16px;background:var(--surface);border:1px solid var(--border-hi);box-shadow:0 24px 60px rgba(0,0,0,0.45);">
+    <div class="modal-hd" style="border-bottom:none;padding:0 0 16px 0;">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <img src="assets/rl.png" alt="Resolve Lumvrix™" style="width:32px;height:32px;border-radius:8px;object-fit:cover;" />
+        <div>
+          <h2 style="font-size:17px;font-weight:700;letter-spacing:-0.02em;">Resolve Lumvrix</h2>
+          <p style="font-size:12px;color:var(--muted);margin-top:1px;">Sign in to your VIP account</p>
+        </div>
+      </div>
+      <button class="btn sm" id="btnCloseLogin" style="border-radius:50%;width:26px;height:26px;padding:0;display:flex;align-items:center;justify-content:center;border:none;background:var(--surface2);cursor:pointer;">✕</button>
+    </div>
+
+    <!-- Whop VIP Promo Card -->
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:8px;">
+      <div>
+        <div style="font-weight:700;font-size:12.5px;color:var(--text);">VIP All-Access Pass</div>
+        <div style="font-size:11px;color:var(--muted);">100% OFF with code <strong style="color:var(--green);">LUMVRIX100</strong></div>
+      </div>
+      <a href="https://whop.com/checkout/plan_fOxPHqsLK2LxS?promoCode=LUMVRIX100" target="_blank" class="btn sm" style="background:var(--primary);color:#fff;text-decoration:none;font-weight:600;padding:5px 10px;border-radius:6px;font-size:11px;white-space:nowrap;">Claim Free VIP</a>
+    </div>
+
+    <!-- Email Sign In Form -->
+    <form id="loginForm" onsubmit="return false;" style="display:flex;flex-direction:column;gap:11px;">
+      <div>
+        <label style="display:block;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:5px;">Email address</label>
+        <input type="email" id="loginEmail" placeholder="hugo@example.com" style="width:100%;padding:9px 11px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none;" required />
+      </div>
+      <div>
+        <label style="display:block;font-size:11px;font-weight:600;color:var(--muted);margin-bottom:5px;">Password</label>
+        <input type="password" id="loginPass" placeholder="••••••••••••" style="width:100%;padding:9px 11px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;outline:none;" />
+      </div>
+      <button type="submit" id="btnSubmitLogin" class="btn primary" style="width:100%;padding:9px;background:var(--primary);color:#fff;font-weight:600;border-radius:8px;font-size:13px;margin-top:2px;border:none;cursor:pointer;">
+        Sign In
+      </button>
+    </form>
+
+    <div style="text-align:center;margin:14px 0 10px;position:relative;">
+      <span style="background:var(--surface);padding:0 8px;font-size:11px;color:var(--dim);position:relative;z-index:1;">or instant 1-click access</span>
+      <div style="position:absolute;top:50%;left:0;right:0;height:1px;background:var(--border);z-index:0;"></div>
+    </div>
+
+    <!-- Quick Sign In Buttons -->
+    <div style="display:flex;gap:8px;">
+      <button type="button" id="btnQuickHugo" class="btn sm" style="flex:1;padding:7px;border-radius:8px;font-size:11.5px;background:var(--surface2);border:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">
+        👤 Sign In as Hugo
+      </button>
+      <button type="button" id="btnQuickGuest" class="btn sm" style="flex:1;padding:7px;border-radius:8px;font-size:11.5px;background:var(--surface2);border:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;">
+        ⚡ Instant Guest
+      </button>
+    </div>
+  </div>
+</div>
 <div class="modal-bg" id="exportModal">
   <div class="modal">
     <div class="modal-hd">
@@ -1834,7 +1928,7 @@
   }
 
   // ===== 5. INTERACTIONS (INCLUDING DIRECT ON-CANVAS CAPTION DRAG & HRL THEME TOGGLE!) =====
-  let hrlTheme = "light";
+  let hrlTheme = localStorage.getItem("lumvrix_theme") || "dark";
   const applyTheme = t => {
     hrlTheme = t === "dark" ? "dark" : "light";
     if (hrlTheme === "dark") document.documentElement.setAttribute("data-theme", "dark");
@@ -2276,6 +2370,120 @@
     } catch {}
   }
 
+  
+  // ===== AUTH & MINIMALIST LOG IN SYSTEM =====
+  const loginModal = document.getElementById("loginModal");
+  const authContainer = document.getElementById("authContainer");
+
+  function getSavedUser() {
+    try { return JSON.parse(localStorage.getItem("lumvrix_user")); } catch { return null; }
+  }
+
+  function renderAuthUI() {
+    const user = getSavedUser();
+    if (user && user.email) {
+      const name = user.name || user.email.split("@")[0];
+      const initial = name.charAt(0).toUpperCase();
+      authContainer.innerHTML = `
+        <div class="user-pill" id="userPill" title="Account settings">
+          <span class="user-avatar">${initial}</span>
+          <span style="font-size:12px;font-weight:600;">${name}</span>
+          <span class="vip-chip">${user.plan || "VIP"}</span>
+        </div>
+        <div class="user-dropdown" id="userDropdown">
+          <div style="padding:6px 10px 4px;">
+            <div style="font-weight:700;font-size:12.5px;">${name}</div>
+            <div style="font-size:11px;color:var(--muted);">${user.email}</div>
+          </div>
+          <div class="user-dropdown-sep"></div>
+          <a class="user-dropdown-item" href="https://whop.com/checkout/plan_fOxPHqsLK2LxS?promoCode=LUMVRIX100" target="_blank">
+            <span>✨</span> <span>VIP Membership (Active)</span>
+          </a>
+          <button class="user-dropdown-item" id="btnToggleThemeDrop">
+            <span>🌓</span> <span>Switch Theme</span>
+          </button>
+          <div class="user-dropdown-sep"></div>
+          <button class="user-dropdown-item danger" id="btnLogout">
+            <span>🚪</span> <span>Sign Out</span>
+          </button>
+        </div>
+      `;
+      const pill = document.getElementById("userPill");
+      const drop = document.getElementById("userDropdown");
+      if (pill && drop) {
+        pill.onclick = (e) => { e.stopPropagation(); drop.classList.toggle("show"); };
+      }
+      const btnLogout = document.getElementById("btnLogout");
+      if (btnLogout) {
+        btnLogout.onclick = () => {
+          localStorage.removeItem("lumvrix_user");
+          renderAuthUI();
+          toast("Signed out successfully");
+        };
+      }
+      const btnThemeDrop = document.getElementById("btnToggleThemeDrop");
+      if (btnThemeDrop) {
+        btnThemeDrop.onclick = () => {
+          applyTheme(hrlTheme === "light" ? "dark" : "light");
+          toast(`Theme switched`);
+        };
+      }
+    } else {
+      authContainer.innerHTML = `
+        <button class="btn sm" id="btnOpenLogin" style="background:var(--primary);color:#fff;font-weight:600;padding:5px 13px;border-radius:8px;border:none;cursor:pointer;">
+          Log In
+        </button>
+      `;
+      const btn = document.getElementById("btnOpenLogin");
+      if (btn) btn.onclick = () => loginModal.classList.add("show");
+    }
+  }
+
+  document.addEventListener("click", () => {
+    const drop = document.getElementById("userDropdown");
+    if (drop) drop.classList.remove("show");
+  });
+
+  const btnCloseLogin = document.getElementById("btnCloseLogin");
+  if (btnCloseLogin) btnCloseLogin.onclick = () => loginModal.classList.remove("show");
+
+  const btnSubmitLogin = document.getElementById("btnSubmitLogin");
+  if (btnSubmitLogin) {
+    btnSubmitLogin.onclick = (e) => {
+      e.preventDefault();
+      const email = (document.getElementById("loginEmail").value || "").trim();
+      if (!email) { toast("Please enter your email"); return; }
+      const name = email.split("@")[0];
+      localStorage.setItem("lumvrix_user", JSON.stringify({ email, name, plan: "VIP" }));
+      loginModal.classList.remove("show");
+      renderAuthUI();
+      toast(`Welcome back, ${name}! VIP features active.`);
+    };
+  }
+
+  const btnQuickHugo = document.getElementById("btnQuickHugo");
+  if (btnQuickHugo) {
+    btnQuickHugo.onclick = () => {
+      localStorage.setItem("lumvrix_user", JSON.stringify({ email: "hugo@hrl-lumvrix.com", name: "Hugo", plan: "VIP" }));
+      loginModal.classList.remove("show");
+      renderAuthUI();
+      toast("Welcome back, Hugo! VIP features active.");
+    };
+  }
+
+  const btnQuickGuest = document.getElementById("btnQuickGuest");
+  if (btnQuickGuest) {
+    btnQuickGuest.onclick = () => {
+      localStorage.setItem("lumvrix_user", JSON.stringify({ email: "guest@resolve-lumvrix.com", name: "Guest", plan: "Free" }));
+      loginModal.classList.remove("show");
+      renderAuthUI();
+      toast("Signed in as Guest");
+    };
+  }
+
+  renderAuthUI();
+
+  applyTheme(hrlTheme);
   // Boot!
   drawFilmstrip(); drawWave(); syncInputs(); renderMcpSetup(); refreshAll(false); connectLocal(); requestAnimationFrame(tick);
 })();
